@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import useIsMobile from "@/hooks/useIsMobile";
 import AOS from "aos";
 import Profile from "@/components/elements/Profile";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -19,6 +20,7 @@ const Sidebar = (props: Props) => {
   const isMobile = useIsMobile();
   // const imageSize = isMobile ? 40 : 100;
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     AOS.init({
@@ -36,6 +38,7 @@ const Sidebar = (props: Props) => {
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
+
   return (
     // <div className="sticky top-0 left-0 w-full lg:w-64 bg-white shadow-sm p-4">
     <div className="sticky transition-all duration-300 top-0 z-10 flex flex-col lg:py-8 lg:h-full">
@@ -66,11 +69,10 @@ const Sidebar = (props: Props) => {
                       variant={"ghost"}
                       className="flex items-center justify-start gap-4 hover:lg:rounded-lg lg:hover:scale-105 lg:hover:gap-3 lg:transition-all lg:duration-300"
                       key={key}
-                      asChild
+                      onClick={() => router.push(row.url)}
+                      aria-label={row.title}
                     >
-                      <Link aria-label={row.title} href={row.url}>
-                        {row.icon} {row.title}
-                      </Link>
+                      {row.icon} {row.title}
                     </Button>
                   );
                 })}
