@@ -19,6 +19,7 @@ const Profile = ({ isOpen }: Props) => {
         className={`w-[40px] h-[40px] md:w-[70px] md:h-[70px] mr-3 lg:mr-0 shadow-md border-2 z-10 border-white dark:border-neutral-800 rounded-full`}
       >
         <AvatarImage
+          alt="Dicki Prasetya"
           className="lg:hover:scale-105"
           src="https://github.com/shadcn.png"
         />
@@ -51,7 +52,7 @@ const Profile = ({ isOpen }: Props) => {
             </Tooltip>
           </TooltipProvider>
         </div>
-        <div className="text-sm text-neutral-400">@evairo176</div>
+        <div className="text-sm text-neutral-500">@evairo176</div>
       </div>
     </div>
   );
