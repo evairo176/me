@@ -3,17 +3,27 @@ import React from "react";
 import styled from "@emotion/styled";
 import clsx from "clsx";
 
-type Props = {};
+interface MenuOpenProps {
+  expandMenu: boolean;
+  setExpandMenu: (expand: boolean) => void;
+}
 
-const MenuOpen = (props: Props) => {
+const MenuOpen = ({ expandMenu, setExpandMenu }: MenuOpenProps) => {
+  const handleMenuToggle = () => {
+    setExpandMenu(!expandMenu);
+  };
+
   const menuSpanData = [{ index: 1 }, { index: 2 }, { index: 3 }];
   return (
-    <div className="flex lg:hidden">
+    <div className="flex md:hidden" onClick={handleMenuToggle}>
       <StyledMenu>
         {menuSpanData.map((item) => (
           <StyledMenuSpan
             key={item.index}
-            className={clsx("bg-neutral-950 dark:bg-neutral-100 ")}
+            className={clsx(
+              "bg-neutral-950 dark:bg-neutral-100",
+              expandMenu && "active"
+            )}
           />
         ))}
       </StyledMenu>

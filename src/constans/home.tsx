@@ -5,21 +5,46 @@ export const MENU: MenuType[] = [
   {
     title: "Home",
     icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "?menu=home",
+    url: "/",
   },
   {
     title: "Project",
     icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "?menu=project",
+    url: "projects",
   },
   {
     title: "Blog",
     icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "?menu=blog",
+    url: "blog",
   },
   {
     title: "Learn",
     icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "?menu=learn",
+    url: "learn",
+  },
+  {
+    title: "Learn",
+    icon: <BiHomeCircle className="w-5 h-5" />,
+    url: "learn",
+  },
+  {
+    title: "Learn",
+    icon: <BiHomeCircle className="w-5 h-5" />,
+    url: "learn",
+  },
+  {
+    title: "Learn",
+    icon: <BiHomeCircle className="w-5 h-5" />,
+    url: "learn",
+  },
+  {
+    title: "Learn",
+    icon: <BiHomeCircle className="w-5 h-5" />,
+    url: "learn",
+  },
+  {
+    title: "Learn",
+    icon: <BiHomeCircle className="w-5 h-5" />,
+    url: "learn",
   },
 ];

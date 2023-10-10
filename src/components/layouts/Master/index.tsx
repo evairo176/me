@@ -14,7 +14,9 @@ const Master = ({ children }: Props) => {
 
       {/* Content */}
       <div className="lg:max-w-[854px] transition-all scroll-smooth duration-300 w-full lg:min-h-screen no-scrollbar border">
-        {children}
+        <div className="mb-10 mt-20 lg:mt-0 p-8 aos-init aos-animate">
+          {children}
+        </div>
       </div>
     </div>
   );
