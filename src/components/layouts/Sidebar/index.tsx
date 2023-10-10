@@ -63,13 +63,12 @@ const Sidebar = (props: Props) => {
                 {MENU.map((row, key) => {
                   return (
                     <Button
-                      aria-label={row.title}
                       variant={"ghost"}
                       className="flex items-center justify-start gap-4 hover:lg:rounded-lg lg:hover:scale-105 lg:hover:gap-3 lg:transition-all lg:duration-300"
                       key={key}
                       asChild
                     >
-                      <Link href={row.url}>
+                      <Link aria-label={row.title} href={row.url}>
                         {row.icon} {row.title}
                       </Link>
                     </Button>
