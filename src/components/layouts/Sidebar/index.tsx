@@ -95,6 +95,7 @@ const Sidebar = (props: Props) => {
                   className="flex items-center justify-start gap-4 hover:lg:rounded-lg lg:hover:scale-105 lg:hover:gap-3 lg:transition-all lg:duration-300"
                   key={key}
                   onClick={() => dispatch(toggleMenu(!isOpen))}
+                  aria-label={row.title}
                   asChild
                 >
                   <Link href={row.url}>
