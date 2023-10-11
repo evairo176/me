@@ -18,7 +18,7 @@ type Props = {};
 
 const CareerList = (props: Props) => {
   const { theme } = useTheme();
-  console.log;
+
   return (
     <section className="space-y-6 mt-3">
       <div className="space-y-2">
