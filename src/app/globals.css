@@ -126,3 +126,6 @@
 .animation-reverse {
   animation-direction: reverse;
 }
+.costum-line:before {
+  background: #ff5700;
+}
