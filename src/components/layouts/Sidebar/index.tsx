@@ -21,7 +21,6 @@ const Sidebar = (props: Props) => {
   const isMobile = useIsMobile();
   // const imageSize = isMobile ? 40 : 100;
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -73,6 +72,7 @@ const Sidebar = (props: Props) => {
                       key={key}
                       asChild
                       aria-label={row.title}
+                      onClick={() => dispatch(toggleMenu(!isOpen))}
                     >
                       <Link href={row.url}>
                         {row.icon} {row.title}
@@ -94,6 +94,7 @@ const Sidebar = (props: Props) => {
                   variant={pathname === row.url ? "secondary" : "ghost"}
                   className="flex items-center justify-start gap-4 hover:lg:rounded-lg lg:hover:scale-105 lg:hover:gap-3 lg:transition-all lg:duration-300"
                   key={key}
+                  onClick={() => dispatch(toggleMenu(!isOpen))}
                   asChild
                 >
                   <Link href={row.url}>
