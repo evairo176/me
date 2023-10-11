@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { MENU } from "@/constans/home";
@@ -42,7 +43,7 @@ const Sidebar = (props: Props) => {
   return (
     // <div className="sticky top-0 left-0 w-full lg:w-64 bg-white shadow-sm p-4">
     <div className="sticky transition-all duration-300 top-0 z-10 flex flex-col lg:py-8 lg:h-full">
-      <div className="z-20 fixed shadow-sm xl:shadow-none lg:border-none dark:border-b dark:border-neutral-800 bg-white dark:bg-dark lg:!bg-transparent w-full lg:w-64 p-5 lg:relative lg:p-0">
+      <div className="z-20 fixed shadow-sm xl:shadow-none lg:border-none bg-background  w-full lg:w-64 p-5 lg:relative lg:p-0">
         <div
           className={`flex flex-row lg:flex-col items-center justify-between  space-y-1`}
         >

@@ -1,7 +1,7 @@
 import { MenuType } from "@/types/home-types";
 import { BiHomeCircle } from "react-icons/bi";
 import { CiViewTimeline } from "react-icons/ci";
-import { GrArticle } from "react-icons/gr";
+import { PiArticleLight } from "react-icons/pi";
 import { GiStumpRegrowth } from "react-icons/gi";
 import {
   AiOutlineFundProjectionScreen,
@@ -24,7 +24,7 @@ export const MENU: MenuType[] = [
   },
   {
     title: "Blog",
-    icon: <GrArticle className="w-5 h-5" />,
+    icon: <PiArticleLight className="w-5 h-5" />,
     url: "blog",
   },
   {

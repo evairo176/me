@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import NextTopLoader from "nextjs-toploader";
+import { ThemeProvider } from "@/context/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-background`}>
         <ReduxProvider>
           <NextTopLoader
             color="#05b6d3"
@@ -32,7 +33,14 @@ export default function RootLayout({
             speed={200}
             shadow="0 0 10px #05b6d3,0 0 5px #45c6c0"
           />
-          <Master>{children}</Master>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Master>{children}</Master>
+          </ThemeProvider>
         </ReduxProvider>
       </body>
     </html>

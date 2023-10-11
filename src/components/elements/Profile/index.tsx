@@ -10,6 +10,7 @@ import clsx from "clsx";
 import background from "../../../../public/images/ilustrations/background_profile.webp";
 import Image from "next/image";
 import Status from "../Status";
+import ModeToggle from "../ModeToggle";
 
 type Props = {
   isOpen: boolean;
@@ -21,6 +22,9 @@ const Profile = ({ isOpen }: Props) => {
       <div className="relative w-full h-24 overflow-hidden dark:brightness-50 rounded-lg hidden lg:block">
         <Status />
         <Image alt="background-profile" src={background} />
+        <div className="absolute bottom-1 right-1">
+          <ModeToggle />
+        </div>
       </div>
       <Avatar
         className={`w-[40px] h-[40px] md:w-[70px] md:h-[70px] lg:-mt-11 mr-3 lg:mr-0 shadow-md border-2 z-10 border-white dark:border-neutral-800 rounded-full`}
