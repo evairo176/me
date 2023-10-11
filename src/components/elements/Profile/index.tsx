@@ -7,6 +7,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import clsx from "clsx";
+import background from "../../../../public/images/ilustrations/background_profile.webp";
+import Image from "next/image";
+import Status from "../Status";
 
 type Props = {
   isOpen: boolean;
@@ -15,8 +18,12 @@ type Props = {
 const Profile = ({ isOpen }: Props) => {
   return (
     <div className={clsx("flex lg:flex-col lg:items-center flex-row")}>
+      <div className="relative w-full h-24 overflow-hidden dark:brightness-50 rounded-lg hidden lg:block">
+        <Status />
+        <Image alt="background-profile" src={background} />
+      </div>
       <Avatar
-        className={`w-[40px] h-[40px] md:w-[70px] md:h-[70px] mr-3 lg:mr-0 shadow-md border-2 z-10 border-white dark:border-neutral-800 rounded-full`}
+        className={`w-[40px] h-[40px] md:w-[70px] md:h-[70px] lg:-mt-11 mr-3 lg:mr-0 shadow-md border-2 z-10 border-white dark:border-neutral-800 rounded-full`}
       >
         <AvatarImage
           alt="Dicki Prasetya"
@@ -28,7 +35,9 @@ const Profile = ({ isOpen }: Props) => {
 
       <div className={`flex flex-col lg:items-center`}>
         <div className="flex items-center ">
-          <span className="mr-2">Dicki Prasetya</span>
+          <h2 className="flex-grow text-lg lg:text-xl font-sora font-medium mr-2">
+            Dicki Prasetya
+          </h2>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger aria-label="verified">

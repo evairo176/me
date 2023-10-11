@@ -1,5 +1,15 @@
 import { MenuType } from "@/types/home-types";
 import { BiHomeCircle } from "react-icons/bi";
+import { CiViewTimeline } from "react-icons/ci";
+import { GrArticle } from "react-icons/gr";
+import { GiStumpRegrowth } from "react-icons/gi";
+import {
+  AiOutlineFundProjectionScreen,
+  AiOutlineDashboard,
+} from "react-icons/ai";
+import { GoTasklist } from "react-icons/go";
+import { SiAboutdotme } from "react-icons/si";
+import { MdOutlineContacts } from "react-icons/md";
 
 export const MENU: MenuType[] = [
   {
@@ -9,42 +19,42 @@ export const MENU: MenuType[] = [
   },
   {
     title: "Project",
-    icon: <BiHomeCircle className="w-5 h-5" />,
+    icon: <AiOutlineFundProjectionScreen className="w-5 h-5" />,
     url: "projects",
   },
   {
     title: "Blog",
-    icon: <BiHomeCircle className="w-5 h-5" />,
+    icon: <GrArticle className="w-5 h-5" />,
     url: "blog",
   },
   {
     title: "Learn",
-    icon: <BiHomeCircle className="w-5 h-5" />,
+    icon: <GiStumpRegrowth className="w-5 h-5" />,
     url: "learn",
   },
   {
-    title: "Learn",
-    icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "learn",
+    title: "Roadmap",
+    icon: <CiViewTimeline className="w-5 h-5" />,
+    url: "roadmap",
   },
   {
-    title: "Learn",
-    icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "learn",
+    title: "Task Board",
+    icon: <GoTasklist className="w-5 h-5" />,
+    url: "task-board",
   },
   {
-    title: "Learn",
-    icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "learn",
+    title: "About",
+    icon: <SiAboutdotme className="w-5 h-5" />,
+    url: "about",
   },
   {
-    title: "Learn",
-    icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "learn",
+    title: "Contact",
+    icon: <MdOutlineContacts className="w-5 h-5" />,
+    url: "contact",
   },
   {
-    title: "Learn",
-    icon: <BiHomeCircle className="w-5 h-5" />,
-    url: "learn",
+    title: "Dashboard",
+    icon: <AiOutlineDashboard className="w-5 h-5" />,
+    url: "dashboard",
   },
 ];
