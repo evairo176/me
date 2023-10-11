@@ -17,7 +17,9 @@ import { Fragment } from "react";
 type Props = {};
 
 const CareerList = (props: Props) => {
-  const { theme } = useTheme();
+  const { systemTheme, theme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+  //   console.log(currentTheme);
 
   return (
     <section className="space-y-6 mt-3">
@@ -29,7 +31,7 @@ const CareerList = (props: Props) => {
           </p>
           <Button
             variant={"secondary"}
-            aria-label="download_resume"
+            aria-label="download resume"
             className="flex gap-2 transition-all duration-300 items-center "
           >
             <div className="border-b-2 overflow-hidden border-neutral-600 dark:border-neutral-500">
@@ -39,7 +41,9 @@ const CareerList = (props: Props) => {
           </Button>
         </SectionSubHeading>
         <VerticalTimeline
-          lineColor={theme === "light" ? "#9ca3af" : "rgba(255,255,255,0.05)"}
+          lineColor={
+            currentTheme === "light" ? "#9ca3af" : "rgba(255,255,255,0.05)"
+          }
         >
           {experiencesData?.map((row, key) => {
             return (
@@ -48,7 +52,9 @@ const CareerList = (props: Props) => {
                 visible={true}
                 contentStyle={{
                   background:
-                    theme === "light" ? "f3f4f6" : "rgba(255,255,255,0.05)",
+                    currentTheme === "light"
+                      ? "f3f4f6"
+                      : "rgba(255,255,255,0.05)",
                   boxShadow: "none",
                   border: "1px solid rgba(0,0,0,0.05)",
                   textAlign: "left",
@@ -56,7 +62,7 @@ const CareerList = (props: Props) => {
                 }}
                 contentArrowStyle={{
                   borderRight:
-                    theme === "light"
+                    currentTheme === "light"
                       ? "0.4rem solid #9ca3af"
                       : "0.4rem solid rgba(255,255,255,0.05)",
                 }}
@@ -64,7 +70,9 @@ const CareerList = (props: Props) => {
                 icon={row?.icon}
                 iconStyle={{
                   background:
-                    theme === "light" ? "white" : "rgba(255,255,255,0.15)",
+                    currentTheme === "light"
+                      ? "white"
+                      : "rgba(255,255,255,0.15)",
                   fontSize: "1.5rem",
                 }}
               >

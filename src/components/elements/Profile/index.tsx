@@ -11,6 +11,7 @@ import background from "../../../../public/images/ilustrations/background_profil
 import Image from "next/image";
 import Status from "../Status";
 import ModeToggle from "../ModeToggle";
+import profile from "../../../../public/images/ilustrations/profile.png";
 
 type Props = {
   isOpen: boolean;
@@ -29,10 +30,10 @@ const Profile = ({ isOpen }: Props) => {
       <Avatar
         className={`w-[40px] h-[40px] md:w-[70px] md:h-[70px] lg:-mt-11 mr-3 lg:mr-0 shadow-md border-2 z-10 border-white dark:border-neutral-800 rounded-full`}
       >
-        <AvatarImage
+        <Image
           alt="Dicki Prasetya"
           className="lg:hover:scale-105"
-          src="https://github.com/shadcn.png"
+          src={profile}
         />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>

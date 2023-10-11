@@ -20,7 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-background`}>
+      <body
+        className={`${inter.className} bg-background`}
+        suppressHydrationWarning={true}
+      >
         <ReduxProvider>
           <NextTopLoader
             color="#05b6d3"

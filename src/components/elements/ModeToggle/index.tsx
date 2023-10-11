@@ -11,20 +11,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useEffect, useState } from "react";
-type Theme = "light" | "dark";
+// import { useEffect, useState } from "react";
+// type Theme = "light" | "dark";
 
 const ModeToggle = () => {
-  const { setTheme, theme } = useTheme();
-  useEffect(() => {
-    const localTheme = window.localStorage.getItem("theme") as Theme | null;
+  const { setTheme } = useTheme();
+  //   const { setTheme, theme } = useTheme();
+  //   useEffect(() => {
+  //     const localTheme = window.localStorage.getItem("theme") as Theme | null;
 
-    if (localTheme) {
-      setTheme(localTheme);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-    }
-  }, []);
+  //     if (localTheme) {
+  //       setTheme(localTheme);
+  //     } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  //       setTheme("dark");
+  //     }
+  //   }, []);
 
   return (
     <DropdownMenu>
@@ -43,7 +44,7 @@ const ModeToggle = () => {
         <DropdownMenuItem
           onClick={() => {
             setTheme("light");
-            window.localStorage.setItem("theme", "light");
+            // window.localStorage.setItem("theme", "light");
           }}
         >
           Light
@@ -51,19 +52,19 @@ const ModeToggle = () => {
         <DropdownMenuItem
           onClick={() => {
             setTheme("dark");
-            window.localStorage.setItem("theme", "dark");
+            // window.localStorage.setItem("theme", "dark");
           }}
         >
           Dark
         </DropdownMenuItem>
-        {/* <DropdownMenuItem
+        <DropdownMenuItem
           onClick={() => {
             setTheme("system");
             window.localStorage.setItem("theme", "system");
           }}
         >
           System
-        </DropdownMenuItem> */}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
