@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import useIsMobile from "@/hooks/useIsMobile";
 import AOS from "aos";
 import Profile from "@/components/elements/Profile";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -22,6 +22,7 @@ const Sidebar = (props: Props) => {
   // const imageSize = isMobile ? 40 : 100;
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     AOS.init({
@@ -67,13 +68,15 @@ const Sidebar = (props: Props) => {
                 {MENU.map((row, key) => {
                   return (
                     <Button
-                      variant={"ghost"}
-                      className="flex items-center justify-start gap-4 hover:lg:rounded-lg lg:hover:scale-105 lg:hover:gap-3 lg:transition-all lg:duration-300"
+                      variant={pathname === row.url ? "secondary" : "ghost"}
+                      className={` flex items-center justify-start gap-4 hover:lg:rounded-lg lg:hover:scale-105 lg:hover:gap-3 lg:transition-all lg:duration-300`}
                       key={key}
-                      onClick={() => router.push(row.url)}
+                      asChild
                       aria-label={row.title}
                     >
-                      {row.icon} {row.title}
+                      <Link href={row.url}>
+                        {row.icon} {row.title}
+                      </Link>
                     </Button>
                   );
                 })}
@@ -88,7 +91,7 @@ const Sidebar = (props: Props) => {
             {MENU.map((row, key) => {
               return (
                 <Button
-                  variant={"ghost"}
+                  variant={pathname === row.url ? "secondary" : "ghost"}
                   className="flex items-center justify-start gap-4 hover:lg:rounded-lg lg:hover:scale-105 lg:hover:gap-3 lg:transition-all lg:duration-300"
                   key={key}
                   asChild

@@ -20,42 +20,42 @@ export const MENU: MenuType[] = [
   {
     title: "Project",
     icon: <AiOutlineFundProjectionScreen className="w-5 h-5" />,
-    url: "projects",
+    url: "/projects",
   },
   {
     title: "Blog",
     icon: <PiArticleLight className="w-5 h-5" />,
-    url: "blog",
+    url: "/blog",
   },
   {
     title: "Learn",
     icon: <GiStumpRegrowth className="w-5 h-5" />,
-    url: "learn",
+    url: "/learn",
   },
   {
     title: "Roadmap",
     icon: <CiViewTimeline className="w-5 h-5" />,
-    url: "roadmap",
+    url: "/roadmap",
   },
   {
     title: "Task Board",
     icon: <GoTasklist className="w-5 h-5" />,
-    url: "task-board",
+    url: "/task-board",
   },
   {
     title: "About",
     icon: <SiAboutdotme className="w-5 h-5" />,
-    url: "about",
+    url: "/about",
   },
   {
     title: "Contact",
     icon: <MdOutlineContacts className="w-5 h-5" />,
-    url: "contact",
+    url: "/contact",
   },
   {
     title: "Dashboard",
     icon: <AiOutlineDashboard className="w-5 h-5" />,
-    url: "dashboard",
+    url: "/dashboard",
   },
 ];
 
