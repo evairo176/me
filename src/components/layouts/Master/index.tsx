@@ -13,7 +13,7 @@ const Master = ({ children }: Props) => {
       <Sidebar />
 
       {/* Content */}
-      <div className="lg:max-w-[854px] p-5 lg:p-0 lg:mt-8 w-full lg:min-h-screen no-scrollbar">
+      <div className="lg:max-w-[854px] p-2 lg:p-0 lg:mt-8 w-full lg:min-h-screen no-scrollbar">
         <div className="mb-10 mt-20 md:mt-0 transition-all scroll-smooth duration-300  aos-init aos-animate">
           {children}
         </div>
