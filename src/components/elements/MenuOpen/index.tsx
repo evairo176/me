@@ -56,7 +56,7 @@ const StyledMenuSpan = styled.span`
     transform: rotate(45deg);
   }
   &.active:nth-of-type(2) {
-    width: 0;
+    display: none;
   }
   &.active:nth-of-type(3) {
     transform: rotate(-45deg);

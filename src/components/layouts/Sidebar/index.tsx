@@ -12,7 +12,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import useIsMobile from "@/hooks/useIsMobile";
 import AOS from "aos";
 import Profile from "@/components/elements/Profile";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import ModeToggle from "@/components/elements/ModeToggle";
 
 type Props = {};
 
@@ -44,14 +45,19 @@ const Sidebar = (props: Props) => {
     // <div className="sticky top-0 left-0 w-full lg:w-64 bg-white shadow-sm p-4">
     <div className="sticky transition-all duration-300 top-0 z-10 flex flex-col lg:py-8 lg:h-full">
       <div className="z-20 fixed bg-card text-card-foreground shadow lg:shadow-none  w-full lg:w-64 p-5 md:relative lg:p-0">
-        <div
-          className={`flex flex-row lg:flex-col items-center justify-between  space-y-1`}
-        >
+        <div className={`flex flex-row lg:flex-col justify-between  space-y-1`}>
           <Profile isOpen={isOpen} />
-          <MenuOpen
-            expandMenu={isOpen}
-            setExpandMenu={(e) => dispatch(toggleMenu(e))}
-          />
+          <div
+            className={`flex items-center ${
+              isOpen ? "flex-col-reverse" : "flex row"
+            }  flex lg:hidden gap-5 mt-2 !items-end flex-col-reverse justify-between h-[120px] pb-1`}
+          >
+            <ModeToggle />
+            <MenuOpen
+              expandMenu={isOpen}
+              setExpandMenu={(e) => dispatch(toggleMenu(e))}
+            />
+          </div>
         </div>
 
         {isMobile && (
