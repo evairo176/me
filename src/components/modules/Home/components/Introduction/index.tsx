@@ -8,7 +8,7 @@ type Props = {};
 
 const Introduction = (props: Props) => {
   return (
-    <section className="p-3 lg:p-8 rounded-xl border bg-card text-card-foreground shadow">
+    <section className="p-4 lg:p-8 rounded-xl border bg-card text-card-foreground shadow">
       <div className="flex justify-between items-center">
         <div className="flex gap-2 text-2xl lg:text-3xl font-medium font-sora">
           <h1>{"Hi, I'm Dicki"}</h1>
