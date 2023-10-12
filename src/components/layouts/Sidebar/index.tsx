@@ -43,7 +43,7 @@ const Sidebar = (props: Props) => {
   return (
     // <div className="sticky top-0 left-0 w-full lg:w-64 bg-white shadow-sm p-4">
     <div className="sticky transition-all duration-300 top-0 z-10 flex flex-col lg:py-8 lg:h-full">
-      <div className="z-20 fixed rounded-xl bg-card text-card-foreground shadow lg:shadow-none  w-full lg:w-64 p-5 md:relative lg:p-0">
+      <div className="z-20 fixed bg-card text-card-foreground shadow lg:shadow-none  w-full lg:w-64 p-5 md:relative lg:p-0">
         <div
           className={`flex flex-row lg:flex-col items-center justify-between  space-y-1`}
         >
