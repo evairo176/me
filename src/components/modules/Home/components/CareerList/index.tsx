@@ -22,7 +22,7 @@ const CareerList = (props: Props) => {
   //   console.log(currentTheme);
 
   return (
-    <section className="space-y-6 mt-3">
+    <section className="space-y-6 mt-3 p-3 lg:p-8 rounded-xl border bg-card text-card-foreground shadow">
       <div className="space-y-2">
         <SectionHeading title="Carrer" icon={<FaTimeline className="mr-2" />} />
         <SectionSubHeading>
