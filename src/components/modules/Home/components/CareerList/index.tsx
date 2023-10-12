@@ -51,28 +51,19 @@ const CareerList = (props: Props) => {
                 key={key}
                 visible={true}
                 contentStyle={{
-                  background:
-                    currentTheme === "light"
-                      ? "f3f4f6"
-                      : "rgba(255,255,255,0.05)",
+                  background: "hsl(var(--muted))",
                   boxShadow: "none",
                   border: "1px solid rgba(0,0,0,0.05)",
                   textAlign: "left",
                   padding: "1.3rem 2rem",
                 }}
                 contentArrowStyle={{
-                  borderRight:
-                    currentTheme === "light"
-                      ? "0.4rem solid #9ca3af"
-                      : "0.4rem solid rgba(255,255,255,0.05)",
+                  borderRight: "hsl(var(--muted))",
                 }}
                 date={row?.date}
                 icon={row?.icon}
                 iconStyle={{
-                  background:
-                    currentTheme === "light"
-                      ? "white"
-                      : "rgba(255,255,255,0.15)",
+                  background: "hsl(var(--muted))",
                   fontSize: "1.5rem",
                 }}
               >
