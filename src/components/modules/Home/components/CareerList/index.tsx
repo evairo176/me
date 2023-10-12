@@ -40,11 +40,7 @@ const CareerList = (props: Props) => {
             <span>Download Resume</span>
           </Button>
         </SectionSubHeading>
-        <VerticalTimeline
-          lineColor={
-            currentTheme === "light" ? "#9ca3af" : "rgba(255,255,255,0.05)"
-          }
-        >
+        <VerticalTimeline lineColor={"hsl(var(--muted))"}>
           {experiencesData?.map((row, key) => {
             return (
               <VerticalTimelineElement
