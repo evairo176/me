@@ -12,9 +12,7 @@ const HomeModules = (props: Props) => {
   return (
     <>
       <Introduction />
-      <Separator />
       <CareerList />
-      <Separator />
     </>
   );
 };
