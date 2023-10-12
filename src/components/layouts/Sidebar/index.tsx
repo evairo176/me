@@ -48,9 +48,11 @@ const Sidebar = (props: Props) => {
         <div className={`flex flex-row lg:flex-col justify-between  space-y-1`}>
           <Profile isOpen={isOpen} />
           <div
-            className={`flex items-center ${
-              isOpen ? "flex-col-reverse" : "flex row"
-            }  flex lg:hidden gap-5 mt-2 !items-end flex-col-reverse justify-between h-[120px] pb-1`}
+            className={`flex items-center lg:hidden gap-5 mt-2 ${
+              isOpen
+                ? "!items-end flex-col-reverse justify-between h-[120px] pb-1"
+                : "flex row"
+            } `}
           >
             <ModeToggle />
             <MenuOpen

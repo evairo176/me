@@ -30,7 +30,7 @@ const Profile = ({ isOpen }: Props) => {
       <div
         className={`flex ${
           isOpen ? "flex-col gap-5 mt-2 justify-between" : "flex-row"
-        }`}
+        } lg:flex-col lg:items-center`}
       >
         <Avatar
           className={`${

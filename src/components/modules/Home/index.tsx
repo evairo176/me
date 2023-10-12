@@ -1,12 +1,9 @@
 import React from "react";
 
 import Introduction from "./components/Introduction";
-import { Separator } from "@/components/ui/separator";
 import CareerList from "./components/CareerList";
-import { Button } from "@/components/ui/button";
-import Gap from "@/components/elements/Gap";
-import Projects from "./components/Projects";
-
+import dynamic from "next/dynamic";
+const Projects = dynamic(() => import("./components/Projects"));
 type Props = {};
 
 const HomeModules = (props: Props) => {
