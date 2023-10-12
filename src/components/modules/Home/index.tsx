@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import CareerList from "./components/CareerList";
 import { Button } from "@/components/ui/button";
 import Gap from "@/components/elements/Gap";
+import Projects from "./components/Projects";
 
 type Props = {};
 
@@ -13,6 +14,7 @@ const HomeModules = (props: Props) => {
     <>
       <Introduction />
       <CareerList />
+      <Projects />
     </>
   );
 };

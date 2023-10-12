@@ -1,4 +1,4 @@
-import { ExperiencesType, MenuType } from "@/types/home-types";
+import { ExperiencesType, MenuType, ProjectsType } from "@/types/home-types";
 import { BiHomeCircle } from "react-icons/bi";
 import { CiViewTimeline } from "react-icons/ci";
 import { PiArticleLight } from "react-icons/pi";
@@ -10,6 +10,12 @@ import {
 import { GoTasklist } from "react-icons/go";
 import { SiAboutdotme } from "react-icons/si";
 import { MdOutlineContacts } from "react-icons/md";
+
+import paymentXenditCustom from "../../public/images/projects/payment-xendit-custom.png";
+import tnosPwa from "../../public/images/projects/tnos-pwa.png";
+import myBlog from "../../public/images/projects/my-blog.png";
+import appstore from "../../public/images/projects/appstore.jpg";
+import news from "../../public/images/projects/news.png";
 
 export const MENU: MenuType[] = [
   {
@@ -83,5 +89,56 @@ export const experiencesData: ExperiencesType[] = [
       "I'm now a full-stack developer working as a full-time. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
     icon: <AiOutlineDashboard className="w-5 h-5" />,
     date: "2023 - present",
+  },
+];
+
+export const projectsData: ProjectsType[] = [
+  {
+    title: "Payment Costum Xendit",
+    description:
+      "Make payments easier with Xendit special payments such as Credit Cards, Bank Transfers, E-Wallets & QR Codes",
+    tags: ["React.js", "Laravel", "CSS", "Mysql", "Xendit"],
+    imageUrl: paymentXenditCustom,
+    link: "https://app.tnosworld.com/",
+  },
+  {
+    title: "PWA Tnos Website",
+    description:
+      "I work as a full-stack developer at this startup project for 9 months. Users can log in, register and carry out transactions on body guard ordering services, creating legal documents, online legal consultations using the custom Xendit payment method.",
+    tags: [
+      "React.js",
+      "Laravel",
+      "CSS",
+      "Mysql",
+      "Xendit",
+      "Google Map",
+      "Sendgrid Email",
+    ],
+    imageUrl: tnosPwa,
+    link: "https://app.tnosworld.com/",
+  },
+  {
+    title: "Blog",
+    description:
+      "I created this blog website to share some of the ways I do in the world of programming or anything else.",
+    tags: ["TypeScript", "Next.js", "Tailwind", "Directus js", "Postgree"],
+    imageUrl: myBlog,
+    link: "https://evairo-blog.vercel.app/",
+  },
+  {
+    title: "App Store",
+    description:
+      "Easy Android and iOS food ordering application with MidTrans online payment.",
+    tags: ["React Native", "Laravel", "Midtrans"],
+    imageUrl: appstore,
+    link: "#",
+  },
+  {
+    title: "News",
+    description:
+      "A leading news portal offering the latest news and in-depth analysis across various fields, including politics, economics, entertainment, and technology.",
+    tags: ["Laravel"],
+    imageUrl: news,
+    link: "#",
   },
 ];

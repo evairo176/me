@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import React from "react";
 
 export type MenuType = {
@@ -12,4 +13,12 @@ export type ExperiencesType = {
   description: string;
   icon?: React.ReactNode;
   date: string;
+};
+
+export type ProjectsType = {
+  title: string;
+  description: string;
+  tags: string[];
+  imageUrl: string | StaticImageData;
+  link: string;
 };
