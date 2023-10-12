@@ -32,7 +32,7 @@ const Project = ({
       className="group mb-3 sm:mb-8 last:mb-0 scroll-mt-30"
       id="projects"
     >
-      <section className="bg-background max-w-[42rem] border borderBlack rounded-lg overflow-hidden sm:pr-8 relative sm:h-[20rem] hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
+      <section className="bg-background max-w-[42rem] border borderBlack rounded-md overflow-hidden sm:pr-8 relative sm:h-[20rem] hover:bg-gray-200 transition sm:group-even:pl-8 dark:hover:bg-white/20">
         <Image
           src={imageUrl}
           alt="Project I worked on"
@@ -54,13 +54,13 @@ const Project = ({
           <Link href={link}>
             <h3 className="text-2xl font-semibold">{title}</h3>
           </Link>
-          <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-white/70 text-justify">
+          <p className="mt-2 text-sm leading-relaxed text-justify">
             {description}
           </p>
           <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
             {tags.map((tag, index) => (
               <li
-                className="px-3 bg-neutral-600 text-secondary  py-1 text-[9px] uppercase tracking-wider rounded-full dark:text-white/70"
+                className="px-3 bg-muted py-1 text-[9px] uppercase tracking-wider rounded-full"
                 key={index}
               >
                 {tag}
