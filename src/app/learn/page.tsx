@@ -1,9 +1,10 @@
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {};
 
 const Learn = (props: Props) => {
-  return <div>Learn</div>;
+  return notFound();
 };
 
 export default Learn;

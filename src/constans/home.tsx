@@ -1,4 +1,9 @@
-import { ExperiencesType, MenuType, ProjectsType } from "@/types/home-types";
+import {
+  ExperiencesType,
+  MenuType,
+  ProjectsType,
+  SkillsType,
+} from "@/types/home-types";
 import { BiHomeCircle } from "react-icons/bi";
 import { CiViewTimeline } from "react-icons/ci";
 import { PiArticleLight } from "react-icons/pi";
@@ -141,4 +146,25 @@ export const projectsData: ProjectsType[] = [
     imageUrl: news,
     link: "#",
   },
+];
+
+export const skillsData: SkillsType = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Node.js",
+  "Git",
+  "Tailwind",
+  "Prisma",
+  "MongoDB",
+  "Redux",
+  "Express",
+  "PostgreSQL",
+  "Python",
+  "Framer Motion",
+  "Midtrans",
+  "Xendit",
 ];

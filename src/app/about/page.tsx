@@ -1,9 +1,10 @@
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {};
 
 const About = (props: Props) => {
-  return <div>About</div>;
+  return notFound();
 };
 
 export default About;

@@ -1,9 +1,10 @@
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {};
 
 const Dashboard = (props: Props) => {
-  return <div>Dashboard</div>;
+  return notFound();
 };
 
 export default Dashboard;

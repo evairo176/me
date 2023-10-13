@@ -1,9 +1,10 @@
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {};
 
 const TaskBoard = (props: Props) => {
-  return <div>TaskBoard</div>;
+  return notFound();
 };
 
 export default TaskBoard;

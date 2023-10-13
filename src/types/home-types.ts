@@ -22,3 +22,5 @@ export type ProjectsType = {
   imageUrl: string | StaticImageData;
   link: string;
 };
+
+export type SkillsType = string[];

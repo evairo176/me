@@ -1,9 +1,10 @@
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {};
 
 const Blog = (props: Props) => {
-  return <div>Blog</div>;
+  return notFound();
 };
 
 export default Blog;
