@@ -21,7 +21,7 @@ const Skill = (props: Props) => {
   };
 
   return (
-    <ul className="flex flex-wrap justify-center gap-2 text-lg text-gray-800">
+    <ul className="flex flex-wrap justify-center gap-2 text-lg">
       {skillsData?.map((row: string, key: number) => {
         return (
           <motion.li
