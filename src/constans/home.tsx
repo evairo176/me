@@ -396,4 +396,8 @@ export const STACKS: stacksProps[] = [
       />
     ),
   },
+  {
+    name: "Midtrans",
+    icon: <Icons.midtrans className={`h-[${iconSize}px] w-[${iconSize}px]`} />,
+  },
 ];
