@@ -24,3 +24,8 @@ export type ProjectsType = {
 };
 
 export type SkillsType = string[];
+
+export type stacksProps = {
+  name: string;
+  icon?: JSX.Element;
+};

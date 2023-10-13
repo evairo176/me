@@ -3,6 +3,7 @@ import {
   MenuType,
   ProjectsType,
   SkillsType,
+  stacksProps,
 } from "@/types/home-types";
 import { BiHomeCircle } from "react-icons/bi";
 import { CiViewTimeline } from "react-icons/ci";
@@ -21,6 +22,40 @@ import tnosPwa from "../../public/images/projects/tnos-pwa.png";
 import myBlog from "../../public/images/projects/my-blog.png";
 import appstore from "../../public/images/projects/appstore.jpg";
 import news from "../../public/images/projects/news.png";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { BsFillBootstrapFill } from "react-icons/bs";
+import {
+  SiChakraui,
+  SiCss3,
+  SiExpo,
+  SiExpress,
+  SiFirebase,
+  SiFramer,
+  SiGithub,
+  SiGraphql,
+  SiGulp,
+  SiHtml5,
+  SiJavascript,
+  SiJest,
+  SiMui,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPhp,
+  SiPrisma,
+  SiReact,
+  SiReacthookform,
+  SiReactquery,
+  SiReactrouter,
+  SiReacttable,
+  SiRedux,
+  SiSass,
+  SiStorybook,
+  SiTailwindcss,
+  SiTypescript,
+  SiVite,
+  SiZod,
+} from "react-icons/si";
+import { Icons } from "@/components/icons/shadcn-ui";
 
 export const MENU: MenuType[] = [
   {
@@ -167,4 +202,198 @@ export const skillsData: SkillsType = [
   "Framer Motion",
   "Midtrans",
   "Xendit",
+];
+
+const iconSize = 25;
+// : ,
+// : ,
+// : ,
+// "": ,
+// "": ,
+// : ,
+// : (
+//
+// ),
+// : ,
+// "": ,
+// : ,
+// : ,
+// : ,
+// "": ,
+// : ,
+// : ,
+// : ,
+// : ,
+// "": ,
+// "Nuxt.js": <SiNuxtdotjs size={iconSize} className="text-green-600" />,
+// "Vue.js": <SiVuedotjs size={iconSize} className="text-green-500" />,
+// : ,
+// "": ,
+// : ,
+// "": ,
+// : ,
+// : ,
+// : ,
+// "": ,
+// : ,
+// : ,
+// "": ,
+// "": (
+//
+// ),
+// "": ,
+
+export const STACKS: stacksProps[] = [
+  {
+    name: "PHP",
+    icon: <SiPhp size={iconSize} className="text-blue-500" />,
+  },
+  {
+    name: "JavaScript",
+    icon: <SiJavascript size={iconSize} className="text-yellow-400" />,
+  },
+  {
+    name: "TypeScript",
+    icon: <SiTypescript size={iconSize} className="text-blue-400" />,
+  },
+  {
+    name: "Next.js",
+    icon: <SiNextdotjs size={iconSize} />,
+  },
+  {
+    name: "React.js",
+    icon: <SiReact size={iconSize} className="text-sky-500" />,
+  },
+  {
+    name: "TailwindCSS",
+    icon: <SiTailwindcss size={iconSize} className="text-cyan-300" />,
+  },
+  {
+    name: "GraphQL",
+    icon: <SiGraphql size={iconSize} className="text-pink-600" />,
+  },
+  {
+    name: "Material UI",
+    icon: <SiMui size={iconSize} className="text-sky-400" />,
+  },
+  {
+    name: "Vite",
+    icon: <SiVite size={iconSize} className="text-purple-500" />,
+  },
+  {
+    name: "PostgreSql",
+    icon: <BiLogoPostgresql size={iconSize} className="text-blue-400" />,
+  },
+  {
+    name: "ChakraUI",
+    icon: <SiChakraui size={iconSize} className="text-teal-500" />,
+  },
+  {
+    name: "React Native",
+    icon: <SiReact size={iconSize} className="text-sky-600" />,
+  },
+  {
+    name: "Expo",
+    icon: <SiExpo size={iconSize} />,
+  },
+  {
+    name: "SASS",
+    icon: <SiSass size={iconSize} className="text-pink-600" />,
+  },
+  {
+    name: "Gulp",
+    icon: <SiGulp size={iconSize} className="text-red-500" />,
+  },
+  {
+    name: "Firebase",
+    icon: <SiFirebase size={iconSize} className="text-yellow-500" />,
+  },
+  {
+    name: "Framer Motion",
+    icon: <SiFramer size={iconSize} />,
+  },
+  {
+    name: "Jest",
+    icon: <SiJest size={iconSize} className="text-orange-600" />,
+  },
+  {
+    name: "Express.js",
+    icon: <SiExpress size={iconSize} />,
+  },
+  {
+    name: "Redux",
+    icon: <SiRedux size={iconSize} className="text-purple-500" />,
+  },
+  {
+    name: "React Query",
+    icon: <SiReactquery size={iconSize} className="text-red-600" />,
+  },
+  {
+    name: "HTML",
+    icon: <SiHtml5 size={iconSize} className="text-orange-500" />,
+  },
+  {
+    name: "CSS",
+    icon: <SiCss3 size={iconSize} className="text-blue-500" />,
+  },
+  {
+    name: "Prisma",
+    icon: <SiPrisma size={iconSize} className="text-teal-500" />,
+  },
+  {
+    name: "Node JS",
+    icon: <SiNodedotjs size={iconSize} className="text-green-600" />,
+  },
+  {
+    name: "Github",
+    icon: <SiGithub size={iconSize} />,
+  },
+  {
+    name: "Storybook",
+    icon: <SiStorybook size={iconSize} className="text-pink-500" />,
+  },
+  {
+    name: "React Router",
+    icon: <SiReactrouter size={iconSize} className="text-pink-500" />,
+  },
+  {
+    name: "React Hook Form",
+    icon: <SiReacthookform size={iconSize} className="text-pink-500" />,
+  },
+  {
+    name: "React Table",
+    icon: <SiReacttable size={iconSize} className="text-rose-600" />,
+  },
+  {
+    name: "Shadcn/ui",
+    icon: (
+      <Icons.logo
+        className={`h-[${iconSize}px] w-[${iconSize}px] text-slate-500`}
+      />
+    ),
+  },
+  {
+    name: "NPM",
+    icon: (
+      <Icons.npm
+        className={`h-[${iconSize}px] w-[${iconSize}px] text-red-500`}
+      />
+    ),
+  },
+  {
+    name: "Google",
+    icon: (
+      <Icons.google
+        className={`h-[${iconSize}px] w-[${iconSize}px] text-blue-500`}
+      />
+    ),
+  },
+  {
+    name: "Xendit",
+    icon: (
+      <Icons.xendit
+        className={`h-[${iconSize}px] w-[${iconSize}px] text-blue-500`}
+      />
+    ),
+  },
 ];

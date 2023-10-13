@@ -1,5 +1,6 @@
 "use client";
-import { skillsData } from "@/constans/home";
+import { STACKS, skillsData } from "@/constans/home";
+import { stacksProps } from "@/types/home-types";
 import { motion } from "framer-motion";
 import React from "react";
 
@@ -22,10 +23,10 @@ const Skill = (props: Props) => {
 
   return (
     <ul className="flex flex-wrap justify-center gap-2 text-lg">
-      {skillsData?.map((row: string, key: number) => {
+      {STACKS?.map((row: stacksProps, key: number) => {
         return (
           <motion.li
-            className="bg-muted rounded-xl px-5 py-3 "
+            className="flex  items-center gap-2 bg-muted rounded-xl px-5 py-3"
             key={key}
             variants={fadeIn}
             initial="initial"
@@ -35,7 +36,8 @@ const Skill = (props: Props) => {
             }}
             custom={key}
           >
-            {row}
+            {row.icon}
+            {row.name}
           </motion.li>
         );
       })}
