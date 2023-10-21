@@ -56,6 +56,7 @@ import {
   SiZod,
 } from "react-icons/si";
 import { Icons } from "@/components/icons/shadcn-ui";
+import { signOut } from "next-auth/react";
 
 export const MENU: MenuType[] = [
   {
@@ -102,6 +103,19 @@ export const MENU: MenuType[] = [
     title: "Dashboard",
     icon: <AiOutlineDashboard className="w-5 h-5" />,
     url: "/dashboard",
+  },
+];
+
+export const MENU_DASHBOARD: MenuType[] = [
+  {
+    title: "Dashboard",
+    icon: <AiOutlineDashboard className="w-5 h-5" />,
+    url: "/admin/dashboard",
+  },
+  {
+    title: "Blog",
+    icon: <PiArticleLight className="w-5 h-5" />,
+    url: "/admin/blog",
   },
 ];
 

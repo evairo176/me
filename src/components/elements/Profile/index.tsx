@@ -12,17 +12,25 @@ import Image from "next/image";
 import Status from "../Status";
 import ModeToggle from "../ModeToggle";
 import profile from "../../../../public/images/ilustrations/profile.png";
+import { useAppSelector } from "@/redux/hooks";
+import { UserInterface } from "@/types/user-types";
 
 type Props = {
   isOpen: boolean;
+  user?: UserInterface;
 };
 
-const Profile = ({ isOpen }: Props) => {
+const Profile = ({ isOpen, user }: Props) => {
   return (
     <div className={clsx("flex lg:flex-col lg:items-center flex-row")}>
       <div className="relative w-full h-24 overflow-hidden dark:brightness-50 rounded-md hidden lg:block">
         <Status />
-        <Image alt="background-profile" src={background} />
+        <Image
+          alt="background-profile"
+          src={background}
+          width={40}
+          height={40}
+        />
         <div className="absolute bottom-1 right-1">
           <ModeToggle />
         </div>
