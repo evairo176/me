@@ -84,6 +84,9 @@ const Blog = (props: Props) => {
                     <div className="p-2 lg:p-3">
                       <div className="font-semibold text-2xl">{row?.title}</div>
                       <div className="text-sm text-gray-500">{row?.des}</div>
+                      <div className="text-sm text-gray-500">
+                        {data?.user?.fullname}
+                      </div>
                       <div className="mt-2">
                         <Button variant="secondary">Read More</Button>
                       </div>

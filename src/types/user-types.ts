@@ -28,7 +28,7 @@ export interface BlogInterface {
   des?: string;
   content: any[]; // You might want to define a more specific type for content.
   // tags: string[];
-  Author: UserInterface[];
+  Author: UserInterface;
   // total_likes: number;
   // total_comments: number;
   // total_reads: number;
