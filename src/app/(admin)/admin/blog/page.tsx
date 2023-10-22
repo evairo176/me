@@ -88,7 +88,9 @@ const Blog = (props: Props) => {
                         {data?.user?.fullname}
                       </div>
                       <div className="mt-2">
-                        <Button variant="secondary">Read More</Button>
+                        <Button variant="secondary">
+                          <Link href={`/admin/blog/${row?.id}`}>Read More</Link>
+                        </Button>
                       </div>
                     </div>
                   </div>

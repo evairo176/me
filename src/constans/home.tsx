@@ -16,14 +16,13 @@ import {
 import { GoTasklist } from "react-icons/go";
 import { SiAboutdotme } from "react-icons/si";
 import { MdOutlineContacts } from "react-icons/md";
-
 import paymentXenditCustom from "../../public/images/projects/payment-xendit-custom.png";
 import tnosPwa from "../../public/images/projects/tnos-pwa.png";
 import myBlog from "../../public/images/projects/my-blog.png";
-import appstore from "../../public/images/projects/appstore.jpg";
+// import appstore from "../../public/images/projects/appstore.jpg";
 import news from "../../public/images/projects/news.png";
 import { BiLogoPostgresql } from "react-icons/bi";
-import { BsFillBootstrapFill } from "react-icons/bs";
+// import apps from "../../public/images/projects/appstore.jpg";
 import {
   SiChakraui,
   SiCss3,
@@ -179,14 +178,14 @@ export const projectsData: ProjectsType[] = [
     imageUrl: myBlog,
     link: "https://evairo-blog.vercel.app/",
   },
-  {
-    title: "App Store",
-    description:
-      "Easy Android and iOS food ordering application with MidTrans online payment.",
-    tags: ["React Native", "Laravel", "Midtrans"],
-    imageUrl: appstore,
-    link: "#",
-  },
+  // {
+  //   title: "App Store",
+  //   description:
+  //     "Easy Android and iOS food ordering application with MidTrans online payment.",
+  //   tags: ["React Native", "Laravel", "Midtrans"],
+  //   imageUrl: apps,
+  //   link: "#",
+  // },
   {
     title: "News",
     description:
