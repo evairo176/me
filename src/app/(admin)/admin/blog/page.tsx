@@ -1,7 +1,9 @@
 "use client";
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { dateToHumanDate } from "@/helper";
 import { BlogInterface, UserInterface } from "@/types/user-types";
 import config from "@/utils/config";
 import axios from "axios";
@@ -64,33 +66,42 @@ const Blog = (props: Props) => {
           <TabsTrigger value="not_publish">Not Publish</TabsTrigger>
         </TabsList>
         <TabsContent value="publish">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             {data &&
               data?.user?.Blog?.map((row: BlogInterface, key: number) => {
                 return (
-                  <div
-                    key={key}
-                    className=" rounded-md border bg-card text-card-foreground"
-                  >
+                  <div key={key} className="bg-card text-card-foreground">
                     <div>
                       <Image
                         alt={row?.title}
                         src={`${config["NEXT_PUBLIC_BACKEND_BASE_URL"]}/${row?.image}`}
                         width={200}
                         height={150}
-                        className="w-full object-fit h-[170px]"
+                        className="w-full object-fit h-[200px]"
                       />
                     </div>
-                    <div className="p-2 lg:p-3">
-                      <div className="font-semibold text-2xl">{row?.title}</div>
-                      <div className="text-sm text-gray-500">{row?.des}</div>
-                      <div className="text-sm text-gray-500">
+                    <div className="flex items-center mt-3">
+                      <div className="text-xs text-gray-500">
                         {data?.user?.fullname}
                       </div>
-                      <div className="mt-2">
-                        <Button variant="secondary">
-                          <Link href={`/admin/blog/${row?.id}`}>Read More</Link>
-                        </Button>
+                      <div className="w-1 h-1 bg-gray-500 rounded-full mr-1 ml-1"></div>
+                      <div className="text-xs text-gray-500">
+                        {dateToHumanDate(data?.user?.createdAt)}
+                      </div>
+                    </div>
+                    <div className="mt-1">
+                      <div className="font-semibold text-1xl mb-1">
+                        {row?.title}
+                      </div>
+                      <div className="text-sm text-gray-500 leading-normal line-clamp-3 text-justify">
+                        {row?.des}
+                      </div>
+                    </div>
+                    <div className="mt-2">
+                      <div className="flex flex-wrap items-center gap-1">
+                        {[0, 1, 2, 3, 4].map(() => {
+                          return <Badge variant={"outline"}>Laravel</Badge>;
+                        })}
                       </div>
                     </div>
                   </div>
