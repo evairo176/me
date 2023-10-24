@@ -27,8 +27,9 @@ export interface BlogInterface {
   image: string;
   des?: string;
   content: any[]; // You might want to define a more specific type for content.
-  // tags: string[];
+  Tags: TagInterface[];
   Author: UserInterface;
+  Categories: CategoryInterface;
   // total_likes: number;
   // total_comments: number;
   // total_reads: number;
@@ -36,4 +37,14 @@ export interface BlogInterface {
   draft: boolean;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface CategoryInterface {
+  id: string;
+  name: string;
+}
+
+export interface TagInterface {
+  id: string;
+  name: string;
 }

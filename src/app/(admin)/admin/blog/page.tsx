@@ -66,7 +66,7 @@ const Blog = (props: Props) => {
           <TabsTrigger value="not_publish">Not Publish</TabsTrigger>
         </TabsList>
         <TabsContent value="publish">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {data &&
               data?.user?.Blog?.map((row: BlogInterface, key: number) => {
                 return (
@@ -80,27 +80,39 @@ const Blog = (props: Props) => {
                         className="w-full object-fit h-[200px]"
                       />
                     </div>
-                    <div className="flex items-center mt-3">
+
+                    <div className="text-primary font-medium text-sm mr-1 mt-3">
+                      {row?.Categories?.name}
+                    </div>
+
+                    <div className="flex items-center mt-1">
                       <div className="text-xs text-gray-500">
                         {data?.user?.fullname}
                       </div>
+
                       <div className="w-1 h-1 bg-gray-500 rounded-full mr-1 ml-1"></div>
                       <div className="text-xs text-gray-500">
-                        {dateToHumanDate(data?.user?.createdAt)}
+                        {dateToHumanDate(row.createdAt.toString())}
                       </div>
                     </div>
                     <div className="mt-1">
-                      <div className="font-semibold text-1xl mb-1">
-                        {row?.title}
-                      </div>
+                      <Link href={`/admin/blog/${row.id}`}>
+                        <div className="font-semibold text-1xl mb-1 cursor-pointer">
+                          {row?.title}
+                        </div>
+                      </Link>
                       <div className="text-sm text-gray-500 leading-normal line-clamp-3 text-justify">
                         {row?.des}
                       </div>
                     </div>
                     <div className="mt-2">
                       <div className="flex flex-wrap items-center gap-1">
-                        {[0, 1, 2, 3, 4].map(() => {
-                          return <Badge variant={"outline"}>Laravel</Badge>;
+                        {row?.Tags.map((row, key) => {
+                          return (
+                            <Badge key={row.id} variant={"outline"}>
+                              {row.name}
+                            </Badge>
+                          );
                         })}
                       </div>
                     </div>

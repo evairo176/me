@@ -10,6 +10,7 @@ const Editor: FC<EditorNovelInterface> = ({ form, name }) => {
   return (
     <div>
       <EditorNovel
+        className="rounded-md border bg-card text-card-foreground"
         disableLocalStorage={true}
         defaultValue={
           form.getValues(name) ? form.getValues(name) : defaultEditorContent

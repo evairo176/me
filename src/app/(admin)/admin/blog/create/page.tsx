@@ -1,6 +1,7 @@
 "use client";
 import CustomUpload from "@/components/elements/CustomUpload";
 import Editor from "@/components/elements/Editor";
+import InputSkill from "@/components/elements/InputSkill";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,11 +23,30 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { z } from "zod";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { CategoryInterface } from "@/types/user-types";
 
 type Props = {};
+
+// A function to fetch data from the API
+const fetchDataCategory = async () => {
+  try {
+    const response = await axios.get(`${config["BACKEND_URL"]}/category`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
 
 const Create = (props: Props) => {
   const form = useForm<z.infer<typeof CreateBlogSchema>>({
@@ -36,6 +56,15 @@ const Create = (props: Props) => {
 
   const router = useRouter();
   const { data: session } = useSession();
+
+  // Queries
+  const {
+    data: dataQuery,
+    isLoading: isLoadingQuery,
+    isError,
+  } = useQuery("categories", () => fetchDataCategory());
+
+  console.log(dataQuery);
 
   const createBlog = async (val: z.infer<typeof CreateBlogSchema>) => {
     setIsloading(true);
@@ -48,6 +77,9 @@ const Create = (props: Props) => {
     formData.append("title", val.title);
     formData.append("content", val.content);
     formData.append("des", val.des);
+    formData.append("draft", val.draft ? "1" : "0");
+    formData.append("Tags", JSON.stringify(val.tags));
+    formData.append("categoryId", val.category);
 
     await axios
       .post(`${config["BACKEND_URL"]}/blogs`, formData, configD)
@@ -94,6 +126,44 @@ const Create = (props: Props) => {
         >
           <FormField
             control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem className="w-full lg:w-full">
+                <FormLabel>Category</FormLabel>
+
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      {isError ? (
+                        <SelectValue placeholder="Category Error" />
+                      ) : (
+                        <SelectValue placeholder="Select category" />
+                      )}
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {!isLoadingQuery &&
+                      dataQuery &&
+                      dataQuery?.category?.map(
+                        (row: CategoryInterface, key: number) => {
+                          return (
+                            <SelectItem key={key} value={row.id}>
+                              {row.name}
+                            </SelectItem>
+                          );
+                        }
+                      )}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="title"
             render={({ field }) => (
               <FormItem className="w-full lg:w-full">
@@ -106,6 +176,26 @@ const Create = (props: Props) => {
                 </FormControl>
                 <FormDescription>At least 3 characters</FormDescription>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="draft"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                <div className="space-y-0.5">
+                  <FormLabel>Draft</FormLabel>
+                  <FormDescription>
+                    You can make publis or not publish.
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
               </FormItem>
             )}
           />
@@ -126,6 +216,7 @@ const Create = (props: Props) => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="imageBanner"
@@ -139,6 +230,7 @@ const Create = (props: Props) => {
               </FormItem>
             )}
           />
+          <InputSkill form={form} name="tags" label="Add Tag" />
           <FormField
             control={form.control}
             name="content"
