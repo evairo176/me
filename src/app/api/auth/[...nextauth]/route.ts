@@ -30,6 +30,7 @@ export const authOption: NextAuthOptions = {
           if (response.data) {
             return {
               ...response.data.user,
+              name: response.data.user.fullname,
               token: response.data.token,
             };
           } else {
@@ -50,12 +51,15 @@ export const authOption: NextAuthOptions = {
       if (account) {
         token.id = user.id;
         token.token = user.token;
+        token.name = user.name;
       }
       return token;
     },
     async session({ session, token, user }) {
       session.user.id = token.id;
       session.user.token = token.token;
+      session.user.name = token.name;
+
       return session;
     },
   },

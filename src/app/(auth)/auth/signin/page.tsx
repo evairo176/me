@@ -12,36 +12,38 @@ import { Input } from "@/components/ui/input";
 import { signInSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { PiSpinner } from "react-icons/pi";
 
 type Props = {};
 
 const SignInPage = (props: Props) => {
   const form = useForm<z.infer<typeof signInSchema>>({
-    defaultValues: {
-      email: "dawdj@gmail.com",
-    },
     resolver: zodResolver(signInSchema),
   });
+  const [isLoading, setIsloading] = useState<boolean>(false);
   const router = useRouter();
 
   const onSubmit = async (val: z.infer<typeof signInSchema>) => {
+    setIsloading(true);
     const authenticated = await signIn("credentials", {
       ...val,
       redirect: false,
     });
 
     if (authenticated?.error) {
-      alert("dwd");
-
+      toast.error("Authentication Error");
+      setIsloading(false);
       return;
     }
-
-    await router.push("/admin/dashboard");
+    setIsloading(false);
+    router.push("/admin/dashboard");
+    toast.success("Login Successfully");
   };
 
   return (
@@ -87,7 +89,9 @@ const SignInPage = (props: Props) => {
                   </FormItem>
                 )}
               />
-              <Button className="w-full">Sign In</Button>
+              <Button disabled={isLoading} className="w-full">
+                {isLoading ? <PiSpinner /> : "Sign In"}
+              </Button>
               <div className="text-sm">
                 Dont have an account{" "}
                 <Link className="text-blue-500" href="/auth/signup">

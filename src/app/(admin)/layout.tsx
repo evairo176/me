@@ -1,5 +1,3 @@
-// import Master from "@/components/layouts/Master";
-import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
@@ -13,6 +11,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOption } from "../api/auth/[...nextauth]/route";
 import QueryClientProvider from "@/context/QueryClientProvider";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

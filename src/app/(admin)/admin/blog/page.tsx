@@ -1,18 +1,17 @@
 "use client";
-import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { dateToHumanDate } from "@/helper";
-import { BlogInterface, UserInterface } from "@/types/user-types";
+import { BlogInterface } from "@/types/user-types";
 import config from "@/utils/config";
 import axios from "axios";
-import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { toast } from "sonner";
 
 type Props = {};
 
@@ -45,7 +44,43 @@ const Blog = (props: Props) => {
     }
   );
 
-  console.log({ data, isLoading, isError });
+  const deleteImage = async (id: string) => {
+    const configD = {
+      headers: { Authorization: `Bearer ${session?.user.token}` },
+    };
+
+    console.log({ deleteId: id });
+
+    await axios
+      .delete(`${config["BACKEND_URL"]}/blogs/${id}`, configD)
+      .then((response) => {
+        // console.log(response?.data?.message);
+        if (response?.data?.message) {
+          toast.success(response?.data?.message);
+        } else {
+          toast.success("Data not created");
+        }
+      })
+      .catch((error) => {
+        if (error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message);
+        } else {
+          toast.error("Please Try Again");
+        }
+      });
+  };
+
+  // Access the client
+  const queryClient = useQueryClient();
+
+  // Mutations
+  const mutation = useMutation(deleteImage, {
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries("blogs");
+    },
+  });
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -54,7 +89,7 @@ const Blog = (props: Props) => {
   }
 
   return (
-    <div>
+    <div className="rounded-md border bg-card text-card-foreground p-3">
       <div className="flex flex-row justify-end items-center">
         <Button asChild>
           <Link href="/admin/blog/create">Create Blog</Link>
@@ -74,7 +109,7 @@ const Blog = (props: Props) => {
                     <div>
                       <Image
                         alt={row?.title}
-                        src={`${config["NEXT_PUBLIC_BACKEND_BASE_URL"]}/${row?.image}`}
+                        src={row?.image}
                         width={200}
                         height={150}
                         className="w-full object-fit h-[200px]"
@@ -115,6 +150,14 @@ const Blog = (props: Props) => {
                           );
                         })}
                       </div>
+                    </div>
+                    <div className="mt-2 flex justify-end">
+                      <Button
+                        onClick={() => mutation.mutate(row.id)}
+                        variant={"destructive"}
+                      >
+                        Delete
+                      </Button>
                     </div>
                   </div>
                 );

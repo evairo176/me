@@ -49,7 +49,7 @@
   }
 }
 
-* {
+.border {
   border-color: hsl(var(--border));
 }
 

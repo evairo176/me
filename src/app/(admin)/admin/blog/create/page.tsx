@@ -72,6 +72,16 @@ const Create = (props: Props) => {
       headers: { Authorization: `Bearer ${session?.user.token}` },
     };
 
+    // const formData = {
+    //   image: val.imageBanner,
+    //   title: val.title,
+    //   content: val.content,
+    //   des: val.des,
+    //   draft: val.draft ? "1" : "0",
+    //   Tags: JSON.stringify(val.tags),
+    //   categoryId: val.category,
+    // };
+
     const formData = new FormData();
     formData.append("image", val.imageBanner);
     formData.append("title", val.title);
