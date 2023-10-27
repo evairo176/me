@@ -16,10 +16,11 @@ export interface UserInterface {
   total_reads: number;
   createdAt: Date;
   updatedAt: Date;
-  blogs: BlogInterface[];
+  Blog: BlogInterface[];
 }
 
 export interface BlogInterface {
+  user: UserInterface;
   id: string;
   authorId: string;
   slug: string;

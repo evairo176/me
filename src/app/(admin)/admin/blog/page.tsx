@@ -3,83 +3,52 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { dateToHumanDate } from "@/helper";
-import { BlogInterface } from "@/types/user-types";
+import { BlogInterface, UserInterface } from "@/types/user-types";
 import config from "@/utils/config";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { MdDeleteOutline } from "react-icons/md";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+import { deleteBlog, getBlog } from "@/features/api/Blog";
 
 type Props = {};
 
-// A function to fetch data from the API
-const fetchData = async (session: any) => {
-  const configD = {
-    headers: { Authorization: `Bearer ${session.user.token}` },
-  };
-  try {
-    const response = await axios.get(
-      `${config["BACKEND_URL"]}/users/${session.user.id}`,
-      configD
-    );
-    return response.data;
-  } catch (error) {
-    return error;
-  }
-};
-
 const Blog = (props: Props) => {
-  //   // Access the client
-  //   const queryClient = useQueryClient();
   const { data: session } = useSession();
-  // Queries
-  const { data, isLoading, isError } = useQuery(
-    "blogs",
-    () => fetchData(session ? session : ""),
-    {
-      enabled: !!session, // Enable the query only if there is an authenticated session);
-    }
-  );
-
-  const deleteImage = async (id: string) => {
-    const configD = {
-      headers: { Authorization: `Bearer ${session?.user.token}` },
-    };
-
-    console.log({ deleteId: id });
-
-    await axios
-      .delete(`${config["BACKEND_URL"]}/blogs/${id}`, configD)
-      .then((response) => {
-        // console.log(response?.data?.message);
-        if (response?.data?.message) {
-          toast.success(response?.data?.message);
-        } else {
-          toast.success("Data not created");
-        }
-      })
-      .catch((error) => {
-        if (error?.response?.data?.message) {
-          toast.error(error?.response?.data?.message);
-        } else {
-          toast.error("Please Try Again");
-        }
-      });
-  };
+  // Queries fetch all blog
+  const {
+    data: dataBlog,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["blogs"],
+    queryFn: async () =>
+      await getBlog({ session: session?.user.token, id: session?.user.id }),
+    enabled: !!session,
+  });
 
   // Access the client
   const queryClient = useQueryClient();
 
-  // Mutations
-  const mutation = useMutation(deleteImage, {
-    onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries("blogs");
-    },
-  });
+  // Mutations delete
+  const { mutate: deleteBlogMutation, isPending: isPendingDeleted } =
+    useMutation({
+      mutationFn: deleteBlog,
+      onSuccess: async () => {
+        // Invalidate and refetch
+        await queryClient.invalidateQueries({ queryKey: ["blogs"] });
+        toast.success("Data deleted successfully");
+      },
+      onError: (error) => {
+        console.log(error);
+        toast.error("Please Try Again");
+      },
+    });
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -102,10 +71,10 @@ const Blog = (props: Props) => {
         </TabsList>
         <TabsContent value="publish">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {data &&
-              data?.user?.Blog?.map((row: BlogInterface, key: number) => {
+            {dataBlog &&
+              dataBlog?.map((row: BlogInterface, key: number) => {
                 return (
-                  <div key={key} className="bg-card text-card-foreground">
+                  <div key={key} className="bg-card text-card-foreground ">
                     <div>
                       <Image
                         alt={row?.title}
@@ -122,7 +91,7 @@ const Blog = (props: Props) => {
 
                     <div className="flex items-center mt-1">
                       <div className="text-xs text-gray-500">
-                        {data?.user?.fullname}
+                        {row?.Author.fullname}
                       </div>
 
                       <div className="w-1 h-1 bg-gray-500 rounded-full mr-1 ml-1"></div>
@@ -153,10 +122,26 @@ const Blog = (props: Props) => {
                     </div>
                     <div className="mt-2 flex justify-end">
                       <Button
-                        onClick={() => mutation.mutate(row.id)}
+                        disabled={isPendingDeleted}
+                        onClick={() =>
+                          deleteBlogMutation({
+                            id: row.id,
+                            session: session?.user.token,
+                          })
+                        }
                         variant={"destructive"}
+                        className="rounded-none"
                       >
-                        Delete
+                        <MdDeleteOutline className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant={"warning"}
+                        className="rounded-none"
+                        asChild
+                      >
+                        <Link href={`/admin/blog/edit/${row.id}`}>
+                          <HiOutlinePencilAlt className="w-4 h-4" />
+                        </Link>
                       </Button>
                     </div>
                   </div>

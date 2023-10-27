@@ -27,8 +27,17 @@ export default function CustomUpload({ form, name }: CustomUploadProps) {
   return (
     <div className="inline-flex items-center w-full">
       <div className="mr-2">
-        {previewImg !== "" && (
+        {previewImg !== "" ? (
           <Image width={120} height={120} src={previewImg} alt={previewImg} />
+        ) : (
+          form.getValues(name) && (
+            <Image
+              width={120}
+              height={120}
+              src={form.getValues(name)}
+              alt={name}
+            />
+          )
         )}
       </div>
       <div

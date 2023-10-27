@@ -2,46 +2,24 @@
 import BlogBody from "@/components/elements/BlogBody";
 import config from "@/utils/config";
 import axios from "axios";
-import { useSession } from "next-auth/react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import React from "react";
-import { useQuery } from "react-query";
-
-// A function to fetch data from the API
-const fetchData = async (session: any, id?: string) => {
-  const configD = {
-    headers: { Authorization: `Bearer ${session.user.token}` },
-  };
-  try {
-    const response = await axios.get(
-      `${config["BACKEND_URL"]}/blogs/${id}`,
-      configD
-    );
-    return response.data;
-  } catch (error) {
-    return error;
-  }
-};
+import { useQuery } from "@tanstack/react-query";
 
 type Props = {};
 
 const DetailBlog = () => {
   const { id } = useParams();
+  // Queries fetch all blog
+  const { data, isLoading, isError } = useQuery({
+    queryFn: async () => {
+      const response = await axios.get(`${config["BACKEND_URL"]}/blogs/${id}`);
+      return response.data;
+    },
+    queryKey: ["blogsDetail"],
+    enabled: !!id,
+  });
 
-  //   const queryClient = useQueryClient();
-  const { data: session } = useSession();
-
-  console.log({ session });
-  // Queries
-  const { data, isLoading, isError, error } = useQuery(
-    "blogs",
-    () => fetchData(session ? session : "", id as string),
-    {
-      enabled: !!session, // Enable the query only if there is an authenticated session);
-    }
-  );
-
-  console.log({ data, isLoading, isError });
   if (isLoading) {
     return <p>Loading...</p>;
   }

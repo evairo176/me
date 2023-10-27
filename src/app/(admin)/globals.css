@@ -66,6 +66,22 @@
       scrollbar-width: none; /* Firefox */
     }
   }
+
+  .rich-text h2 {
+    @apply mb-3 text-3xl font-semibold text-neutral-600;
+  }
+
+  .rich-text h3 {
+    @apply mb-3 text-2xl font-semibold text-neutral-600;
+  }
+
+  .rich-text p {
+    @apply mb-3 text-justify leading-snug text-neutral-600;
+  }
+
+  .rich-text strong {
+    @apply mb-3 text-justify leading-snug text-neutral-600;
+  }
 }
 
 .inverted-border-radius {

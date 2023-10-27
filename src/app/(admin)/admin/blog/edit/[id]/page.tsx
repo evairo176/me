@@ -20,8 +20,8 @@ import { CreateBlogSchema } from "@/utils/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Switch } from "@/components/ui/switch";
@@ -34,25 +34,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CategoryInterface } from "@/types/user-types";
-import { createBlog } from "@/features/api/Blog";
+import { CategoryInterface, TagInterface } from "@/types/user-types";
 
 type Props = {};
 
-const Create = (props: Props) => {
-  const form = useForm<z.infer<typeof CreateBlogSchema>>({
-    resolver: zodResolver(CreateBlogSchema),
-  });
-
+const EditBlog = (props: Props) => {
   const router = useRouter();
   const { data: session } = useSession();
+  const { id } = useParams();
 
   // Queries fetch all category
-  const {
-    data: dataCategory,
-    isLoading: isLoadingQuery,
-    isError,
-  } = useQuery({
+  const { data: dataCategory, isLoading: isLoadingCategory } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const response = await axios.get(`${config["BACKEND_URL"]}/category`);
@@ -61,15 +53,80 @@ const Create = (props: Props) => {
     },
   });
 
+  // Queries fetch all blog
+  const {
+    data: dataDetailBlog,
+    isLoading: isLoadingDetail,
+    isError: isErrorDetail,
+  } = useQuery({
+    queryFn: async () => {
+      const response = await axios.get(`${config["BACKEND_URL"]}/blogs/${id}`);
+      return response.data.blog;
+    },
+    queryKey: ["blogs", id],
+  });
+
+  const form = useForm<z.infer<typeof CreateBlogSchema>>({
+    resolver: zodResolver(CreateBlogSchema),
+    // defaultValues: dataDetailBlog,
+  });
+
+  useEffect(() => {
+    if (dataDetailBlog && dataDetailBlog) {
+      form.setValue("category", dataDetailBlog?.categoryId);
+      form.setValue("title", dataDetailBlog?.title);
+      form.setValue("content", dataDetailBlog?.content);
+      form.setValue("imageBanner", dataDetailBlog?.image);
+      form.setValue("draft", dataDetailBlog?.draft);
+      form.setValue("des", dataDetailBlog?.des);
+      form.setValue(
+        "tags",
+        dataDetailBlog?.Tags.map((item: TagInterface) => item.name)
+      );
+    }
+  }, [form, dataDetailBlog, dataDetailBlog]);
+
+  // useEffect(() => {
+  //   // Set default values based on the data fetched from the API
+  //   form.setValue("category", dataDetailBlog?.categoryId || "");
+  //   form.setValue("title", dataDetailBlog?.title || "");
+  //   form.setValue("content", dataDetailBlog?.content || "");
+  //   form.setValue("imageBanner", dataDetailBlog?.image || "");
+  //   form.setValue("tags", dataDetailBlog?.Tags || "");
+  //   // Set default values for other fields as needed
+  // }, [dataDetailBlog]);
+
   // Access the client
   const queryClient = useQueryClient();
 
-  const { mutate: submitBlog, isPending } = useMutation({
-    mutationFn: createBlog,
+  const { mutate: submitUpdateBlog, isPending } = useMutation({
+    mutationFn: async (val: z.infer<typeof CreateBlogSchema>) => {
+      console.log(val);
+      const configD = {
+        headers: { Authorization: `Bearer ${session?.user.token}` },
+      };
+
+      const formData = new FormData();
+      formData.append("image", val.imageBanner);
+      formData.append("title", val.title);
+      formData.append("content", val.content);
+      formData.append("des", val.des);
+      formData.append("draft", val.draft ? "1" : "0");
+      formData.append("Tags", JSON.stringify(val.tags));
+      formData.append("categoryId", val.category);
+
+      const response = await axios.put(
+        `${config["BACKEND_URL"]}/blogs/${id}`,
+        formData,
+        configD
+      );
+
+      return response.data;
+    },
     onSuccess: async () => {
       // Invalidate and refetch
       await queryClient.invalidateQueries({ queryKey: ["blogs"] });
-      toast.success("Created Blog Successfully");
+      toast.success("Updated blog successfully");
       router.push("/admin/blog");
     },
     onError: () => {
@@ -80,13 +137,11 @@ const Create = (props: Props) => {
   return (
     <div className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
       <div className="font-semibold text-medium">
-        Create <span className="text-primary">Blog</span>
+        Edit <span className="text-primary">Blog {dataDetailBlog?.title}</span>
       </div>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((val) =>
-            submitBlog({ session: session?.user.token, val: val })
-          )}
+          onSubmit={form.handleSubmit((val) => submitUpdateBlog(val))}
           className="mt-5 space-y-6 pt-6"
         >
           <FormField
@@ -102,25 +157,19 @@ const Create = (props: Props) => {
                 >
                   <FormControl>
                     <SelectTrigger>
-                      {isError ? (
-                        <SelectValue placeholder="Category Error" />
-                      ) : (
-                        <SelectValue placeholder="Select category" />
-                      )}
+                      <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {!isLoadingQuery &&
-                      dataCategory &&
-                      dataCategory?.category?.map(
-                        (row: CategoryInterface, key: number) => {
-                          return (
-                            <SelectItem key={key} value={row.id}>
-                              {row.name}
-                            </SelectItem>
-                          );
-                        }
-                      )}
+                    {dataCategory?.category?.map(
+                      (row: CategoryInterface, key: number) => {
+                        return (
+                          <SelectItem key={key} value={row.id}>
+                            {row.name}
+                          </SelectItem>
+                        );
+                      }
+                    )}
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -206,7 +255,7 @@ const Create = (props: Props) => {
                   <Editor
                     {...field}
                     form={form}
-                    placeholder="Isi sesukanya"
+                    placeholder="Please explore your mine"
                     name="content"
                   />
                 </FormControl>
@@ -226,4 +275,4 @@ const Create = (props: Props) => {
   );
 };
 
-export default Create;
+export default EditBlog;
