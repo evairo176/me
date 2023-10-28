@@ -36,7 +36,7 @@ const Blogs = (props: Props) => {
   return (
     <section className="p-4 mt-3 lg:p-8 rounded-md border bg-card text-card-foreground">
       <SectionHeading
-        title="Carrer"
+        title="Blogs"
         icon={<PiArticleLight className="mr-2" />}
       />
       <SectionSubHeading>
@@ -82,7 +82,7 @@ const Blogs = (props: Props) => {
                   </div>
                 </div>
                 <div className="mt-1">
-                  <Link href={`#`}>
+                  <Link href={`/blogs/${row?.id}`}>
                     <div className="font-semibold text-1xl mb-1 cursor-pointer">
                       {row?.title}
                     </div>

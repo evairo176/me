@@ -69,9 +69,9 @@ export const MENU: MenuType[] = [
     url: "/projects",
   },
   {
-    title: "Blog",
+    title: "Blogs",
     icon: <PiArticleLight className="w-5 h-5" />,
-    url: "/blog",
+    url: "/blogs",
   },
   {
     title: "Learn",

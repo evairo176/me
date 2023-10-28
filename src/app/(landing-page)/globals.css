@@ -54,6 +54,21 @@
 }
 
 @layer utilities {
+  .rich-text h2 {
+    @apply mb-3 text-3xl font-semibold;
+  }
+
+  .rich-text h3 {
+    @apply mb-3 text-2xl font-semibold;
+  }
+
+  .rich-text p {
+    @apply mb-3 text-justify leading-snug text-gray-500;
+  }
+  .rich-text blockquote {
+    @apply p-4 my-4 border-l-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800;
+  }
+
   @layer responsive {
     /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
