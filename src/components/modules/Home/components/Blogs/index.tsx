@@ -82,7 +82,7 @@ const Blogs = (props: Props) => {
                   </div>
                 </div>
                 <div className="mt-1">
-                  <Link href={`/blogs/${row?.id}`}>
+                  <Link href={`/blogs/${row?.slug}`}>
                     <div className="font-semibold text-1xl mb-1 cursor-pointer">
                       {row?.title}
                     </div>
