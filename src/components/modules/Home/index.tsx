@@ -1,11 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import Introduction from "./components/Introduction";
 import CareerList from "./components/CareerList";
 import dynamic from "next/dynamic";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
-// const Projects = dynamic(() => import("./components/Projects"));
+import Blogs from "./components/Blogs";
+// const Blogs = dynamic(() => import("./components/Blogs"));
 // const Skills = dynamic(() => import("./components/Skills"));
 type Props = {};
 
@@ -16,6 +17,9 @@ const HomeModules = (props: Props) => {
       <CareerList />
       <Projects />
       <Skills />
+      <Suspense fallback="Loading screen...">
+        <Blogs />
+      </Suspense>
     </>
   );
 };

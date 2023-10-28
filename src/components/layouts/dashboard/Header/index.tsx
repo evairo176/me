@@ -19,16 +19,9 @@ const Header: FC<HeaderProps> = () => {
           <MenuIcon className="w-7 h-7" />
         </div>
         <div>
-          <div>Company</div>
+          <div>Me</div>
           <div className="font-semibold">{session?.user?.name}</div>
         </div>
-      </div>
-
-      <div>
-        <Button onClick={navCreateJobPage} className="rounded-none py-3 px-6">
-          <PlusIcon className="mr-2 w-4 h-4" />
-          Post a job
-        </Button>
       </div>
     </div>
   );

@@ -6,18 +6,10 @@ import { z } from "zod";
 
 interface getBlog {
   id: string;
-  session: string;
 }
 
-export const getBlog = async ({ id, session }: getBlog) => {
-  const configD = {
-    headers: { Authorization: `Bearer ${session}` },
-  };
-
-  const response = await axios.get(
-    `${config["BACKEND_URL"]}/blogs/user/${id}`,
-    configD
-  );
+export const getBlog = async ({ id }: getBlog) => {
+  const response = await axios.get(`${config["BACKEND_URL"]}/blogs/user/${id}`);
 
   return response.data.blog;
 };

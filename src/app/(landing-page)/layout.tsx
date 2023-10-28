@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/context/ThemeProvider";
+import QueryClientProvider from "@/context/QueryClientProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,7 +43,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Master>{children}</Master>
+            <QueryClientProvider>
+              <Master>{children}</Master>
+            </QueryClientProvider>
           </ThemeProvider>
         </ReduxProvider>
       </body>
