@@ -15,8 +15,8 @@ const Code = ({ children, language }: CodeProps) => {
 
   return (
     <div className="rounded-md border bg-gray-500">
-      <div className="flex justify-between items-center p-2 ">
-        <div className="text-sm text-white">Example Code</div>
+      <div className="flex justify-between items-center py-1 px-[12px]">
+        <div className="text-xs text-white">Example</div>
         {copy ? (
           <Button disabled={true} variant={"ghost"} className="group">
             <BsCheck2Circle className="text-white w-5 h-5 group-hover:text-gray-500" />

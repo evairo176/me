@@ -21,7 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Switch } from "@/components/ui/switch";
@@ -56,8 +56,9 @@ const EditBlog = (props: Props) => {
   // Queries fetch all blog
   const {
     data: dataDetailBlog,
-    isLoading: isLoadingDetail,
-    isError: isErrorDetail,
+    isLoading: isLoadingDetailBlog,
+    isError: isErrorDetailBlog,
+    isSuccess: isSuccessDetailBlog,
   } = useQuery({
     queryFn: async () => {
       const response = await axios.get(`${config["BACKEND_URL"]}/blogs/${id}`);
@@ -68,33 +69,32 @@ const EditBlog = (props: Props) => {
 
   const form = useForm<z.infer<typeof CreateBlogSchema>>({
     resolver: zodResolver(CreateBlogSchema),
-    // defaultValues: dataDetailBlog,
+    defaultValues: {
+      title: "",
+      des: "",
+      category: "",
+      imageBanner: "",
+      content: "",
+      draft: false,
+      tags: [],
+    },
   });
 
   useEffect(() => {
-    if (dataDetailBlog && dataDetailBlog) {
-      form.setValue("category", dataDetailBlog?.categoryId);
-      form.setValue("title", dataDetailBlog?.title);
-      form.setValue("content", dataDetailBlog?.content);
-      form.setValue("imageBanner", dataDetailBlog?.image);
-      form.setValue("draft", dataDetailBlog?.draft);
-      form.setValue("des", dataDetailBlog?.des);
-      form.setValue(
-        "tags",
-        dataDetailBlog?.Tags.map((item: TagInterface) => item.name)
-      );
-    }
-  }, [form, dataDetailBlog, dataDetailBlog]);
+    const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
+    const category = dataDetailBlog?.categoryId;
 
-  // useEffect(() => {
-  //   // Set default values based on the data fetched from the API
-  //   form.setValue("category", dataDetailBlog?.categoryId || "");
-  //   form.setValue("title", dataDetailBlog?.title || "");
-  //   form.setValue("content", dataDetailBlog?.content || "");
-  //   form.setValue("imageBanner", dataDetailBlog?.image || "");
-  //   form.setValue("tags", dataDetailBlog?.Tags || "");
-  //   // Set default values for other fields as needed
-  // }, [dataDetailBlog]);
+    let defaultValue = {
+      title: dataDetailBlog?.title,
+      des: dataDetailBlog?.des,
+      category: category,
+      imageBanner: dataDetailBlog?.image,
+      content: dataDetailBlog?.content,
+      draft: dataDetailBlog?.draft,
+      tags: tags,
+    };
+    form.reset(defaultValue);
+  }, [form, dataDetailBlog]);
 
   // Access the client
   const queryClient = useQueryClient();
@@ -134,10 +134,14 @@ const EditBlog = (props: Props) => {
     },
   });
 
+  if (isLoadingDetailBlog) {
+    return <div>loading..</div>;
+  }
+
   return (
     <div className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
       <div className="font-semibold text-medium">
-        Edit <span className="text-primary">Blog {dataDetailBlog?.title}</span>
+        Edit <span className="text-primary">Blog </span>
       </div>
       <Form {...form}>
         <form
@@ -150,9 +154,9 @@ const EditBlog = (props: Props) => {
             render={({ field }) => (
               <FormItem className="w-full lg:w-full">
                 <FormLabel>Category</FormLabel>
-
                 <Select
                   onValueChange={field.onChange}
+                  value={field.value}
                   defaultValue={field.value}
                 >
                   <FormControl>
@@ -161,17 +165,19 @@ const EditBlog = (props: Props) => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {dataCategory?.category?.map(
-                      (row: CategoryInterface, key: number) => {
-                        return (
-                          <SelectItem key={key} value={row.id}>
-                            {row.name}
-                          </SelectItem>
-                        );
-                      }
-                    )}
+                    {isSuccessDetailBlog &&
+                      dataCategory?.category?.map(
+                        (row: CategoryInterface, key: number) => {
+                          return (
+                            <SelectItem key={key} value={row.id?.toString()}>
+                              {row.name}
+                            </SelectItem>
+                          );
+                        }
+                      )}
                   </SelectContent>
                 </Select>
+
                 <FormMessage />
               </FormItem>
             )}
