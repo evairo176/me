@@ -35,17 +35,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CategoryInterface, TagInterface } from "@/types/user-types";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-import BlogBody from "@/components/elements/BlogBody";
-import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
+// import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 
 type Props = {};
 
@@ -270,12 +260,12 @@ const EditBlog = (props: Props) => {
               <FormItem className="w-full lg:w-full">
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <MDXEditorComponent
+                  {/* <MDXEditorComponent
                     {...field}
                     form={form}
                     placeholder="Isi sesukanya"
                     name="content"
-                  />
+                  /> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
