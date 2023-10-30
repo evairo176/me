@@ -35,7 +35,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CategoryInterface, TagInterface } from "@/types/user-types";
-// import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
+import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 
 type Props = {};
 
