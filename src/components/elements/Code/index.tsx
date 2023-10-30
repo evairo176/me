@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
   atomOneDark,
   atomOneLight,
@@ -8,11 +8,30 @@ import { BiCopyAlt } from "react-icons/bi";
 import { BsCheck2Circle } from "react-icons/bs";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
+import typescript from "react-syntax-highlighter/dist/esm/languages/hljs/typescript";
+import javascript from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
+import diff from "react-syntax-highlighter/dist/esm/languages/hljs/diff";
+import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
+import css from "react-syntax-highlighter/dist/esm/languages/hljs/css";
 
 type CodeProps = {
   children: string;
   language: string;
 };
+
+const languages = {
+  javascript: "javascript",
+  typescript: "typescript",
+  diff: "diff",
+  tsx: "tsx",
+  css: "css",
+};
+
+// SyntaxHighlighter.registerLanguage(languages.javascript, javascript);
+// SyntaxHighlighter.registerLanguage(languages.typescript, typescript);
+// SyntaxHighlighter.registerLanguage(languages.diff, diff);
+// SyntaxHighlighter.registerLanguage(languages.tsx, tsx);
+// SyntaxHighlighter.registerLanguage(languages.css, css);
 
 const Code = ({ children, language }: CodeProps) => {
   const [copy, setCopy] = useState<boolean>(false);
@@ -44,7 +63,7 @@ const Code = ({ children, language }: CodeProps) => {
         )}
       </div>
       <SyntaxHighlighter
-        language="javascript"
+        language={language ? language : "javascript"}
         style={currentTheme === "dark" ? atomOneDark : atomOneLight}
       >
         {children}

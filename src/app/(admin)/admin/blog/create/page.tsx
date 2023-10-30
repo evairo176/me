@@ -1,6 +1,5 @@
 "use client";
 import CustomUpload from "@/components/elements/CustomUpload";
-import Editor from "@/components/elements/Editor";
 import InputSkill from "@/components/elements/InputSkill";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Switch } from "@/components/ui/switch";
@@ -36,6 +35,17 @@ import {
 } from "@/components/ui/select";
 import { CategoryInterface } from "@/types/user-types";
 import { createBlog } from "@/features/api/Blog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Code from "@/components/elements/Code";
+import BlogBody from "@/components/elements/BlogBody";
+import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 
 type Props = {};
 
@@ -201,9 +211,9 @@ const Create = (props: Props) => {
             name="content"
             render={({ field }) => (
               <FormItem className="w-full lg:w-full">
-                <FormLabel>Content</FormLabel>
+                <FormLabel>Content </FormLabel>
                 <FormControl>
-                  <Editor
+                  <MDXEditorComponent
                     {...field}
                     form={form}
                     placeholder="Isi sesukanya"

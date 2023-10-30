@@ -1,73 +1,77 @@
-import parse, { Element, domToReact } from "html-react-parser";
-import Image from "next/image";
-import Code from "../Code";
+import ReactMarkdown from "react-markdown";
+import CodeBlock from "@/components/CodeBlock";
 
 type BlogBodyProps = {
   body: string;
 };
 
+interface TableProps {
+  children: React.ReactNode;
+}
+
+const Table = ({ children }: TableProps) => {
+  return (
+    <div className="table-container">
+      <table className="table w-full">{children}</table>
+    </div>
+  );
+};
+
 const BlogBody = ({ body = "" }: BlogBodyProps) => {
-  const options = {
-    replace: (domNode: any) => {
-      if (domNode instanceof Element && domNode.attribs) {
-        if (domNode.name === "img") {
-          const { src, alt } = domNode.attribs;
-          return (
-            <Image
-              className="my-3 h-auto max-h-[300px] w-full rounded-md object-cover object-center md:max-h-[500px]"
-              src={src}
-              alt={alt}
-              width={1200}
-              height={620}
+  return (
+    <div className="text-rich">
+      <ReactMarkdown
+        components={{
+          a: (props) => (
+            <a
+              className="text-teal-600 hover:text-teal-400 hover:underline cursor-pointer"
+              target="_blank"
+              {...props}
             />
-          );
-        }
-
-        if (
-          domNode.type === "tag" &&
-          domNode.name === "pre" &&
-          domNode.children
-        ) {
-          const codeNode: any = domNode.children.find(
-            (child: any) => child.name === "span"
-          );
-
-          if (codeNode && codeNode.children && codeNode.children.length === 1) {
-            const codeContent = codeNode.children[0].data;
-            const language = codeNode.attribs.class || ""; // You can modify this to extract the language class
-
-            return <Code language={language}>{codeContent}</Code>;
-          }
-        }
-        if (
-          domNode.type === "tag" &&
-          domNode.name === "blockquote" &&
-          domNode.children
-        ) {
-          const codeNode: any = domNode.children.find(
-            (child: any) => child.name === "span"
-          );
-          console.log({ codeNode });
-          if (codeNode && codeNode.children && codeNode.children.length === 1) {
-            const blockquoteContent = codeNode.children[0].data;
-            const language = codeNode.attribs.class || ""; // You can modify this to extract the language class
-
-            return (
-              <blockquote className="border-l-2 border-primary p-2 bg-muted text-sm text-justify">
-                {blockquoteContent}
-              </blockquote>
-            );
-          }
-        }
-      }
-    },
-  };
-
-  const getParseHtml = (body: string) => {
-    return parse(body, options);
-  };
-
-  return <div className="rich-text">{getParseHtml(body)}</div>;
+          ),
+          p: (props) => <div {...props} />,
+          h2: (props) => (
+            <h2
+              className="text-xl font-medium dark:text-neutral-300"
+              {...props}
+            />
+          ),
+          h3: (props) => (
+            <h3
+              className="text-[18px] leading-snug pt-4 font-medium dark:text-neutral-300"
+              {...props}
+            />
+          ),
+          ul: (props) => (
+            <ul className="pl-10 space-y-3 list-disc pb-5" {...props} />
+          ),
+          ol: (props) => (
+            <ol className="pl-10 space-y-3 list-decimal pb-5" {...props} />
+          ),
+          code: (props) => <CodeBlock {...props} />,
+          blockquote: (props) => (
+            <blockquote
+              className="pl-6 py-3 text-md border-l-[5px] border-neutral-700 border-l-cyan-500 bg-neutral-100 dark:bg-neutral-800 rounded-lg text-cyan-800 dark:text-cyan-200"
+              {...props}
+            />
+          ),
+          table: (props) => <Table {...(props as TableProps)} />,
+          th: (props) => (
+            <th className="border dark:border-neutral-600 py-1 px-3 text-left">
+              {props.children}
+            </th>
+          ),
+          td: (props) => (
+            <td className="border dark:border-neutral-600  py-1 px-3">
+              {props.children}
+            </td>
+          ),
+        }}
+      >
+        {body}
+      </ReactMarkdown>
+    </div>
+  );
 };
 
 export default BlogBody;

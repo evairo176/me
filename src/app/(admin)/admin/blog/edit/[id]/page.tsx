@@ -35,6 +35,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CategoryInterface, TagInterface } from "@/types/user-types";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+import BlogBody from "@/components/elements/BlogBody";
+import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 
 type Props = {};
 
@@ -140,8 +151,10 @@ const EditBlog = (props: Props) => {
 
   return (
     <div className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
-      <div className="font-semibold text-medium">
-        Edit <span className="text-primary">Blog </span>
+      <div className="flex items-center justify-between">
+        <div className="font-semibold text-medium">
+          Edit <span className="text-primary">Blog </span>{" "}
+        </div>
       </div>
       <Form {...form}>
         <form
@@ -258,10 +271,10 @@ const EditBlog = (props: Props) => {
               <FormItem className="w-full lg:w-full">
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <Editor
+                  <MDXEditorComponent
                     {...field}
                     form={form}
-                    placeholder="Please explore your mine"
+                    placeholder="Isi sesukanya"
                     name="content"
                   />
                 </FormControl>
@@ -270,7 +283,7 @@ const EditBlog = (props: Props) => {
             )}
           />
 
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-4">
             <Button disabled={isPending}>
               {isPending ? "Loading..." : "Save"}
             </Button>
