@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
 import ReactMarkdown from "react-markdown";
-import CodeBlock from "@/components/CodeBlock";
+import CodeBlock from "@/components/elements/CodeBlock";
 
 interface MDXEditorComponentInterface {
   form: any;

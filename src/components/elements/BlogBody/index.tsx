@@ -1,5 +1,5 @@
 import ReactMarkdown from "react-markdown";
-import CodeBlock from "@/components/CodeBlock";
+import CodeBlock from "@/components/elements/CodeBlock";
 
 type BlogBodyProps = {
   body: string;

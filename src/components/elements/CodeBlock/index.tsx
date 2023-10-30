@@ -33,8 +33,8 @@ SyntaxHighlighter.registerLanguage(languages.css, css);
 
 const CodeBlock = ({ className = "", children, inline, ...props }: any) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [value, copy] = useCopyToClipboard();
+
   const match = /language-(\w+)/.exec(className || "");
 
   const handleCopy = (code: string) => {
