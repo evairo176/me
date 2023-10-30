@@ -84,8 +84,8 @@ const EditBlog = (props: Props) => {
   useEffect(() => {
     const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
     const category = dataDetailBlog?.categoryId;
-
-    let defaultValue = {
+    if(tags){
+      let defaultValue = {
       title: dataDetailBlog?.title,
       des: dataDetailBlog?.des,
       category: category,
@@ -95,6 +95,7 @@ const EditBlog = (props: Props) => {
       tags: tags,
     };
     form.reset(defaultValue);
+    }
   }, [form, dataDetailBlog]);
 
   // Access the client
@@ -260,12 +261,12 @@ const EditBlog = (props: Props) => {
               <FormItem className="w-full lg:w-full">
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  {/* <MDXEditorComponent
+                  <MDXEditorComponent
                     {...field}
                     form={form}
                     placeholder="Isi sesukanya"
                     name="content"
-                  /> */}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
