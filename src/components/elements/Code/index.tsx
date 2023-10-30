@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import {
+  atomOneDark,
+  atomOneLight,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { BiCopyAlt } from "react-icons/bi";
 import { BsCheck2Circle } from "react-icons/bs";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 type CodeProps = {
   children: string;
@@ -12,6 +16,8 @@ type CodeProps = {
 
 const Code = ({ children, language }: CodeProps) => {
   const [copy, setCopy] = useState<boolean>(false);
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <div className="rounded-md border bg-gray-500">
@@ -37,7 +43,10 @@ const Code = ({ children, language }: CodeProps) => {
           </Button>
         )}
       </div>
-      <SyntaxHighlighter language="javascript" style={atomOneDark}>
+      <SyntaxHighlighter
+        language="javascript"
+        style={currentTheme === "dark" ? atomOneDark : atomOneLight}
+      >
         {children}
       </SyntaxHighlighter>
     </div>

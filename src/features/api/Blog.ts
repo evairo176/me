@@ -7,7 +7,7 @@ import { z } from "zod";
 interface getBlog {
   id: string;
 }
-
+// get all blog by user
 export const getBlog = async ({ id }: getBlog) => {
   const response = await axios.get(`${config["BACKEND_URL"]}/blogs/user/${id}`);
 
@@ -19,6 +19,7 @@ interface createBlog {
   val: z.infer<typeof CreateBlogSchema>;
 }
 
+// create blog
 export const createBlog = async ({ session, val }: createBlog) => {
   const configD = {
     headers: { Authorization: `Bearer ${session}` },
@@ -45,6 +46,8 @@ interface DeleteBlog {
   id: string;
   session: string;
 }
+
+// delete blog
 export const deleteBlog = async ({ session, id }: DeleteBlog) => {
   const configD = {
     headers: { Authorization: `Bearer ${session}` },
@@ -54,5 +57,24 @@ export const deleteBlog = async ({ session, id }: DeleteBlog) => {
     configD
   );
 
+  return response.data.blog;
+};
+
+// get all blog
+export const getAllBlog = async () => {
+  const response = await axios.get(`${config["BACKEND_URL"]}/blogs`);
+
+  return response.data.blog;
+};
+
+interface DetailBlog {
+  slug: string | string[];
+}
+
+// get detail blog
+export const getDetailBlog = async ({ slug }: DetailBlog) => {
+  const response = await axios.get(
+    `${config["BACKEND_URL"]}/blogs/detail/${slug}`
+  );
   return response.data.blog;
 };

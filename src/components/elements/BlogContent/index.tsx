@@ -29,11 +29,11 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
       </div>
 
       <div className="flex items-center mt-1">
-        <div className="text-xs text-gray-500">{blog?.Author.fullname}</div>
+        <div className="text-xs text-gray-500">{blog?.Author?.fullname}</div>
 
         <div className="w-1 h-1 bg-gray-400 rounded-full mr-1 ml-1"></div>
         <div className="text-xs text-gray-500">
-          {dateToHumanDate(blog.createdAt.toString())}
+          {dateToHumanDate(blog?.createdAt?.toString())}
         </div>
       </div>
       <div className="mt-1">
@@ -52,10 +52,10 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
       </div>
       <div className="mt-2">
         <div className="flex flex-wrap items-center gap-1">
-          {blog?.Tags.map((row, key) => {
+          {blog?.Tags?.map((row, key) => {
             return (
-              <Badge key={row.id} variant={"outline"}>
-                {row.name}
+              <Badge key={row?.id} variant={"outline"}>
+                {row?.name}
               </Badge>
             );
           })}

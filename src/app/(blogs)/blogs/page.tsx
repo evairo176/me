@@ -1,23 +1,21 @@
 "use client";
+import BlogContent from "@/components/elements/BlogContent";
 import SectionHeading from "@/components/elements/SectionHeading";
 import SectionSubHeading from "@/components/elements/SectionSubHeading";
-import { Button } from "@/components/ui/button";
-import React from "react";
-import { PiArticleLight } from "react-icons/pi";
-import { BiDotsVerticalRounded } from "react-icons/bi";
-import { useQuery } from "@tanstack/react-query";
-import { getBlog } from "@/features/api/Blog";
-import { BlogInterface } from "@/types/user-types";
-import Image from "next/image";
-import { dateToHumanDate } from "@/helper";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import BlogContent from "@/components/elements/BlogContent";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
+import { Button } from "@/components/ui/button";
+import { getAllBlog, getBlog } from "@/features/api/Blog";
+import { BlogInterface } from "@/types/user-types";
+import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import React from "react";
+import { BsArrowLeftCircle } from "react-icons/bs";
+import { PiArticleLight } from "react-icons/pi";
 
 type Props = {};
 
-const Blogs = (props: Props) => {
+const Blog = (props: Props) => {
   // Queries fetch all blog
   const {
     data: blog,
@@ -25,7 +23,7 @@ const Blogs = (props: Props) => {
     isError: isErrorBlog,
   } = useQuery({
     queryKey: ["blogs"],
-    queryFn: async () => await getBlog({ id: "clnye4mzg0000nls08cyb4q36" }),
+    queryFn: async () => await getAllBlog(),
   });
 
   if (isLoadingBlog) {
@@ -37,15 +35,15 @@ const Blogs = (props: Props) => {
         />
         <SectionSubHeading>
           <p className="dark:text-neutral-400">My Blogs.</p>
-          <Button variant={"secondary"} aria-label="view all blog" asChild>
+          <Button variant={"secondary"} aria-label="Back To Home" asChild>
             <Link
-              href={"/blogs"}
+              href={"/"}
               className="flex gap-2 transition-all duration-300 items-center"
             >
-              <span>View all Blogs</span>
               <div className="overflow-hidden dark:border-neutral-500">
-                <BiDotsVerticalRounded className="animate-rain-arrow" />
+                <BsArrowLeftCircle className="animate-rain-arrow" />
               </div>
+              <span>Back To Home</span>
             </Link>
           </Button>
         </SectionSubHeading>
@@ -69,15 +67,15 @@ const Blogs = (props: Props) => {
       />
       <SectionSubHeading>
         <p className="dark:text-neutral-400">My Blogs.</p>
-        <Button variant={"secondary"} aria-label="view all blog" asChild>
+        <Button variant={"secondary"} aria-label="Back To Home" asChild>
           <Link
-            href={"/blogs"}
+            href={"/"}
             className="flex gap-2 transition-all duration-300 items-center"
           >
-            <span>View all Blogs</span>
             <div className="overflow-hidden dark:border-neutral-500">
-              <BiDotsVerticalRounded className="animate-rain-arrow" />
+              <BsArrowLeftCircle className="animate-rain-arrow" />
             </div>
+            <span>Back To Home</span>
           </Link>
         </Button>
       </SectionSubHeading>
@@ -90,4 +88,4 @@ const Blogs = (props: Props) => {
   );
 };
 
-export default Blogs;
+export default Blog;

@@ -31,12 +31,32 @@ const BlogBody = ({ body = "" }: BlogBodyProps) => {
           const codeNode: any = domNode.children.find(
             (child: any) => child.name === "span"
           );
-          console.log({ codeNode });
+
           if (codeNode && codeNode.children && codeNode.children.length === 1) {
             const codeContent = codeNode.children[0].data;
             const language = codeNode.attribs.class || ""; // You can modify this to extract the language class
 
             return <Code language={language}>{codeContent}</Code>;
+          }
+        }
+        if (
+          domNode.type === "tag" &&
+          domNode.name === "blockquote" &&
+          domNode.children
+        ) {
+          const codeNode: any = domNode.children.find(
+            (child: any) => child.name === "span"
+          );
+          console.log({ codeNode });
+          if (codeNode && codeNode.children && codeNode.children.length === 1) {
+            const blockquoteContent = codeNode.children[0].data;
+            const language = codeNode.attribs.class || ""; // You can modify this to extract the language class
+
+            return (
+              <blockquote className="border-l-2 border-primary p-2 bg-muted text-sm text-justify">
+                {blockquoteContent}
+              </blockquote>
+            );
           }
         }
       }

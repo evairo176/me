@@ -32,7 +32,7 @@ const SocialLink = ({
       <div
         className={
           isShareURL
-            ? "rounded-md bg-neutral-200 px-3 py-2 text-neutral-600 transition-colors duration-100 hover:bg-neutral-600 hover:text-neutral-100"
+            ? "rounded-md bg-muted px-3 py-2 transition-colors duration-100 hover:bg-primary-foreground"
             : ""
         }
       >

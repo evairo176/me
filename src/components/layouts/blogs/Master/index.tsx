@@ -12,7 +12,7 @@ const Master = ({ children }: Props) => {
       <div className="flex flex-col justify-center lg:flex-row lg:gap-5 lg:pt-10">
         {/* Sidebar */}
 
-        <Sidebar />
+        {/* <Sidebar /> */}
 
         {/* Content */}
         <div className="lg:max-w-[854px] p-2 lg:p-0 lg:mt-8 w-full lg:min-h-screen no-scrollbar">
