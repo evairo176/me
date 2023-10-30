@@ -26,7 +26,7 @@ export default function MDXEditorComponent({
         }}
       />
       <div className="mt-3">
-        <ReactMarkdown
+        {/* <ReactMarkdown
           components={{
             a: (props) => (
               <a
@@ -75,7 +75,7 @@ export default function MDXEditorComponent({
           }}
         >
           {form.getValues(name)}
-        </ReactMarkdown>
+        </ReactMarkdown> */}
       </div>
     </div>
   );
