@@ -190,7 +190,6 @@ const EditBlog = (props: Props) => {
                       )}
                   </SelectContent>
                 </Select>
-
                 <FormMessage />
               </FormItem>
             )}
