@@ -1,5 +1,4 @@
 import React from "react";
-import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 
 type Props = {
