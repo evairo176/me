@@ -1,17 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PlusIcon } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
-import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
 
 interface InputSkillProps {
   form: any;
@@ -51,7 +42,7 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
     if (val && val.length > 0) {
       setValues(val);
     }
-  }, [form, name]);
+  }, [name, form]);
 
   return (
     <>
