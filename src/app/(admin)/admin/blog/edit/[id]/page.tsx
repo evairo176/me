@@ -94,7 +94,7 @@ const EditBlog = (props: Props) => {
         draft: dataDetailBlog?.draft,
         tags: tags,
       };
-      console.log(defaultValue);
+
       form.reset(defaultValue);
     }
   }, [form, dataDetailBlog]);
