@@ -1,12 +1,11 @@
 "use client";
 import BlogBody from "@/components/elements/BlogBody";
 import BlogContent from "@/components/elements/BlogContent";
+import CtaCard from "@/components/elements/CtaCard";
 import SocialLink from "@/components/elements/SocialLink";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { getDetailBlog } from "@/features/api/Blog";
-import config from "@/utils/config";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React from "react";
@@ -71,6 +70,7 @@ const DetailBlog = (props: Props) => {
           {/* <PostBody body={post.body} /> */}
           <BlogBody body={blog?.content} />
         </div>
+        <CtaCard />
       </div>
     </>
   );
