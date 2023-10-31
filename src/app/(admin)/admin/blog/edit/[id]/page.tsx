@@ -85,17 +85,19 @@ const EditBlog = (props: Props) => {
     const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
     const category = dataDetailBlog?.categoryId;
 
-    let defaultValue = {
-      title: dataDetailBlog?.title,
-      des: dataDetailBlog?.des,
-      category: category,
-      imageBanner: dataDetailBlog?.image,
-      content: dataDetailBlog?.content,
-      draft: dataDetailBlog?.draft,
-      tags: tags,
-    };
+    if (dataDetailBlog) {
+      let defaultValue = {
+        title: dataDetailBlog?.title,
+        des: dataDetailBlog?.des,
+        category: category,
+        imageBanner: dataDetailBlog?.image,
+        content: dataDetailBlog?.content,
+        draft: dataDetailBlog?.draft,
+        tags: tags,
+      };
 
-    form.reset(defaultValue);
+      form.reset(defaultValue);
+    }
   }, [form, dataDetailBlog]);
 
   // Access the client

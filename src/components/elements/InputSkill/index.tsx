@@ -21,9 +21,7 @@ interface InputSkillProps {
 
 const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
   const [isHide, setHide] = useState<boolean>(false);
-  const [values, setValues] = useState<string[]>(
-    form.getValues(name) ? form.getValues(name) : []
-  );
+  const [values, setValues] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSaveValue = () => {
@@ -86,29 +84,53 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
                 </div>
               )}
               <div className="space-x-3">
-                {values.map((item: string, key: number) => (
-                  <Badge
-                    variant={"outline"}
-                    key={key}
-                    onClick={() => handleDeleteValue(item)}
-                  >
-                    {item}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4 ml-2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </Badge>
-                ))}
+                {values
+                  ? values.map((item: string, key: number) => (
+                      <Badge
+                        variant={"outline"}
+                        key={key}
+                        onClick={() => handleDeleteValue(item)}
+                      >
+                        {item}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4 ml-2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </Badge>
+                    ))
+                  : field?.value?.map((item: string, key: number) => (
+                      <Badge
+                        variant={"outline"}
+                        key={key}
+                        onClick={() => handleDeleteValue(item)}
+                      >
+                        {item}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4 ml-2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </Badge>
+                    ))}
               </div>
             </>
           </FormControl>
