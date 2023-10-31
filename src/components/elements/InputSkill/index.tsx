@@ -17,15 +17,21 @@ interface InputSkillProps {
   form: any;
   name: string;
   label: string;
+  defaultValue?: string[];
 }
 
-const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
+const InputSkill: FC<InputSkillProps> = ({
+  form,
+  name,
+  label,
+  defaultValue,
+}) => {
   const [isHide, setHide] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>([]);
 
   useEffect(() => {
     const getDefaultValue = () => {
-      const val = form.getValues(name);
+      const val = defaultValue;
 
       if (val && val.length > 0) {
         setValues(val);
@@ -34,7 +40,7 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
     };
 
     getDefaultValue();
-  }, [form, name]);
+  }, [form, name, defaultValue]);
 
   const handleSaveValue = () => {
     const value = form.getValues(name);

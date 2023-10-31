@@ -83,7 +83,6 @@ const EditBlog = (props: Props) => {
   });
 
   useEffect(() => {
-    const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
     const category = dataDetailBlog?.categoryId;
 
     if (dataDetailBlog) {
@@ -94,7 +93,6 @@ const EditBlog = (props: Props) => {
         imageBanner: dataDetailBlog?.image,
         content: dataDetailBlog?.content,
         draft: dataDetailBlog?.draft,
-        tags: tags,
       };
 
       form.reset(defaultValue);
@@ -303,7 +301,14 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           /> */}
-          <InputSkill form={form} name="tags" label="Add Tag" />
+          <InputSkill
+            form={form}
+            defaultValue={dataDetailBlog?.Tags.map(
+              (item: TagInterface) => item.name
+            )}
+            name="tags"
+            label="Add Tag"
+          />
           <FormField
             control={form.control}
             name="content"
