@@ -48,6 +48,7 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
 
   useEffect(() => {
     const val = form.getValues(name);
+    console.log({ val: val });
 
     if (val && val.length > 0) {
       setValues(val);
@@ -60,10 +61,7 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="block">
-            {label}
-            {field.value}
-          </FormLabel>
+          <FormLabel className="block">{label}</FormLabel>
           <FormControl>
             <>
               <Button
