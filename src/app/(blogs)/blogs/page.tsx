@@ -8,7 +8,6 @@ import { getAllBlog, getBlog } from "@/features/api/Blog";
 import { BlogInterface } from "@/types/user-types";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import React from "react";
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { PiArticleLight } from "react-icons/pi";
@@ -18,7 +17,7 @@ type Props = {};
 const Blog = (props: Props) => {
   // Queries fetch all blog
   const {
-    data: blog,
+    data: dataBlog,
     isLoading: isLoadingBlog,
     isError: isErrorBlog,
   } = useQuery({
@@ -80,7 +79,7 @@ const Blog = (props: Props) => {
         </Button>
       </SectionSubHeading>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
-        {blog?.map((row: BlogInterface, key: number) => {
+        {dataBlog?.blog?.map((row: BlogInterface, key: number) => {
           return <BlogContent key={key} blog={row} />;
         })}
       </div>

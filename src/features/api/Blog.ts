@@ -62,9 +62,18 @@ export const deleteBlog = async ({ session, id }: DeleteBlog) => {
 
 // get all blog
 export const getAllBlog = async () => {
-  const response = await axios.get(`${config["BACKEND_URL"]}/blogs`);
+  const res = await fetch(`${config["BACKEND_URL"]}/blogs`, {
+    next: { revalidate: 3600 },
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
 
-  return response.data.blog;
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
 };
 
 interface DetailBlog {
@@ -73,8 +82,16 @@ interface DetailBlog {
 
 // get detail blog
 export const getDetailBlog = async ({ slug }: DetailBlog) => {
-  const response = await axios.get(
-    `${config["BACKEND_URL"]}/blogs/detail/${slug}`
-  );
-  return response.data.blog;
+  const res = await fetch(`${config["BACKEND_URL"]}/blogs/detail/${slug}`, {
+    next: { revalidate: 3600 },
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
 };

@@ -75,7 +75,7 @@ const Header = (props: Props) => {
           </button>
         </div>
         <nav className="px-4 py-2" onClick={toggleMobileMenu}>
-          <div mx-auto w-full max-w-7xl px-4>
+          <div className="mx-auto w-full max-w-7xl px-4">
             <ul className="space-y-3">
               <li>{/* <LangSwithcer locale={locale} /> */}</li>
               <li>

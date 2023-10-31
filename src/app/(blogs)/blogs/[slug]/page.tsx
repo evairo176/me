@@ -21,7 +21,7 @@ const DetailBlog = (props: Props) => {
 
   // Queries fetch all blog
   const {
-    data: blog,
+    data: dataBlog,
     isLoading,
     isError,
   } = useQuery({
@@ -48,7 +48,7 @@ const DetailBlog = (props: Props) => {
       </div>
       <div className="space-y-10">
         {/* <PostHero locale={params.lang} post={post} /> */}
-        <BlogContent isBlogPage={true} blog={blog} />
+        <BlogContent isBlogPage={true} blog={dataBlog?.blog} />
         <div className="flex flex-col gap-5 md:flex-row">
           <div className="relative">
             <div className="sticky top-20  flex items-center gap-5   md:flex-col">
@@ -71,7 +71,7 @@ const DetailBlog = (props: Props) => {
             </div>
           </div>
           {/* <PostBody body={post.body} /> */}
-          <BlogBody body={blog?.content} />
+          <BlogBody body={dataBlog?.blog?.content} />
         </div>
         <CtaCard />
       </div>
