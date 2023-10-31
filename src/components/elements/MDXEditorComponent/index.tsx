@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
-// import ReactMarkdown from "react-markdown";
-// import CodeBlock from "@/components/elements/CodeBlock";
+import ReactMarkdown from "react-markdown";
+import CodeBlock from "@/components/elements/CodeBlock";
 
 interface MDXEditorComponentInterface {
   form: any;
@@ -26,7 +26,7 @@ export default function MDXEditorComponent({
         }}
       />
       <div className="mt-3">
-        {/* <ReactMarkdown
+        <ReactMarkdown
           components={{
             a: (props) => (
               <a
@@ -75,7 +75,7 @@ export default function MDXEditorComponent({
           }}
         >
           {form.getValues(name)}
-        </ReactMarkdown> */}
+        </ReactMarkdown>
       </div>
     </div>
   );
