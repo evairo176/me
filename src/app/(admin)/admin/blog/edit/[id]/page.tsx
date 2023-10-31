@@ -253,54 +253,6 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           />
-          {/* <FormField
-      control={form.control}
-      name={"tags"}
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel className="block">Add Tag</FormLabel>
-          <FormControl>
-          <InputSkill form={form} name="tags" label="" />
-          </FormControl>
-          <FormMessage />
-        </FormItem> />
-         )}
-         /> */}
-
-          {/* <FormField
-            control={form.control}
-            name="tags"
-            render={({ field }) => (
-              <FormItem className="w-full lg:w-full">
-                <FormControl>
-                  <InputSkill
-                    {...field}
-                    form={form}
-                    name="tags"
-                    label="Add tags"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-          {/* <FormField
-            control={form.control}
-            name="tags"
-            render={({ field }) => (
-              <FormItem className="w-full lg:w-full">
-                <FormControl>
-                  <TagsInput
-                    {...field}
-                    form={form}
-                    name="tags"
-                    label="Add tags"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
           <InputSkill
             form={form}
             defaultValue={dataDetailBlog?.Tags.map(

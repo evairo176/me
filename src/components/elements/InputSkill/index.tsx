@@ -83,11 +83,7 @@ const InputSkill: FC<InputSkillProps> = ({
               </Button>
               {isHide && (
                 <div className="my-4 flex flex-row gap-4">
-                  <Input
-                    defaultValue={field.value}
-                    onChange={field.onChange}
-                    className="w-[246px]"
-                  />
+                  <Input onChange={field.onChange} className="w-[246px]" />
                   <Button
                     type="button"
                     variant={"outline"}
