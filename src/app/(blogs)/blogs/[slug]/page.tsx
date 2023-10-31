@@ -1,15 +1,18 @@
 "use client";
-import BlogBody from "@/components/elements/BlogBody";
+// import BlogBody from "@/components/elements/BlogBody";
 import BlogContent from "@/components/elements/BlogContent";
 import CtaCard from "@/components/elements/CtaCard";
 import SocialLink from "@/components/elements/SocialLink";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { getDetailBlog } from "@/features/api/Blog";
 import { useQuery } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React from "react";
 import { BsArrowLeftCircle } from "react-icons/bs";
+
+const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
 type Props = {};
 
