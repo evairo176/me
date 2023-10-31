@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/select";
 import { CategoryInterface, TagInterface } from "@/types/user-types";
 import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
+import TagsInput from "@/components/elements/TagsInput";
 
 type Props = {};
 
@@ -268,13 +269,30 @@ const EditBlog = (props: Props) => {
          )}
          /> */}
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="tags"
             render={({ field }) => (
               <FormItem className="w-full lg:w-full">
                 <FormControl>
                   <InputSkill
+                    {...field}
+                    form={form}
+                    name="tags"
+                    label="Add tags"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
+          <FormField
+            control={form.control}
+            name="tags"
+            render={({ field }) => (
+              <FormItem className="w-full lg:w-full">
+                <FormControl>
+                  <TagsInput
                     {...field}
                     form={form}
                     name="tags"
