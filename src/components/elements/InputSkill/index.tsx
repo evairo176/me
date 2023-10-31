@@ -23,6 +23,19 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
   const [isHide, setHide] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>([]);
 
+  useEffect(() => {
+    const getDefaultValue = () => {
+      const val = form.getValues(name);
+
+      if (val && val.length > 0) {
+        setValues(val);
+        form.setValue(name, "");
+      }
+    };
+
+    getDefaultValue();
+  }, [form, name]);
+
   const handleSaveValue = () => {
     const value = form.getValues(name);
 
@@ -43,15 +56,6 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
     setValues(skills);
     form.setValue(name, skills);
   };
-
-  useEffect(() => {
-    const val = form.getValues(name);
-
-    if (val && val.length > 0) {
-      setValues(val);
-      form.setValue(name, "");
-    }
-  }, [form, name]);
 
   return (
     <FormField
