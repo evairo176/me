@@ -286,7 +286,7 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           /> */}
-          <FormField
+          {/* <FormField
             control={form.control}
             name="tags"
             render={({ field }) => (
@@ -302,7 +302,8 @@ const EditBlog = (props: Props) => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
+          <InputSkill form={form} name="tags" label="Add Tag" />
           <FormField
             control={form.control}
             name="content"
