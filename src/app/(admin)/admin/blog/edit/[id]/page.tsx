@@ -273,9 +273,13 @@ const EditBlog = (props: Props) => {
             name="tags"
             render={({ field }) => (
               <FormItem className="w-full lg:w-full">
-                <FormLabel>Add tags</FormLabel>
                 <FormControl>
-                  <InputSkill {...field} form={form} name="tags" />
+                  <InputSkill
+                    {...field}
+                    form={form}
+                    name="tags"
+                    label="Add tags"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -16,20 +16,13 @@ import { z } from "zod";
 interface InputSkillProps {
   form: any;
   name: string;
+  label: string;
 }
 
-const InputSkill: FC<InputSkillProps> = ({ form, name }) => {
+const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
   const [isHide, setHide] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const val = form.getValues(name);
-
-    if (val && val.length > 0) {
-      setValues(val);
-    }
-  }, [form, name]);
 
   const handleSaveValue = () => {
     const value = inputRef.current?.value;
@@ -52,6 +45,14 @@ const InputSkill: FC<InputSkillProps> = ({ form, name }) => {
     form.setValue(name, skills);
   };
 
+  useEffect(() => {
+    const val = form.getValues(name);
+
+    if (val && val.length > 0) {
+      setValues(val);
+    }
+  }, [form, name]);
+
   return (
     <>
       <Button
@@ -61,6 +62,7 @@ const InputSkill: FC<InputSkillProps> = ({ form, name }) => {
         onClick={() => setHide(!isHide)}
       >
         <PlusIcon className="w-4 h-4 mr-2" />
+        {label}
       </Button>
       {isHide && (
         <div className="my-4 flex flex-row gap-4">
