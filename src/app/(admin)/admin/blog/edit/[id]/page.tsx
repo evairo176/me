@@ -181,12 +181,10 @@ const EditBlog = (props: Props) => {
                       )}
                   </SelectContent>
                 </Select>
-
                 <FormMessage />
               </FormItem>
             )}
           />
-          <InputSkill form={form} name="tags" label="Add Tag" />
           <FormField
             control={form.control}
             name="title"
@@ -254,6 +252,7 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           />
+          <InputSkill form={form} name="tags" label="Add Tag" />
           <FormField
             control={form.control}
             name="content"
