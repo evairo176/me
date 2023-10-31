@@ -25,6 +25,15 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
   const [values, setValues] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    const val = form.getValues(name);
+    console.log({ val: val });
+
+    if (val && val.length > 0) {
+      setValues(val);
+    }
+  }, [form, name]);
+
   const handleSaveValue = () => {
     const value = inputRef.current?.value;
 
@@ -45,15 +54,6 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
     setValues(skills);
     form.setValue(name, skills);
   };
-
-  useEffect(() => {
-    const val = form.getValues(name);
-    console.log({ val: val });
-
-    if (val && val.length > 0) {
-      setValues(val);
-    }
-  }, [form, name]);
 
   return (
     <FormField
