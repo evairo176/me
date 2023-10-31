@@ -23,7 +23,7 @@ const DetailBlog = (props: Props) => {
     isError,
   } = useQuery({
     queryFn: async () => await getDetailBlog({ slug: slug }),
-    queryKey: ["blogsDetail"],
+    queryKey: ["blogs", slug],
   });
 
   if (isLoading) {
