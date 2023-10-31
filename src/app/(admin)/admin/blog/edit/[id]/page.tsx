@@ -35,7 +35,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CategoryInterface, TagInterface } from "@/types/user-types";
-import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 
 type Props = {};
 
@@ -141,10 +140,8 @@ const EditBlog = (props: Props) => {
 
   return (
     <div className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
-      <div className="flex items-center justify-between">
-        <div className="font-semibold text-medium">
-          Edit <span className="text-primary">Blog </span>{" "}
-        </div>
+      <div className="font-semibold text-medium">
+        Edit <span className="text-primary">Blog </span>
       </div>
       <Form {...form}>
         <form
@@ -261,10 +258,10 @@ const EditBlog = (props: Props) => {
               <FormItem className="w-full lg:w-full">
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <MDXEditorComponent
+                  <Editor
                     {...field}
                     form={form}
-                    placeholder="Isi sesukanya"
+                    placeholder="Please explore your mine"
                     name="content"
                   />
                 </FormControl>
@@ -273,7 +270,7 @@ const EditBlog = (props: Props) => {
             )}
           />
 
-          <div className="flex justify-end gap-4">
+          <div className="flex justify-end">
             <Button disabled={isPending}>
               {isPending ? "Loading..." : "Save"}
             </Button>
