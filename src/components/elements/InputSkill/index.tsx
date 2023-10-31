@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { PlusIcon } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import { array, z } from "zod";
 
 interface InputSkillProps {
   form: any;
@@ -22,10 +22,9 @@ interface InputSkillProps {
 const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
   const [isHide, setHide] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSaveValue = () => {
-    const value = inputRef.current?.value;
+    const value = form.getValues(name);
 
     if (value === "") {
       return;
@@ -50,6 +49,7 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
 
     if (val && val.length > 0) {
       setValues(val);
+      form.setValue(name, "");
     }
   }, [form, name]);
 
@@ -73,7 +73,11 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
               </Button>
               {isHide && (
                 <div className="my-4 flex flex-row gap-4">
-                  <Input ref={inputRef} className="w-[246px]" />
+                  <Input
+                    defaultValue={field.value}
+                    onChange={field.onChange}
+                    className="w-[246px]"
+                  />
                   <Button
                     type="button"
                     variant={"outline"}
@@ -84,54 +88,29 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
                 </div>
               )}
               <div className="space-x-3">
-                {values
-                  ? values.map((item: string, key: number) => (
-                      <Badge
-                        variant={"outline"}
-                        key={key}
-                        onClick={() => handleDeleteValue(item)}
-                      >
-                        {item}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-4 h-4 ml-2"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </Badge>
-                    ))
-                  : form.getValues(name) &&
-                    form.getValues(name)?.map((item: string, key: number) => (
-                      <Badge
-                        variant={"outline"}
-                        key={key}
-                        onClick={() => handleDeleteValue(item)}
-                      >
-                        {item}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-4 h-4 ml-2"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </Badge>
-                    ))}
+                {values.map((item: string, key: number) => (
+                  <Badge
+                    variant={"outline"}
+                    key={key}
+                    onClick={() => handleDeleteValue(item)}
+                  >
+                    {item}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-4 h-4 ml-2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </Badge>
+                ))}
               </div>
             </>
           </FormControl>
