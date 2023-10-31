@@ -35,7 +35,7 @@ const InputSkill: FC<InputSkillProps> = ({
 
       if (val && val.length > 0) {
         setValues(val);
-        form.setValue(name, "");
+        form.setValue(name, val);
       }
     };
 
