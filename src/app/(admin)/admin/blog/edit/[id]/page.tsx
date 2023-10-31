@@ -35,17 +35,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CategoryInterface, TagInterface } from "@/types/user-types";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
-import BlogBody from "@/components/elements/BlogBody";
-import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
+// import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 
 type Props = {};
 
@@ -94,17 +84,18 @@ const EditBlog = (props: Props) => {
   useEffect(() => {
     const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
     const category = dataDetailBlog?.categoryId;
-
-    let defaultValue = {
-      title: dataDetailBlog?.title,
-      des: dataDetailBlog?.des,
-      category: category,
-      imageBanner: dataDetailBlog?.image,
-      content: dataDetailBlog?.content,
-      draft: dataDetailBlog?.draft,
-      tags: tags,
-    };
-    form.reset(defaultValue);
+    if (tags) {
+      let defaultValue = {
+        title: dataDetailBlog?.title,
+        des: dataDetailBlog?.des,
+        category: category,
+        imageBanner: dataDetailBlog?.image,
+        content: dataDetailBlog?.content,
+        draft: dataDetailBlog?.draft,
+        tags: tags,
+      };
+      form.reset(defaultValue);
+    }
   }, [form, dataDetailBlog]);
 
   // Access the client
