@@ -68,8 +68,6 @@ const EditBlog = (props: Props) => {
     queryKey: ["blogs", id],
   });
 
-  const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
-
   const form = useForm<z.infer<typeof CreateBlogSchema>>({
     resolver: zodResolver(CreateBlogSchema),
     defaultValues: {
@@ -79,7 +77,7 @@ const EditBlog = (props: Props) => {
       imageBanner: "",
       content: "",
       draft: false,
-      tags: tags,
+      tags: [],
     },
   });
 
@@ -93,11 +91,11 @@ const EditBlog = (props: Props) => {
       imageBanner: dataDetailBlog?.image,
       content: dataDetailBlog?.content,
       draft: dataDetailBlog?.draft,
-      tags: tags,
+      tags: dataDetailBlog?.Tags,
     };
 
     form.reset(defaultValue);
-  }, [form, dataDetailBlog, tags]);
+  }, [form, dataDetailBlog]);
 
   // Access the client
   const queryClient = useQueryClient();
