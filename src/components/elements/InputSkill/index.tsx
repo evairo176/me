@@ -20,6 +20,7 @@ interface InputSkillProps {
 }
 
 const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
+  console.log({ usestate: form.getValues(name) });
   const [isHide, setHide] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
