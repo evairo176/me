@@ -1,4 +1,6 @@
 "use client";
+import MenuOpen from "@/components/elements/MenuOpen";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -15,13 +17,18 @@ const Header = (props: Props) => {
       <div className="sticky left-0 right-0 top-0 z-[999] border-b bg-white bg-opacity-70 backdrop-blur-md dark:border-none dark:bg-black">
         <div className="mx-auto w-full max-w-7xl px-4">
           <div className="flex items-center justify-between py-5">
-            <button
+            <Button
+              aria-label="Mobile Menu Button"
+              variant={"ghost"}
               id="mobileMenuButton"
-              className="flex text-neutral-800 hover:text-neutral-400 focus:text-neutral-400 focus:outline-none md:hidden"
+              className="md:hidden"
               onClick={toggleMobileMenu}
             >
-              #
-            </button>
+              <MenuOpen
+                expandMenu={isMobileMenuOpen}
+                setExpandMenu={toggleMobileMenu}
+              />
+            </Button>
             <Link
               className="text-lg font-bold dark:text-neutral-600"
               href={`#`}
@@ -55,24 +62,16 @@ const Header = (props: Props) => {
         } md:hidden`}
       >
         <div className=" h-16  px-4 py-4 text-right">
-          <button
-            className="text-gray-300 hover:text-neutral-400 focus:outline-none"
+          <Button
+            variant={"ghost"}
+            aria-label="Mobile Menu Button A"
             onClick={toggleMobileMenu}
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+            <MenuOpen
+              expandMenu={isMobileMenuOpen}
+              setExpandMenu={toggleMobileMenu}
+            />
+          </Button>
         </div>
         <nav className="px-4 py-2" onClick={toggleMobileMenu}>
           <div className="mx-auto w-full max-w-7xl px-4">
