@@ -84,19 +84,18 @@ const EditBlog = (props: Props) => {
   useEffect(() => {
     const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
     const category = dataDetailBlog?.categoryId;
-    if (dataDetailBlog) {
-      let defaultValue = {
-        title: dataDetailBlog?.title,
-        des: dataDetailBlog?.des,
-        category: category,
-        imageBanner: dataDetailBlog?.image,
-        content: dataDetailBlog?.content,
-        draft: dataDetailBlog?.draft,
-        tags: tags,
-      };
 
-      form.reset(defaultValue);
-    }
+    let defaultValue = {
+      title: dataDetailBlog?.title,
+      des: dataDetailBlog?.des,
+      category: category,
+      imageBanner: dataDetailBlog?.image,
+      content: dataDetailBlog?.content,
+      draft: dataDetailBlog?.draft,
+      tags: tags,
+    };
+
+    form.reset(defaultValue);
   }, [form, dataDetailBlog]);
 
   // Access the client
@@ -187,6 +186,7 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           />
+          <InputSkill form={form} name="tags" label="Add Tag" />
           <FormField
             control={form.control}
             name="title"
@@ -241,7 +241,6 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="imageBanner"
@@ -255,7 +254,6 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           />
-          <InputSkill form={form} name="tags" label="Add Tag" />
           <FormField
             control={form.control}
             name="content"
@@ -274,7 +272,6 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           />
-
           <div className="flex justify-end gap-4">
             <Button disabled={isPending}>
               {isPending ? "Loading..." : "Save"}
