@@ -82,19 +82,23 @@ const EditBlog = (props: Props) => {
   });
 
   useEffect(() => {
+    const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
     const category = dataDetailBlog?.categoryId;
 
-    let defaultValue = {
-      title: dataDetailBlog?.title,
-      des: dataDetailBlog?.des,
-      category: category,
-      imageBanner: dataDetailBlog?.image,
-      content: dataDetailBlog?.content,
-      draft: dataDetailBlog?.draft,
-      tags: dataDetailBlog?.Tags,
-    };
+    if (dataDetailBlog) {
+      console.log({ tags });
+      let defaultValue = {
+        title: dataDetailBlog?.title,
+        des: dataDetailBlog?.des,
+        category: category,
+        imageBanner: dataDetailBlog?.image,
+        content: dataDetailBlog?.content,
+        draft: dataDetailBlog?.draft,
+        tags: tags,
+      };
 
-    form.reset(defaultValue);
+      form.reset(defaultValue);
+    }
   }, [form, dataDetailBlog]);
 
   // Access the client
