@@ -46,11 +46,11 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
   };
 
   useEffect(() => {
-    const val = form.getValues(name);
+    console.log({ luar: form.getValues(name) });
 
-    if (val && val.length > 0) {
-      console.log({ val });
-      setValues(val);
+    if (form.getValues(name) && form.getValues(name).length > 0) {
+      console.log({ val: form.getValues(name) });
+      setValues(form.getValues(name));
     }
   }, [form, name]);
 
