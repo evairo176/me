@@ -68,6 +68,8 @@ const EditBlog = (props: Props) => {
     queryKey: ["blogs", id],
   });
 
+  const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
+
   const form = useForm<z.infer<typeof CreateBlogSchema>>({
     resolver: zodResolver(CreateBlogSchema),
     defaultValues: {
@@ -77,12 +79,11 @@ const EditBlog = (props: Props) => {
       imageBanner: "",
       content: "",
       draft: false,
-      tags: [],
+      tags: tags,
     },
   });
 
   useEffect(() => {
-    const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
     const category = dataDetailBlog?.categoryId;
 
     let defaultValue = {
