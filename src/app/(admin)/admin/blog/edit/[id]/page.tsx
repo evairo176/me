@@ -97,7 +97,7 @@ const EditBlog = (props: Props) => {
     };
 
     form.reset(defaultValue);
-  }, [form, dataDetailBlog]);
+  }, [form, dataDetailBlog, tags]);
 
   // Access the client
   const queryClient = useQueryClient();
