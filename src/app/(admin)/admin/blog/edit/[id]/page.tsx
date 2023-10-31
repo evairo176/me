@@ -85,16 +85,17 @@ const EditBlog = (props: Props) => {
     const tags = dataDetailBlog?.Tags.map((item: TagInterface) => item.name);
     const category = dataDetailBlog?.categoryId;
 
-    if (dataDetailBlog) {
-      console.log({ tags });
-      form.setValue("title", dataDetailBlog?.title);
-      form.setValue("des", dataDetailBlog?.des);
-      form.setValue("category", dataDetailBlog?.category);
-      form.setValue("imageBanner", dataDetailBlog?.image);
-      form.setValue("content", dataDetailBlog?.content);
-      form.setValue("draft", dataDetailBlog?.draft);
-      form.setValue("tags", tags);
-    }
+    let defaultValue = {
+      title: dataDetailBlog?.title,
+      des: dataDetailBlog?.des,
+      category: category,
+      imageBanner: dataDetailBlog?.image,
+      content: dataDetailBlog?.content,
+      draft: dataDetailBlog?.draft,
+      tags: tags,
+    };
+
+    form.reset(defaultValue);
   }, [form, dataDetailBlog]);
 
   // Access the client
@@ -185,7 +186,7 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           />
-
+          <InputSkill form={form} name="tags" label="Add Tag" />
           <FormField
             control={form.control}
             name="title"
@@ -253,7 +254,6 @@ const EditBlog = (props: Props) => {
               </FormItem>
             )}
           />
-          <InputSkill form={form} name="tags" label="Add Tag" />
           <FormField
             control={form.control}
             name="content"

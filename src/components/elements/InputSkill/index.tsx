@@ -20,7 +20,7 @@ interface InputSkillProps {
 }
 
 const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
-  console.log({ usestate: form.getValues(name) });
+  console.log({ value: form.getValues(name) });
   const [isHide, setHide] = useState<boolean>(false);
   const [values, setValues] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,15 +47,12 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
   };
 
   useEffect(() => {
-    console.log({ luar: form.getValues(name) });
+    const val = form.getValues(name);
 
-    if (form.getValues(name) && form.getValues(name).length > 0) {
-      console.log({ val: form.getValues(name) });
-      setValues(form.getValues(name));
+    if (val && val.length > 0) {
+      setValues(val);
     }
   }, [form, name]);
-
-  console.log({ values });
 
   return (
     <FormField
@@ -63,7 +60,10 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="block">{label}</FormLabel>
+          <FormLabel className="block">
+            {label}
+            {field.value}
+          </FormLabel>
           <FormControl>
             <>
               <Button
@@ -88,30 +88,29 @@ const InputSkill: FC<InputSkillProps> = ({ form, name, label }) => {
                 </div>
               )}
               <div className="space-x-3">
-                {values &&
-                  values?.map((item: string, key: number) => (
-                    <Badge
-                      variant={"outline"}
-                      key={key}
-                      onClick={() => handleDeleteValue(item)}
+                {values.map((item: string, key: number) => (
+                  <Badge
+                    variant={"outline"}
+                    key={key}
+                    onClick={() => handleDeleteValue(item)}
+                  >
+                    {item}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-4 h-4 ml-2"
                     >
-                      {item}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-4 h-4 ml-2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </Badge>
-                  ))}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </Badge>
+                ))}
               </div>
             </>
           </FormControl>
