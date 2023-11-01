@@ -15,11 +15,13 @@ import { toast } from "sonner";
 import { MdDeleteOutline } from "react-icons/md";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { deleteBlog, getBlog } from "@/features/api/Blog";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 type Props = {};
 
 const Blog = (props: Props) => {
   const { data: session } = useSession();
+  const axiosAuth = useAxiosAuth();
   // Queries fetch all blog
   const {
     data: dataBlog,
@@ -27,7 +29,8 @@ const Blog = (props: Props) => {
     isError,
   } = useQuery({
     queryKey: ["blogs"],
-    queryFn: async () => await getBlog({ id: session?.user.id }),
+    queryFn: async () =>
+      await getBlog({ id: session?.user.id as string, axiosAuth: axiosAuth }),
   });
 
   // Access the client
@@ -124,7 +127,8 @@ const Blog = (props: Props) => {
                         onClick={() =>
                           deleteBlogMutation({
                             id: row.id,
-                            session: session?.user.token,
+                            session: session?.user.token as string,
+                            axiosAuth: axiosAuth,
                           })
                         }
                         variant={"destructive"}

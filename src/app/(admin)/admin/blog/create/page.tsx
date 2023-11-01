@@ -46,6 +46,7 @@ import {
 import Code from "@/components/elements/Code";
 import BlogBody from "@/components/elements/BlogBody";
 import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 type Props = {};
 
@@ -56,6 +57,7 @@ const Create = (props: Props) => {
 
   const router = useRouter();
   const { data: session } = useSession();
+  const axiosAuth = useAxiosAuth();
 
   // Queries fetch all category
   const {
@@ -65,7 +67,7 @@ const Create = (props: Props) => {
   } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const response = await axios.get(`${config["BACKEND_URL"]}/category`);
+      const response = await axiosAuth.get(`/category`);
 
       return response.data;
     },
@@ -95,7 +97,7 @@ const Create = (props: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((val) =>
-            submitBlog({ session: session?.user.token, val: val })
+            submitBlog({ axiosAuth: axiosAuth, val: val })
           )}
           className="mt-5 space-y-6 pt-6"
         >

@@ -37,6 +37,7 @@ import {
 import { CategoryInterface, TagInterface } from "@/types/user-types";
 import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 import TagsInput from "@/components/elements/TagsInput";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 type Props = {};
 
@@ -44,12 +45,13 @@ const EditBlog = (props: Props) => {
   const router = useRouter();
   const { data: session } = useSession();
   const { id } = useParams();
+  const axiosAuth = useAxiosAuth();
 
   // Queries fetch all category
   const { data: dataCategory, isLoading: isLoadingCategory } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const response = await axios.get(`${config["BACKEND_URL"]}/category`);
+      const response = await axiosAuth.get(`/category`);
 
       return response.data;
     },
@@ -63,7 +65,7 @@ const EditBlog = (props: Props) => {
     isSuccess: isSuccessDetailBlog,
   } = useQuery({
     queryFn: async () => {
-      const response = await axios.get(`${config["BACKEND_URL"]}/blogs/${id}`);
+      const response = await axiosAuth.get(`/blogs/${id}`);
       return response.data.blog;
     },
     queryKey: ["blogs", id],
@@ -118,11 +120,7 @@ const EditBlog = (props: Props) => {
       formData.append("Tags", JSON.stringify(val.tags));
       formData.append("categoryId", val.category);
 
-      const response = await axios.put(
-        `${config["BACKEND_URL"]}/blogs/${id}`,
-        formData,
-        configD
-      );
+      const response = await axiosAuth.put(`/blogs/${id}`, formData, configD);
 
       return response.data;
     },

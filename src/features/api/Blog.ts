@@ -6,25 +6,22 @@ import { z } from "zod";
 
 interface getBlog {
   id: string;
+  axiosAuth: any;
 }
 // get all blog by user
-export const getBlog = async ({ id }: getBlog) => {
-  const response = await axios.get(`${config["BACKEND_URL"]}/blogs/user/${id}`);
+export const getBlog = async ({ id, axiosAuth }: getBlog) => {
+  const response = await axiosAuth.get(`/blogs/user/${id}`);
 
   return response.data.blog;
 };
 
 interface createBlog {
-  session: string;
+  axiosAuth: any;
   val: z.infer<typeof CreateBlogSchema>;
 }
 
 // create blog
-export const createBlog = async ({ session, val }: createBlog) => {
-  const configD = {
-    headers: { Authorization: `Bearer ${session}` },
-  };
-
+export const createBlog = async ({ axiosAuth, val }: createBlog) => {
   const formData = new FormData();
   formData.append("image", val.imageBanner);
   formData.append("title", val.title);
@@ -34,28 +31,22 @@ export const createBlog = async ({ session, val }: createBlog) => {
   formData.append("Tags", JSON.stringify(val.tags));
   formData.append("categoryId", val.category);
 
-  const response = await axios.post(
-    `${config["BACKEND_URL"]}/blogs`,
-    formData,
-    configD
-  );
+  const response = await axiosAuth.post(`/blogs`, formData);
 
   return response.data.blog;
 };
 interface DeleteBlog {
   id: string;
   session: string;
+  axiosAuth: any;
 }
 
 // delete blog
-export const deleteBlog = async ({ session, id }: DeleteBlog) => {
+export const deleteBlog = async ({ session, id, axiosAuth }: DeleteBlog) => {
   const configD = {
     headers: { Authorization: `Bearer ${session}` },
   };
-  const response = await axios.delete(
-    `${config["BACKEND_URL"]}/blogs/${id}`,
-    configD
-  );
+  const response = await axiosAuth.delete(`/blogs/${id}`, configD);
 
   return response.data.blog;
 };

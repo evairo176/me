@@ -32,6 +32,7 @@ export const authOption: NextAuthOptions = {
               ...response.data.user,
               name: response.data.user.fullname,
               token: response.data.token,
+              refreshToken: response.data.refreshToken,
             };
           } else {
             return null;
@@ -48,17 +49,10 @@ export const authOption: NextAuthOptions = {
   },
   callbacks: {
     jwt({ token, account, user }) {
-      if (account) {
-        token.id = user.id;
-        token.token = user.token;
-        token.name = user.name;
-      }
-      return token;
+      return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.user.id = token.id;
-      session.user.token = token.token;
-      session.user.name = token.name;
+      session.user = token as any;
 
       return session;
     },
