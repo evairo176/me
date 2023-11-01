@@ -1,6 +1,5 @@
 "use client";
 import CustomUpload from "@/components/elements/CustomUpload";
-import Editor from "@/components/elements/Editor";
 import InputSkill from "@/components/elements/InputSkill";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,14 +13,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { defaultEditorContent } from "@/lib/default-content";
-import config from "@/utils/config";
 import { CreateBlogSchema } from "@/utils/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Switch } from "@/components/ui/switch";
@@ -36,7 +32,6 @@ import {
 } from "@/components/ui/select";
 import { CategoryInterface, TagInterface } from "@/types/user-types";
 import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
-import TagsInput from "@/components/elements/TagsInput";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 type Props = {};
@@ -48,7 +43,7 @@ const EditBlog = (props: Props) => {
   const axiosAuth = useAxiosAuth();
 
   // Queries fetch all category
-  const { data: dataCategory, isLoading: isLoadingCategory } = useQuery({
+  const { data: dataCategory } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const response = await axiosAuth.get(`/category`);
@@ -61,7 +56,6 @@ const EditBlog = (props: Props) => {
   const {
     data: dataDetailBlog,
     isLoading: isLoadingDetailBlog,
-    isError: isErrorDetailBlog,
     isSuccess: isSuccessDetailBlog,
   } = useQuery({
     queryFn: async () => {

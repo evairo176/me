@@ -20,7 +20,7 @@ const Header: FC<HeaderProps> = () => {
         </div>
         <div>
           <div>Me</div>
-          <div className="font-semibold">{session?.user?.name}</div>
+          <div className="font-semibold">{session?.user?.fullname}</div>
         </div>
       </div>
     </div>
