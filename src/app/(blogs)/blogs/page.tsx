@@ -5,6 +5,7 @@ import SectionSubHeading from "@/components/elements/SectionSubHeading";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { Button } from "@/components/ui/button";
 import { getAllBlog, getBlog } from "@/features/api/Blog";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { BlogInterface } from "@/types/user-types";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
@@ -16,6 +17,7 @@ type Props = {};
 
 const Blog = (props: Props) => {
   // Queries fetch all blog
+  const axiosAuth = useAxiosAuth();
   const {
     data: dataBlog,
     isLoading: isLoadingBlog,

@@ -29,8 +29,7 @@ const Blog = (props: Props) => {
     isError,
   } = useQuery({
     queryKey: ["blogs"],
-    queryFn: async () =>
-      await getBlog({ id: session?.user.id as string, axiosAuth: axiosAuth }),
+    queryFn: async () => await getBlog({ id: session?.user.id as string }),
   });
 
   // Access the client

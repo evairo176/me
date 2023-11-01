@@ -1,15 +1,13 @@
-import { BlogInterface } from "@/types/user-types";
+import { axiosAuth } from "@/lib/axios";
 import config from "@/utils/config";
 import { CreateBlogSchema } from "@/utils/form-schema";
-import axios from "axios";
 import { z } from "zod";
 
 interface getBlog {
   id: string;
-  axiosAuth: any;
 }
 // get all blog by user
-export const getBlog = async ({ id, axiosAuth }: getBlog) => {
+export const getBlog = async ({ id }: getBlog) => {
   const response = await axiosAuth.get(`/blogs/user/${id}`);
 
   return response.data.blog;
