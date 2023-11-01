@@ -30,6 +30,7 @@ const Profile = ({ isOpen, user }: Props) => {
           src={background}
           width={40}
           height={40}
+          className="w-full "
         />
         <div className="absolute bottom-1 right-1">
           <ModeToggle />
