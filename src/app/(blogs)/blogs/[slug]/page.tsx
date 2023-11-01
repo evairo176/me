@@ -5,9 +5,7 @@ import CtaCard from "@/components/elements/CtaCard";
 import SocialLink from "@/components/elements/SocialLink";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { getDetailBlog } from "@/features/api/Blog";
-import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { useQuery } from "@tanstack/react-query";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React from "react";
@@ -19,7 +17,6 @@ type Props = {};
 
 const DetailBlog = (props: Props) => {
   const { slug } = useParams();
-  const axiosAuth = useAxiosAuth();
 
   // Queries fetch all blog
   const {

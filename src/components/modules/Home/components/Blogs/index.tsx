@@ -8,19 +8,13 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useQuery } from "@tanstack/react-query";
 import { getBlog } from "@/features/api/Blog";
 import { BlogInterface } from "@/types/user-types";
-import Image from "next/image";
-import { dateToHumanDate } from "@/helper";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import BlogContent from "@/components/elements/BlogContent";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
-import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 type Props = {};
 
 const Blogs = (props: Props) => {
-  // Queries fetch all blog
-  const axiosAuth = useAxiosAuth();
   const {
     data: blog,
     isLoading: isLoadingBlog,
