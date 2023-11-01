@@ -6,15 +6,17 @@ import { useParams } from "next/navigation";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
 
 type Props = {};
 
 const DetailBlog = () => {
   const { id } = useParams();
+  const axiosAuth = useAxiosAuth();
   // Queries fetch all blog
   const { data, isLoading, isError } = useQuery({
     queryFn: async () => {
-      const response = await axios.get(`${config["BACKEND_URL"]}/blogs/${id}`);
+      const response = await axiosAuth.get(`/blogs/${id}`);
       return response.data;
     },
     queryKey: ["blogsDetail"],

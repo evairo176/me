@@ -106,7 +106,6 @@ const EditBlog = (props: Props) => {
 
   const { mutate: submitUpdateBlog, isPending } = useMutation({
     mutationFn: async (val: z.infer<typeof CreateBlogSchema>) => {
-      console.log(val);
       const configD = {
         headers: { Authorization: `Bearer ${session?.user.token}` },
       };
