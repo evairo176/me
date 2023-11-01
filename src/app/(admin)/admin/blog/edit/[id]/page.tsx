@@ -106,10 +106,6 @@ const EditBlog = (props: Props) => {
 
   const { mutate: submitUpdateBlog, isPending } = useMutation({
     mutationFn: async (val: z.infer<typeof CreateBlogSchema>) => {
-      const configD = {
-        headers: { Authorization: `Bearer ${session?.user.token}` },
-      };
-
       const formData = new FormData();
       formData.append("image", val.imageBanner);
       formData.append("title", val.title);
@@ -119,7 +115,7 @@ const EditBlog = (props: Props) => {
       formData.append("Tags", JSON.stringify(val.tags));
       formData.append("categoryId", val.category);
 
-      const response = await axiosAuth.put(`/blogs/${id}`, formData, configD);
+      const response = await axiosAuth.put(`/blogs/${id}`, formData);
 
       return response.data;
     },
