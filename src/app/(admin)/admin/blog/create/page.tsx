@@ -35,16 +35,6 @@ import {
 } from "@/components/ui/select";
 import { CategoryInterface } from "@/types/user-types";
 import { createBlog } from "@/features/api/Blog";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import Code from "@/components/elements/Code";
-import BlogBody from "@/components/elements/BlogBody";
 import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 
@@ -56,7 +46,6 @@ const Create = (props: Props) => {
   });
 
   const router = useRouter();
-  const { data: session } = useSession();
   const axiosAuth = useAxiosAuth();
 
   // Queries fetch all category

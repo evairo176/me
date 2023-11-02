@@ -14,7 +14,7 @@ const Master = async ({ children }: Props) => {
         <div className="flex flex-row">
           <Sidebar />
           <Header />
-          <div className="relative col-span-3  lg:col-span-5 lg:border-l ml-0 md:ml-64 overflow-x-auto w-full">
+          <div className="relative col-span-3  lg:col-span-5 lg:border-l ml-0 md:ml-64 overflow-x-auto w-full h-screen">
             <div className="px-2 pt-[100px] pb-6 lg:px-8">{children}</div>
           </div>
         </div>

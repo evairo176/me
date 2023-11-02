@@ -25,9 +25,9 @@ const useAxiosAuth = () => {
       async (error) => {
         const prevRequest = error.config;
 
-        if (error.response.status === 500 && !prevRequest.sent) {
+        if (error.response.status === 401 && !prevRequest.sent) {
           prevRequest.sent = true;
-          const res = await refreshToken();
+          await refreshToken();
 
           prevRequest.headers[
             "Authorization"
@@ -43,7 +43,7 @@ const useAxiosAuth = () => {
       axiosAuth.interceptors.request.eject(requestIntercept);
       axiosAuth.interceptors.response.eject(responseIntercept);
     };
-  }, [session]);
+  }, [session, refreshToken]);
 
   return axiosAuth;
 };

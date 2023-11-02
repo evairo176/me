@@ -1,7 +1,6 @@
 "use client";
 import BlogBody from "@/components/elements/BlogBody";
-import config from "@/utils/config";
-import axios from "axios";
+
 import { useParams } from "next/navigation";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";

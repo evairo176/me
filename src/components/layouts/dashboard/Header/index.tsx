@@ -13,7 +13,7 @@ const Header: FC<HeaderProps> = () => {
   const navCreateJobPage = () => router.push("/post-a-job");
 
   return (
-    <div className="fixed top-0 z-[51] bg-white dark:bg-slate-950   w-[100%] px-3 py-6  pb-3 border-b border-border flex flex-row items-center justify-between">
+    <div className="fixed top-0 z-[2] bg-white dark:bg-slate-950   w-[100%] px-3 py-6  pb-3 border-b border-border flex flex-row items-center justify-between">
       <div className="flex gap-2 items-center justify-start">
         <div className="block md:hidden p-3">
           <MenuIcon className="w-7 h-7" />

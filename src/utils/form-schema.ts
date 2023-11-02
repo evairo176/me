@@ -37,3 +37,10 @@ export const UpdateBlogSchema = z.object({
     .min(1, { message: "Content must be at least 1 characters" }),
   imageBanner: z.any(),
 });
+
+export const createRoleSchema = z.object({
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(3, { message: "Name must be at least 3 characters" }),
+  status: z.boolean().default(false),
+});
