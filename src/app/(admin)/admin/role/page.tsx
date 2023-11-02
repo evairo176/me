@@ -141,6 +141,7 @@ const RolesPage = (props: Props) => {
       await queryClient.invalidateQueries({ queryKey: ["roles"] });
       toast.success("Created Role Successfully");
       router.push("/admin/role");
+      form.reset();
     },
     onError: () => {
       toast.error("Please Try Again");
