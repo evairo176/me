@@ -26,6 +26,18 @@ import { createRoleSchema } from "@/utils/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
+import {
   Form,
   FormControl,
   FormDescription,
@@ -35,7 +47,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
-import { createBlog } from "@/features/api/Blog";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
@@ -296,7 +307,11 @@ const RolesPage = (props: Props) => {
           <div>
             <Dialog>
               <DialogTrigger asChild>
-                <Button disabled={isPending}>
+                <Button
+                  disabled={isPending}
+                  size={"sm"}
+                  className="rounded-none"
+                >
                   <AiOutlinePlusSquare className="w-4 h-4" />
                 </Button>
               </DialogTrigger>
@@ -365,8 +380,8 @@ const RolesPage = (props: Props) => {
                 </Form>
               </DialogContent>
             </Dialog>
-            <Dialog>
-              <DialogTrigger asChild>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
                 <Button
                   variant={"destructive"}
                   size={"sm"}
@@ -375,34 +390,32 @@ const RolesPage = (props: Props) => {
                 >
                   <BsTrash className="w-4 h-4" />
                 </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogTitle>Apa anda yakin ingin menghapus data ?</DialogTitle>
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <Button type="button" variant={"secondary"}>
-                      Cancel
-                    </Button>
-                  </DialogClose>
-                  <DialogClose asChild>
-                    <Button
-                      type="submit"
-                      variant={"destructive"}
-                      onClick={() => {
-                        if (selected.length > 0) {
-                          deleteRoleMutation({ idArray: selected, axiosAuth });
-                        } else {
-                          toast.error("You not have any seleceted data");
-                        }
-                      }}
-                      disabled={isPendingDeleted}
-                    >
-                      Delete
-                    </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => {
+                      if (selected.length > 0) {
+                        deleteRoleMutation({ idArray: selected, axiosAuth });
+                      } else {
+                        toast.error("You not have any seleceted data");
+                      }
+                    }}
+                    disabled={isPendingDeleted}
+                  >
+                    Delete
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </div>
