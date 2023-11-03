@@ -14,6 +14,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { MENU_DASHBOARD, MENU_SETTING_DASHBOARD } from "@/constans/dashboard";
 
 interface SidebarProps {}
 
@@ -28,38 +29,19 @@ const Sidebar: FC<SidebarProps> = ({}) => {
             Dashboard
           </h2>
           <div className="space-y-3">
-            <Button
-              onClick={() => router.push("/admin/dashboard")}
-              variant={"secondary"}
-              className="w-full px-0 lg:px-4 lg:justify-start rounded-none hover:text-primary"
-            >
-              <AiOutlineHome className="lg:mr-2  text-lg" />
-              <span className="hidden lg:block">Home</span>
-            </Button>
-            <Button
-              onClick={() => router.push("/admin/blog")}
-              variant={"secondary"}
-              className="w-full px-0 lg:px-4 lg:justify-start rounded-none hover:text-primary"
-            >
-              <HiOutlineBuildingOffice2 className="lg:mr-2  text-lg" />
-              <span className="hidden lg:block">Blog</span>
-            </Button>
-            <Button
-              onClick={() => router.push("/admin/role")}
-              variant={"secondary"}
-              className="w-full px-0 lg:px-4 lg:justify-start rounded-none hover:text-primary"
-            >
-              <FaUserShield className="lg:mr-2  text-lg" />
-              <span className="hidden lg:block">Management Role</span>
-            </Button>
-            <Button
-              onClick={() => router.push("/admin/menu")}
-              variant={"secondary"}
-              className="w-full px-0 lg:px-4 lg:justify-start rounded-none hover:text-primary"
-            >
-              <BsFillMenuButtonFill className="lg:mr-2  text-lg" />
-              <span className="hidden lg:block">Management Menu</span>
-            </Button>
+            {MENU_DASHBOARD.map((row, key) => {
+              return (
+                <Button
+                  key={key}
+                  onClick={() => router.push(row.url)}
+                  variant={"secondary"}
+                  className="w-full px-0 lg:px-4 lg:justify-start rounded-none hover:text-primary"
+                >
+                  {row.icon}
+                  <span className="hidden lg:block">{row.name}</span>
+                </Button>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -70,22 +52,21 @@ const Sidebar: FC<SidebarProps> = ({}) => {
             Settings
           </h2>
           <div className="space-y-3">
-            <Button
-              variant={"secondary"}
-              className="w-full px-0 lg:px-4 lg:justify-start rounded-none hover:text-primary"
-              onClick={() => router.push("/settings")}
-            >
-              <AiOutlineSetting className="lg:mr-2 text-lg" />
-              <span className="hidden lg:block">Settings</span>
-            </Button>
-            <Button
-              onClick={() => signOut()}
-              variant={"secondary"}
-              className="w-full px-0 lg:px-4 lg:justify-start rounded-none hover:text-red-500"
-            >
-              <HiOutlineLogout className="lg:mr-2 text-lg" />
-              <span className="hidden lg:block">Logout</span>
-            </Button>
+            {MENU_SETTING_DASHBOARD.map((row, key) => {
+              return (
+                <Button
+                  key={key}
+                  onClick={() =>
+                    row.name === "Logout" ? signOut() : router.push(row.url)
+                  }
+                  variant={"secondary"}
+                  className="w-full px-0 lg:px-4 lg:justify-start rounded-none hover:text-primary"
+                >
+                  {row.icon}
+                  <span className="hidden lg:block">{row.name}</span>
+                </Button>
+              );
+            })}
           </div>
         </div>
       </div>

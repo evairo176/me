@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+export const signInSchema = z.object({
+  email: z
+    .string({ required_error: "Email is required" })
+    .email({ message: "Email is not valid" }),
+  password: z.string({ required_error: "Password is required" }),
+});
+
 export const CreateBlogSchema = z.object({
   title: z
     .string({ required_error: "Title is required" })
