@@ -51,12 +51,7 @@ type Props = {};
 
 const RolesPage = (props: Props) => {
   const [selected, setSelected] = useState<string[]>([]);
-  const [data, setData] = useState<RoleInterface[]>([]);
-  const [edit, setEdit] = useState<RoleInterface>({
-    id: "",
-    name: "",
-    status: false,
-  });
+  const [resetSelected, setResetSelected] = useState<boolean>(false);
   const form = useForm<z.infer<typeof createRoleSchema>>({
     resolver: zodResolver(createRoleSchema),
   });
@@ -112,6 +107,7 @@ const RolesPage = (props: Props) => {
     mutationFn: updateRole,
     onSuccess: async () => {
       // Invalidate and refetch
+      setResetSelected(true);
       await queryClient.invalidateQueries({ queryKey: ["roles"] });
       toast.success("Update Role Successfully");
       form.reset({
@@ -129,13 +125,8 @@ const RolesPage = (props: Props) => {
       toast.error("Sorry something wrong please try again!");
       return;
     }
-
-    const defaultValue = {
-      name: val.name,
-      status: val.status,
-    };
-
-    form.reset(defaultValue);
+    form.setValue("name", val.name);
+    form.setValue("status", val.status);
   };
 
   // useEffect(() => {
@@ -204,13 +195,11 @@ const RolesPage = (props: Props) => {
           return (
             <>
               <Dialog>
-                <DialogTrigger asChild>
+                <DialogTrigger disabled={isPendingUpdate} asChild>
                   <Button
-                    disabled={isPendingUpdate}
                     onClick={() => handleEdit(role)}
                     variant={"warning"}
                     size={"sm"}
-                    className="rounded-none"
                   >
                     <AiOutlineEdit className="w-4 h-4" />
                   </Button>
@@ -422,6 +411,7 @@ const RolesPage = (props: Props) => {
           columns={columns}
           data={dataRole}
           onRowSelect={setSelected}
+          resetSelected={resetSelected}
         />
       </div>
     </>

@@ -32,17 +32,20 @@ import { Input } from "@/components/ui/input";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableViewOptions } from "./data-table-column-toggle";
 import { useEffect } from "react";
+import { nullable } from "zod";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   onRowSelect?: (ids: string[]) => void;
+  resetSelected: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   onRowSelect,
+  resetSelected,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -81,6 +84,12 @@ export function DataTable<TData, TValue>({
       onRowSelect(originIds);
     }
   }, [onRowSelect, filteredSelectedRows]);
+  useEffect(() => {
+    if (resetSelected) {
+      setRowSelection("");
+    }
+    console.log(resetSelected);
+  }, [resetSelected]);
 
   return (
     <div>
