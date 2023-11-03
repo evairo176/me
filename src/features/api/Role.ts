@@ -21,7 +21,7 @@ interface createRole {
 export const createRole = async ({ axiosAuth, val }: createRole) => {
   const response = await axiosAuth.post(`/role`, val);
 
-  return response.data.blog;
+  return response.data.role;
 };
 
 interface deleteRole {
@@ -33,6 +33,19 @@ export const deleteRole = async ({ axiosAuth, idArray }: deleteRole) => {
   const response = await axiosAuth.post(`/role/delete/multiple`, {
     idArray: idArray,
   });
+
+  return response.data.role;
+};
+
+interface updateRole {
+  axiosAuth: any;
+  val: z.infer<typeof createRoleSchema>;
+  id: string;
+}
+
+// update role
+export const updateRole = async ({ axiosAuth, val, id }: updateRole) => {
+  const response = await axiosAuth.put(`/role/${id}`, val);
 
   return response.data.role;
 };

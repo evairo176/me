@@ -5,7 +5,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createRole, deleteRole, getAllRole } from "@/features/api/Role";
+import {
+  createRole,
+  deleteRole,
+  getAllRole,
+  updateRole,
+} from "@/features/api/Role";
 import {
   Dialog,
   DialogClose,
@@ -47,11 +52,98 @@ type Props = {};
 const RolesPage = (props: Props) => {
   const [selected, setSelected] = useState<string[]>([]);
   const [data, setData] = useState<RoleInterface[]>([]);
+  const [edit, setEdit] = useState<RoleInterface>({
+    id: "",
+    name: "",
+    status: false,
+  });
   const form = useForm<z.infer<typeof createRoleSchema>>({
     resolver: zodResolver(createRoleSchema),
   });
   const axiosAuth = useAxiosAuth();
   const router = useRouter();
+  // Access the client
+  const queryClient = useQueryClient();
+
+  // Queries fetch all blog
+  const {
+    data: dataRole,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryFn: async () => await getAllRole({ axiosAuth: axiosAuth }),
+    queryKey: ["roles"],
+  });
+
+  // mutation create
+  const { mutate: submitRole, isPending } = useMutation({
+    mutationFn: createRole,
+    onSuccess: async () => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["roles"] });
+      toast.success("Created Role Successfully");
+      form.reset({
+        name: "",
+        status: false,
+      });
+    },
+    onError: () => {
+      toast.error("Please Try Again");
+    },
+  });
+
+  // Mutations delete
+  const { mutate: deleteRoleMutation, isPending: isPendingDeleted } =
+    useMutation({
+      mutationFn: deleteRole,
+      onSuccess: async () => {
+        // Invalidate and refetch
+        await queryClient.invalidateQueries({ queryKey: ["roles"] });
+        toast.success("Data deleted successfully");
+      },
+      onError: (error) => {
+        console.log(error);
+        toast.error("Please Try Again");
+      },
+    });
+
+  // mutation update
+  const { mutate: submitUpdateRole, isPending: isPendingUpdate } = useMutation({
+    mutationFn: updateRole,
+    onSuccess: async () => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["roles"] });
+      toast.success("Update Role Successfully");
+      form.reset({
+        name: "",
+        status: false,
+      });
+    },
+    onError: () => {
+      toast.error("Please Try Again");
+    },
+  });
+
+  const handleEdit = (val: RoleInterface) => {
+    if (!val.id) {
+      toast.error("Sorry something wrong please try again!");
+      return;
+    }
+
+    const defaultValue = {
+      name: val.name,
+      status: val.status,
+    };
+
+    form.reset(defaultValue);
+  };
+
+  // useEffect(() => {
+  //   if (dataRole) {
+  //     setData(dataRole);
+  //   }
+  // }, [dataRole]);
+
   const columns = useMemo<ColumnDef<RoleInterface>[]>(
     () => [
       {
@@ -108,11 +200,90 @@ const RolesPage = (props: Props) => {
         header: "Action",
         cell: ({ row }) => {
           let role = row.original;
+
           return (
             <>
-              <Button variant={"warning"} size={"sm"} className="rounded-none">
-                <AiOutlineEdit className="w-4 h-4" />
-              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    disabled={isPendingUpdate}
+                    onClick={() => handleEdit(role)}
+                    variant={"warning"}
+                    size={"sm"}
+                    className="rounded-none"
+                  >
+                    <AiOutlineEdit className="w-4 h-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <Form {...form}>
+                    <form
+                      onSubmit={form.handleSubmit((val) =>
+                        submitUpdateRole({
+                          axiosAuth: axiosAuth,
+                          val,
+                          id: role.id,
+                        })
+                      )}
+                      className="mt-5 space-y-6 pt-6"
+                    >
+                      <DialogHeader>
+                        <DialogTitle>Update Role</DialogTitle>
+                        <DialogDescription>
+                          <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                              <FormItem className="w-full lg:w-full">
+                                <FormLabel>Title</FormLabel>
+                                <FormControl>
+                                  <Input
+                                    placeholder="e.g. Software Engineer Technology"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormDescription>
+                                  At least 3 characters
+                                </FormDescription>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <FormField
+                            control={form.control}
+                            name="status"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                                <div className="space-y-0.5">
+                                  <FormLabel>Draft</FormLabel>
+                                  <FormDescription>
+                                    You can make publis or not publish.
+                                  </FormDescription>
+                                </div>
+                                <FormControl>
+                                  <Switch
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                  />
+                                </FormControl>
+                              </FormItem>
+                            )}
+                          />
+
+                          <div className="flex justify-end"></div>
+                        </DialogDescription>
+                      </DialogHeader>
+                      <DialogFooter className="sm:justify-start">
+                        <DialogClose asChild>
+                          <Button type="submit" disabled={isPendingUpdate}>
+                            {isPendingUpdate ? "Loading..." : "Save Change"}
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </form>
+                  </Form>
+                </DialogContent>
+              </Dialog>
             </>
           );
         },
@@ -120,64 +291,6 @@ const RolesPage = (props: Props) => {
     ],
     []
   );
-
-  // Queries fetch all blog
-  const {
-    data: dataRole,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["roles"],
-    queryFn: async () => await getAllRole({ axiosAuth: axiosAuth }),
-  });
-
-  // Access the client
-  const queryClient = useQueryClient();
-
-  const { mutate: submitRole, isPending } = useMutation({
-    mutationFn: createRole,
-    onSuccess: async () => {
-      // Invalidate and refetch
-      await queryClient.invalidateQueries({ queryKey: ["roles"] });
-      toast.success("Created Role Successfully");
-      router.push("/admin/role");
-      form.reset();
-    },
-    onError: () => {
-      toast.error("Please Try Again");
-    },
-  });
-
-  // Mutations delete
-  const { mutate: deleteRoleMutation, isPending: isPendingDeleted } =
-    useMutation({
-      mutationFn: deleteRole,
-      onSuccess: async () => {
-        // Invalidate and refetch
-        await queryClient.invalidateQueries({ queryKey: ["roles"] });
-        toast.success("Data deleted successfully");
-      },
-      onError: (error) => {
-        console.log(error);
-        toast.error("Please Try Again");
-      },
-    });
-
-  useEffect(() => {
-    if (dataRole) {
-      setData(dataRole);
-    }
-  }, [dataRole]);
-
-  // const handlerDelete = async () => {
-  //   if (selected.length) {
-  //     const Data = dataRole.filter(
-  //       (row: RoleInterface) => !selected.includes(row.id)
-  //     );
-
-  //     setData(Data);
-  //   }
-  // };
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -193,11 +306,11 @@ const RolesPage = (props: Props) => {
           <div className="font-medium">Role Table</div>
           <div>
             <Dialog>
-              <Button disabled={isPending} asChild>
-                <DialogTrigger>
+              <DialogTrigger asChild>
+                <Button disabled={isPending}>
                   <AiOutlinePlusSquare className="w-4 h-4" />
-                </DialogTrigger>
-              </Button>
+                </Button>
+              </DialogTrigger>
               <DialogContent>
                 <Form {...form}>
                   <form
@@ -207,7 +320,7 @@ const RolesPage = (props: Props) => {
                     className="mt-5 space-y-6 pt-6"
                   >
                     <DialogHeader>
-                      <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                      <DialogTitle>Create Role</DialogTitle>
                       <DialogDescription>
                         <FormField
                           control={form.control}
@@ -274,7 +387,6 @@ const RolesPage = (props: Props) => {
                   <BsTrash className="w-4 h-4" />
                 </Button>
               </DialogTrigger>
-
               <DialogContent>
                 <DialogTitle>Apa anda yakin ingin menghapus data ?</DialogTitle>
                 <DialogFooter>
