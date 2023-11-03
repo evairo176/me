@@ -7,8 +7,13 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { BsFillMenuButtonFill } from "react-icons/bs";
 import { FaUserShield } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 interface SidebarProps {}
 

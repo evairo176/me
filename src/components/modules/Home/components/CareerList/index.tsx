@@ -57,10 +57,12 @@ const CareerList = (props: Props) => {
                   borderRight: "hsl(var(--muted))",
                 }}
                 date={row?.date}
+                dateClassName="mx-3"
                 icon={row?.icon}
                 iconStyle={{
                   background: "hsl(var(--muted))",
                   fontSize: "1.5rem",
+                  marginRight: "20px",
                 }}
               >
                 <h3 className="font-semibold capitalize">{row?.title}</h3>

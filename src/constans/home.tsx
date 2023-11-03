@@ -125,7 +125,7 @@ export const experiencesData: ExperiencesType[] = [
     description:
       "I graduated after 3 years of studying. I immediately found a job as a full-stack developer.",
     icon: <AiOutlineDashboard className="w-5 h-5" />,
-    date: "2019 - 2022",
+    date: "Sep 2019 - Okt 2022",
   },
   {
     title: "Full-stack Web Developer",
@@ -133,7 +133,7 @@ export const experiencesData: ExperiencesType[] = [
     description:
       "I worked as a full-stack web developer for 9 month in 1 job. I also upskilled to the full stack.",
     icon: <AiOutlineDashboard className="w-5 h-5" />,
-    date: "2022 - 2023",
+    date: "Okt 2022 - Jul 2023",
   },
   {
     title: "Full-Stack Developer",
@@ -141,7 +141,7 @@ export const experiencesData: ExperiencesType[] = [
     description:
       "I'm now a full-stack developer working as a full-time. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
     icon: <AiOutlineDashboard className="w-5 h-5" />,
-    date: "2023 - present",
+    date: "Agu 2023 - present",
   },
 ];
 
