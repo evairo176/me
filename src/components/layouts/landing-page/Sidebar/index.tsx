@@ -61,9 +61,11 @@ const Sidebar = ({ lang }: SidebarProps) => {
                 : "flex row"
             } `}
           >
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-row items-center gap-2">
               <ModeToggle />
-              <ToggleLanguage locale={lang} />
+              <div className={`${isOpen ? "block" : "hidden"}`}>
+                <ToggleLanguage locale={lang} />
+              </div>
             </div>
             <MenuOpen
               expandMenu={isOpen}
