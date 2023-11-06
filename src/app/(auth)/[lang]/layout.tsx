@@ -1,3 +1,5 @@
+// import Master from "@/components/layouts/Master";
+import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
@@ -5,13 +7,9 @@ import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Toaster } from "sonner";
-import NextAuthProvider from "@/context/NextAuthProvider";
-import Master from "@/components/layouts/dashboard/Master";
 import { getServerSession } from "next-auth";
+import { authOption } from "../../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import { authOption } from "../api/auth/[...nextauth]/route";
-import QueryClientProvider from "@/context/QueryClientProvider";
-import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,8 +25,8 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOption);
 
-  if (session === null) {
-    return redirect("/auth/signin");
+  if (session !== null) {
+    return redirect("/");
   }
   return (
     <html lang="en">
@@ -55,12 +53,8 @@ export default async function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              <NextAuthProvider>
-                <QueryClientProvider>
-                  <Master>{children}</Master>
-                </QueryClientProvider>
-                <Toaster position="top-right" />
-              </NextAuthProvider>
+              {children}
+              <Toaster position="top-right" />
             </ThemeProvider>
           </EdgeStoreProvider>
         </ReduxProvider>

@@ -4,15 +4,16 @@ import Footer from "../Footer";
 
 type Props = {
   children: React.ReactNode;
+  lang: string;
 };
 
-const Master = ({ children }: Props) => {
+const Master = ({ children, lang }: Props) => {
   return (
     <>
       <div className="flex flex-col justify-center lg:flex-row lg:gap-5 lg:pt-10">
         {/* Sidebar */}
 
-        <Sidebar />
+        <Sidebar lang={lang} />
 
         {/* Content */}
         <div className="lg:max-w-[854px] p-2 lg:p-0 lg:mt-8 w-full lg:min-h-screen no-scrollbar">

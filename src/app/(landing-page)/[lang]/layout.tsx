@@ -16,8 +16,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params: { lang },
 }: {
   children: React.ReactNode;
+  params: {
+    lang: string;
+  };
 }) {
   return (
     <html lang="en">
@@ -44,7 +48,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <QueryClientProvider>
-              <Master>{children}</Master>
+              <Master lang={lang}>{children}</Master>
             </QueryClientProvider>
           </ThemeProvider>
         </ReduxProvider>

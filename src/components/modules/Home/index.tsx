@@ -8,12 +8,15 @@ import Skills from "./components/Skills";
 // import Blogs from "./components/Blogs";
 const Blogs = dynamic(() => import("./components/Blogs"));
 // const Skills = dynamic(() => import("./components/Skills"));
-type Props = {};
+type Props = {
+  lang: string;
+  dictionary: any;
+};
 
-const HomeModules = (props: Props) => {
+const HomeModules = ({ lang, dictionary }: Props) => {
   return (
     <>
-      <Introduction />
+      <Introduction lang={lang} dictionary={dictionary} />
       <CareerList />
       <Projects />
       <Skills />

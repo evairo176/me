@@ -3,10 +3,14 @@ import React from "react";
 import { PiCoffeeBold } from "react-icons/pi";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { getDictionary } from "@/lib/getDictionaries";
 
-type Props = {};
+interface IntroductionInterface {
+  lang: string;
+  dictionary: any;
+}
 
-const Introduction = (props: Props) => {
+const Introduction = ({ lang, dictionary }: IntroductionInterface) => {
   return (
     <section className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
       <div className="flex justify-between items-center">
@@ -37,12 +41,7 @@ const Introduction = (props: Props) => {
           </li>
         </ul>
         <p className="leading-[1.8] md:leading-loose text-neutral-800 dark:text-neutral-300">
-          Passionate and seasoned Software Engineer with a strong focus on Full
-          Stack Development. Proficient in TypeScript and well-versed in all
-          aspects of web technologies. Collaborative team player dedicated to
-          delivering efficient, scalable, and visually appealing web
-          applications. I enjoy building sites & apps. My focus is React
-          (Next.js) & React Native.
+          {dictionary.home.personal.description}
         </p>
       </div>
     </section>

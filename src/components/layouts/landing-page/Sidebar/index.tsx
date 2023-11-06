@@ -14,10 +14,13 @@ import AOS from "aos";
 import Profile from "@/components/elements/Profile";
 import { usePathname } from "next/navigation";
 import ModeToggle from "@/components/elements/ModeToggle";
+import ToggleLanguage from "@/components/elements/ToggleLanguage";
 
-type Props = {};
+type SidebarProps = {
+  lang: string;
+};
 
-const Sidebar = (props: Props) => {
+const Sidebar = ({ lang }: SidebarProps) => {
   const { isOpen } = useAppSelector((state) => state.menuReducer);
   const isMobile = useIsMobile();
   // const imageSize = isMobile ? 40 : 100;
@@ -50,7 +53,7 @@ const Sidebar = (props: Props) => {
     >
       <div className="z-20 fixed bg-card text-card-foreground shadow lg:shadow-none  w-full lg:w-64 p-5 md:relative lg:p-0">
         <div className={`flex flex-row lg:flex-col justify-between  space-y-1`}>
-          <Profile isOpen={isOpen} />
+          <Profile lang={lang} isOpen={isOpen} />
           <div
             className={`flex items-center lg:hidden gap-5 mt-2 ${
               isOpen
@@ -58,7 +61,10 @@ const Sidebar = (props: Props) => {
                 : "flex row"
             } `}
           >
-            <ModeToggle />
+            <div className="flex flex-col items-center gap-2">
+              <ModeToggle />
+              <ToggleLanguage locale={lang} />
+            </div>
             <MenuOpen
               expandMenu={isOpen}
               setExpandMenu={(e) => dispatch(toggleMenu(e))}
