@@ -25,7 +25,10 @@
   },
   "home": {
     "personal": {
-      "description": "Software Engineer with a strong focus on Full Stack Development. Proficient in TypeScript and well-versed in all aspects of web technologies. Collaborative team player dedicated to delivering efficient, scalable, and visually appealing web applications. I enjoy building sites & apps. My focus is React (Next.js) & React Native."
+      "say": "Hi, I'm Dicki",
+      "stack": "Full Stack Developer",
+      "description": "Developer with a strong focus on Full Stack Development. Proficient in TypeScript and well-versed in all aspects of web technologies. Collaborative team player dedicated to delivering efficient, scalable, and visually appealing web applications. I enjoy building sites & apps.",
+      "place": "Based in Jakarta"
     }
   }
 }
