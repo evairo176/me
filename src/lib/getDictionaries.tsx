@@ -1,11 +1,11 @@
 import { i18n } from "../../i18n.config";
+import en from "@/constans/language/en";
+import id from "@/constans/language/id";
 
 const dictionaries: any = {
-  en: () =>
-    import("../constans/language/en.json").then((module) => module.default),
-  id: () =>
-    import("../constans/language/id.json").then((module) => module.default),
+  en: en,
+  id: id,
 };
 
 export const getDictionary = async (locale: string) =>
-  dictionaries[i18n.locales.includes(locale) ? locale : i18n.defaultLocale]();
+  dictionaries[i18n.locales.includes(locale) ? locale : i18n.defaultLocale];

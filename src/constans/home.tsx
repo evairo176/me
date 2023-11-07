@@ -19,9 +19,9 @@ import { MdOutlineContacts } from "react-icons/md";
 import paymentXenditCustom from "../../public/images/projects/payment-xendit-custom.png";
 import tnosPwa from "../../public/images/projects/tnos-pwa.png";
 import myBlog from "../../public/images/projects/my-blog.png";
-// import appstore from "../../public/images/projects/appstore.jpg";
 import news from "../../public/images/projects/news.png";
 import { BiLogoPostgresql } from "react-icons/bi";
+// import appstore from "../../public/images/projects/appstore.jpg";
 // import apps from "../../public/images/projects/appstore.jpg";
 import {
   SiChakraui,
@@ -120,7 +120,7 @@ export const MENU_DASHBOARD: MenuType[] = [
 
 export const experiencesData: ExperiencesType[] = [
   {
-    title: "Study di ploma 3",
+    title: "Study diploma 3",
     location: "Politeknik Negeri Indramayu, Jawa Barat",
     description:
       "I graduated after 3 years of studying. I immediately found a job as a full-stack developer.",

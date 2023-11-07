@@ -9,14 +9,15 @@ import { FaTimeline } from "react-icons/fa6";
 import { IoIosDownload } from "react-icons/io";
 import SectionSubHeading from "@/components/elements/SectionSubHeading";
 import { Button } from "@/components/ui/button";
-
-import { experiencesData } from "@/constans/home";
 import { useTheme } from "next-themes";
-import { Fragment } from "react";
+import { DictionaryInterface } from "@/types/home-types";
 
-type Props = {};
+interface CareerListInterface {
+  lang: string;
+  dictionary: DictionaryInterface;
+}
 
-const CareerList = (props: Props) => {
+const CareerList = ({ lang, dictionary }: CareerListInterface) => {
   const { systemTheme, theme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
   //   console.log(currentTheme);
@@ -24,10 +25,13 @@ const CareerList = (props: Props) => {
   return (
     <section className="space-y-6 mt-3 p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
       <div className="space-y-2">
-        <SectionHeading title="Carrer" icon={<FaTimeline className="mr-2" />} />
+        <SectionHeading
+          title={dictionary.home.career?.career}
+          icon={<FaTimeline className="mr-2" />}
+        />
         <SectionSubHeading>
           <p className="dark:text-neutral-400">
-            My professional career journey.
+            {dictionary.home.career?.descriptionCareer}
           </p>
           <Button
             variant={"secondary"}
@@ -37,11 +41,11 @@ const CareerList = (props: Props) => {
             <div className="border-b-2 overflow-hidden border-neutral-600 dark:border-neutral-500">
               <IoIosDownload className="animate-rain-arrow" />
             </div>
-            <span>Download Resume</span>
+            <span>{dictionary.home.career?.downloadResume}</span>
           </Button>
         </SectionSubHeading>
         <VerticalTimeline lineColor={"hsl(var(--muted))"}>
-          {experiencesData?.map((row, key) => {
+          {dictionary.home.career.experiencesData?.map((row, key) => {
             return (
               <VerticalTimelineElement
                 key={key}
@@ -58,7 +62,7 @@ const CareerList = (props: Props) => {
                 }}
                 date={row?.date}
                 dateClassName="mx-3"
-                icon={row?.icon}
+                icon={row.icon}
                 iconStyle={{
                   background: "hsl(var(--muted))",
                   fontSize: "1.5rem",

@@ -10,22 +10,22 @@ export const MENU_DASHBOARD: DASHBOARD_MENU_INTERFACE[] = [
   {
     name: "Dashboard",
     url: "/admin/dashboard",
-    icon: <AiOutlineHome className="lg:mr-2  text-lg" />,
+    icon: <AiOutlineHome />,
   },
   {
     name: "Blogs",
     url: "/admin/blog",
-    icon: <HiOutlineBuildingOffice2 className="lg:mr-2  text-lg" />,
+    icon: <HiOutlineBuildingOffice2 />,
   },
   {
     name: "Role",
     url: "/admin/role",
-    icon: <FaUserShield className="lg:mr-2  text-lg" />,
+    icon: <FaUserShield />,
   },
   {
     name: "Menu",
     url: "/admin/menu",
-    icon: <BsFillMenuButtonFill className="lg:mr-2  text-lg" />,
+    icon: <BsFillMenuButtonFill />,
   },
 ];
 
@@ -33,6 +33,6 @@ export const MENU_SETTING_DASHBOARD: DASHBOARD_MENU_INTERFACE[] = [
   {
     name: "Logout",
     url: "",
-    icon: <HiOutlineLogout className="lg:mr-2 text-lg" />,
+    icon: <HiOutlineLogout />,
   },
 ];

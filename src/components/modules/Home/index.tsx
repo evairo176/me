@@ -17,8 +17,8 @@ const HomeModules = ({ lang, dictionary }: Props) => {
   return (
     <>
       <Introduction lang={lang} dictionary={dictionary} />
-      <CareerList />
-      <Projects />
+      <CareerList lang={lang} dictionary={dictionary} />
+      <Projects dictionary={dictionary} />
       <Skills />
       <Blogs />
     </>

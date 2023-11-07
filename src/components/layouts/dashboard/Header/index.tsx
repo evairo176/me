@@ -1,29 +1,59 @@
 "use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { toggleDashboard } from "@/redux/features/menuSlices";
-import { useAppDispatch } from "@/redux/hooks";
-import { MenuIcon } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { TbSettingsCog } from "react-icons/tb";
 import React, { FC } from "react";
+import { CiMenuFries } from "react-icons/ci";
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  const { isOpenMenuDashboard } = useAppSelector((state) => state.menuReducer);
   const dispatch = useAppDispatch();
 
-  const navCreateJobPage = () => router.push("/post-a-job");
-
   return (
-    <div className="fixed top-0 z-[2] bg-white dark:bg-slate-950   w-[100%] px-3 py-6  pb-3 border-b border-border flex flex-row items-center justify-between">
+    <div className="fixed top-0 z-[2] bg-card  w-full px-3 py-3 border-b border-border flex flex-row items-center justify-between">
       <div className="flex w-full items-center justify-between">
-        <div className="" onClick={() => dispatch(toggleDashboard(true))}>
-          <MenuIcon className="w-6 h-6" />
+        <div className="flex flex-row">
+          <div
+            className={`${
+              isOpenMenuDashboard ? "w-12" : "w-64"
+            } text-center hidden md:block`}
+          >
+            {isOpenMenuDashboard ? "DB" : "Dashboard Blogs"}
+          </div>
+          <div
+            className="cursor-pointer"
+            onClick={() => dispatch(toggleDashboard(!isOpenMenuDashboard))}
+          >
+            <CiMenuFries />
+          </div>
         </div>
-        <div>
-          <div>Me</div>
-          <div className="font-semibold">{session?.user?.fullname}</div>
+        <div className="flex flex-row  items-center">
+          <div className="mr-2">
+            <Avatar className="w-[25px] h-[25px]">
+              <AvatarImage
+                width={30}
+                height={30}
+                src="https://github.com/shadcn.png"
+                alt="@shadcn"
+              />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </div>
+          <div className="text-sm font-semibold mr-3">
+            {session?.user.fullname}
+          </div>
+          <div>
+            <Button size={"sm"}>
+              <TbSettingsCog className="w-5 h-5" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

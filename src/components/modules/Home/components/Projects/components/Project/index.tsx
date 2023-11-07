@@ -4,8 +4,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ProjectsType } from "@/types/home-types";
-
-type Props = {};
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Project = ({
   title,
@@ -54,9 +58,18 @@ const Project = ({
           <Link href={link}>
             <h3 className="text-2xl font-semibold">{title}</h3>
           </Link>
-          <p className="mt-2 text-sm leading-relaxed text-justify">
-            {description}
-          </p>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <p className="mt-2 text-sm leading-relaxed text-justify line-clamp-5">
+                  {description}
+                </p>
+              </TooltipTrigger>
+              <TooltipContent>
+                <div className="w-[280px] text-justify">{description}</div>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
           <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
             {tags.map((tag, index) => (
               <li
