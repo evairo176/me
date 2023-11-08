@@ -41,8 +41,9 @@ const Blogs = ({ lang }: Props) => {
         />
         <SectionSubHeading>
           <p className="dark:text-neutral-400">My Blogs.</p>
-          <Button variant={"secondary"} aria-label="view all blog" asChild>
+          <Button variant={"secondary"} asChild>
             <Link
+              aria-label="view all blog"
               href={`/${lang}/blogs`}
               className="flex gap-2 transition-all duration-300 items-center"
             >
@@ -73,9 +74,10 @@ const Blogs = ({ lang }: Props) => {
       />
       <SectionSubHeading>
         <p className="dark:text-neutral-400">My Blogs.</p>
-        <Button variant={"secondary"} aria-label="view all blog" asChild>
+        <Button variant={"secondary"} asChild>
           <Link
             href={`/${params.lang}/blogs`}
+            aria-label="view all blog"
             className="flex gap-2 transition-all duration-300 items-center"
           >
             <span>View all Blogs</span>
