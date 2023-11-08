@@ -107,6 +107,24 @@ const Blog = (props: Props) => {
         enableHiding: false,
       },
       {
+        accessorKey: "image",
+        header: ({ column }) => (
+          <DataTableColumnHeader column={column} title="Image" />
+        ),
+        cell: ({ row }) => {
+          let blog = row.original;
+          return (
+            <Image
+              src={blog.image}
+              alt={blog.title}
+              width={100}
+              height={100}
+              className="w-10 h-10"
+            />
+          );
+        },
+      },
+      {
         accessorKey: "id",
         header: ({ column }) => (
           <DataTableColumnHeader column={column} title="ID Role" />
@@ -134,20 +152,20 @@ const Blog = (props: Props) => {
         ),
         enableGlobalFilter: true,
       },
-      // {
-      //   accessorKey: "status",
-      //   header: ({ column }) => (
-      //     <DataTableColumnHeader column={column} title="Status" />
-      //   ),
-      //   cell: ({ row }) => {
-      //     let role = row.original;
-      //     return role.status ? (
-      //       <Badge>ON</Badge>
-      //     ) : (
-      //       <Badge variant="destructive">OFF</Badge>
-      //     );
-      //   },
-      // },
+      {
+        accessorKey: "draft",
+        header: ({ column }) => (
+          <DataTableColumnHeader column={column} title="Status" />
+        ),
+        cell: ({ row }) => {
+          let role = row.original;
+          return role.draft ? (
+            <Badge>Publish</Badge>
+          ) : (
+            <Badge variant="destructive">Not Published</Badge>
+          );
+        },
+      },
       {
         id: "actions",
         header: "Action",
@@ -175,7 +193,7 @@ const Blog = (props: Props) => {
                   >
                     Edit
                   </DropdownMenuItem>
-                  <DropdownMenuItem>View payment details</DropdownMenuItem>
+                  <DropdownMenuItem>View details</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </>
