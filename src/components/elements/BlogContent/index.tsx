@@ -39,10 +39,11 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
         </div>
       </div>
       <div className="mt-1">
-        <Link href={`/${params.lang}/blogs/${blog?.slug}`}>
-          <div className="font-semibold text-1xl mb-1 cursor-pointer">
-            {blog?.title}
-          </div>
+        <Link
+          className="font-semibold text-1xl mb-1 cursor-pointer"
+          href={`/${params.lang}/blogs/${blog?.slug}`}
+        >
+          {blog?.title}
         </Link>
         <div
           className={`text-sm text-gray-500 leading-normal ${
