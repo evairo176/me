@@ -55,8 +55,8 @@ const Project = ({
       "
         />
         <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2  sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
-          <Link href={link}>
-            <h3 className="text-2xl font-semibold">{title}</h3>
+          <Link className="text-2xl font-semibold" href={link}>
+            {title}
           </Link>
           <TooltipProvider>
             <Tooltip>

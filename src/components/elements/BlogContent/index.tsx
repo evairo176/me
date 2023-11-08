@@ -41,12 +41,12 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
         </div>
       </div>
       <div className="mt-1">
-        <div
+        <Link
           className="font-semibold text-1xl mb-1 cursor-pointer"
-          onClick={() => router.push(`/${params.lang}/blogs/${blog?.slug}`)}
+          href={`/${params.lang}/blogs/${blog?.slug}`}
         >
           {blog?.title}
-        </div>
+        </Link>
         <div
           className={`text-sm text-gray-500 leading-normal ${
             !isBlogPage && "line-clamp-3"
