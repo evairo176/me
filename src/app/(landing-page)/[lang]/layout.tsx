@@ -48,7 +48,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <QueryClientProvider>
-              <Master lang={lang}>{children}</Master>
+              <Master>{children}</Master>
             </QueryClientProvider>
           </ThemeProvider>
         </ReduxProvider>
