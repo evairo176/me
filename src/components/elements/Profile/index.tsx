@@ -19,10 +19,9 @@ import ToggleLanguage from "../ToggleLanguage";
 type Props = {
   isOpen: boolean;
   user?: UserInterface;
-  lang: string;
 };
 
-const Profile = ({ isOpen, user, lang }: Props) => {
+const Profile = ({ isOpen, user }: Props) => {
   return (
     <div className={clsx("flex lg:flex-col lg:items-center flex-row")}>
       <div className="relative w-full h-24 overflow-hidden dark:brightness-50 rounded-md hidden lg:block">
@@ -35,7 +34,7 @@ const Profile = ({ isOpen, user, lang }: Props) => {
           className="w-full "
         />
         <div className="absolute top-1 right-1">
-          <ToggleLanguage locale={lang} />
+          <ToggleLanguage />
         </div>
         <div className="absolute bottom-1 right-1">
           <ModeToggle />

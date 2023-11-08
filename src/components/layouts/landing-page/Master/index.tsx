@@ -7,10 +7,9 @@ import AOS from "aos";
 
 type Props = {
   children: React.ReactNode;
-  lang: string;
 };
 
-const Master = ({ children, lang }: Props) => {
+const Master = ({ children }: Props) => {
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -22,7 +21,7 @@ const Master = ({ children, lang }: Props) => {
       <div className="flex flex-col justify-center lg:flex-row lg:gap-5 lg:pt-10">
         {/* Sidebar */}
 
-        <Sidebar lang={lang} />
+        <Sidebar />
 
         {/* Content */}
         <motion.div

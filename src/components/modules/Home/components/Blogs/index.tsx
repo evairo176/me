@@ -13,9 +13,11 @@ import BlogContent from "@/components/elements/BlogContent";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { useParams } from "next/navigation";
 
-type Props = {};
+type Props = {
+  lang: string;
+};
 
-const Blogs = (props: Props) => {
+const Blogs = ({ lang }: Props) => {
   const params = useParams();
   const {
     data: blog,
@@ -26,7 +28,7 @@ const Blogs = (props: Props) => {
     queryFn: async () =>
       await getBlog({
         id: "clnye4mzg0000nls08cyb4q36",
-        lang: params.lang as string,
+        lang: lang,
       }),
   });
 
@@ -41,7 +43,7 @@ const Blogs = (props: Props) => {
           <p className="dark:text-neutral-400">My Blogs.</p>
           <Button variant={"secondary"} aria-label="view all blog" asChild>
             <Link
-              href={"/blogs"}
+              href={`/${lang}/blogs`}
               className="flex gap-2 transition-all duration-300 items-center"
             >
               <span>View all Blogs</span>
@@ -73,7 +75,7 @@ const Blogs = (props: Props) => {
         <p className="dark:text-neutral-400">My Blogs.</p>
         <Button variant={"secondary"} aria-label="view all blog" asChild>
           <Link
-            href={"/blogs"}
+            href={`/${params.lang}/blogs`}
             className="flex gap-2 transition-all duration-300 items-center"
           >
             <span>View all Blogs</span>

@@ -2,12 +2,14 @@
 import MenuOpen from "@/components/elements/MenuOpen";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 type Props = {};
 
 const Header = (props: Props) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const params = useParams();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -31,7 +33,7 @@ const Header = (props: Props) => {
             </Button>
             <Link
               className="text-lg font-bold dark:text-neutral-600"
-              href={`#`}
+              href={`/${params.lang}`}
             >
               Explorer
             </Link>

@@ -61,8 +61,8 @@ export const deleteBlog = async ({ axiosAuth, idArray }: DeleteBlog) => {
 // };
 
 // get all blog
-export const getAllBlog = async () => {
-  const res = await fetch(`${config["BACKEND_URL"]}/blogs`, {
+export const getAllBlog = async ({ lang }: { lang: string }) => {
+  const res = await fetch(`${config["BACKEND_URL"]}/blogs?lang=${lang}`, {
     next: { revalidate: 3600 },
   });
   // The return value is *not* serialized

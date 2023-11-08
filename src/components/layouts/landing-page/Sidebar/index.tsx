@@ -12,20 +12,19 @@ import { AnimatePresence, motion } from "framer-motion";
 import useIsMobile from "@/hooks/useIsMobile";
 import AOS from "aos";
 import Profile from "@/components/elements/Profile";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import ModeToggle from "@/components/elements/ModeToggle";
 import ToggleLanguage from "@/components/elements/ToggleLanguage";
 
-type SidebarProps = {
-  lang: string;
-};
+type SidebarProps = {};
 
-const Sidebar = ({ lang }: SidebarProps) => {
+const Sidebar = ({}: SidebarProps) => {
   const { isOpen } = useAppSelector((state) => state.menuReducer);
   const isMobile = useIsMobile();
   // const imageSize = isMobile ? 40 : 100;
   const dispatch = useAppDispatch();
   const pathname = usePathname();
+  const params = useParams();
 
   useEffect(() => {
     AOS.init({
@@ -53,7 +52,7 @@ const Sidebar = ({ lang }: SidebarProps) => {
     >
       <div className="z-20 fixed bg-card text-card-foreground shadow lg:shadow-none  w-full lg:w-64 p-5 md:relative lg:p-0">
         <div className={`flex flex-row lg:flex-col justify-between  space-y-1`}>
-          <Profile lang={lang} isOpen={isOpen} />
+          <Profile isOpen={isOpen} />
           <div
             className={`flex items-center lg:hidden gap-5 mt-2 ${
               isOpen
@@ -64,7 +63,7 @@ const Sidebar = ({ lang }: SidebarProps) => {
             <div className="flex flex-row items-center gap-2">
               <ModeToggle />
               <div className={`${isOpen ? "block" : "hidden"}`}>
-                <ToggleLanguage locale={lang} />
+                <ToggleLanguage />
               </div>
             </div>
             <MenuOpen
@@ -94,7 +93,7 @@ const Sidebar = ({ lang }: SidebarProps) => {
                       aria-label={row.title}
                       onClick={() => dispatch(toggleMenu(!isOpen))}
                     >
-                      <Link href={row.url}>
+                      <Link href={`/${params.lang}${row.url}`}>
                         {row.icon} {row.title}
                       </Link>
                     </Button>
@@ -122,7 +121,7 @@ const Sidebar = ({ lang }: SidebarProps) => {
                   aria-label={row.title}
                   asChild
                 >
-                  <Link href={row.url}>
+                  <Link href={`/${params.lang}${row.url}`}>
                     {row.icon} {row.title}
                     {pathname === row.url && (
                       <motion.span

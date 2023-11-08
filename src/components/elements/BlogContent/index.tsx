@@ -3,6 +3,7 @@ import { dateToHumanDate } from "@/helper";
 import { BlogInterface } from "@/types/user-types";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import React from "react";
 
 interface BlogContentProps {
@@ -10,6 +11,7 @@ interface BlogContentProps {
   isBlogPage?: boolean;
 }
 const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
+  const params = useParams();
   return (
     <div className="space-y-2">
       <div>
@@ -37,7 +39,7 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
         </div>
       </div>
       <div className="mt-1">
-        <Link href={`/blogs/${blog?.slug}`}>
+        <Link href={`/${params.lang}/blogs/${blog?.slug}`}>
           <div className="font-semibold text-1xl mb-1 cursor-pointer">
             {blog?.title}
           </div>

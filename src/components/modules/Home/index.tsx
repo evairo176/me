@@ -20,7 +20,7 @@ const HomeModules = ({ lang, dictionary }: Props) => {
       <CareerList lang={lang} dictionary={dictionary} />
       <Projects dictionary={dictionary} />
       <Skills />
-      <Blogs />
+      <Blogs lang={lang} />
     </>
   );
 };

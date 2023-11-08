@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React from "react";
 
-const ToggleLanguage = ({ locale }: { locale: string }) => {
-  const targetLanguage = locale === "en" ? "id" : "en";
+const ToggleLanguage = ({}) => {
+  const params = useParams();
+  const targetLanguage = params.lang === "en" ? "id" : "en";
   const pathname = usePathname();
   const redirectTarget = () => {
     if (!pathname) return "/";

@@ -8,6 +8,7 @@ import { getAllBlog, getBlog } from "@/features/api/Blog";
 import { BlogInterface } from "@/types/user-types";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import React from "react";
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { PiArticleLight } from "react-icons/pi";
@@ -16,13 +17,14 @@ type Props = {};
 
 const Blog = (props: Props) => {
   // Queries fetch all blog
+  const params = useParams();
   const {
     data: dataBlog,
     isLoading: isLoadingBlog,
     isError: isErrorBlog,
   } = useQuery({
     queryKey: ["blogs"],
-    queryFn: async () => await getAllBlog(),
+    queryFn: async () => await getAllBlog({ lang: params.lang as string }),
   });
 
   if (isLoadingBlog) {
