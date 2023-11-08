@@ -1,9 +1,10 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
 import { dateToHumanDate } from "@/helper";
 import { BlogInterface } from "@/types/user-types";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 
 interface BlogContentProps {
@@ -11,6 +12,7 @@ interface BlogContentProps {
   isBlogPage?: boolean;
 }
 const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
+  const router = useRouter();
   const params = useParams();
   return (
     <div className="space-y-2">
@@ -39,12 +41,12 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
         </div>
       </div>
       <div className="mt-1">
-        <Link
+        <div
           className="font-semibold text-1xl mb-1 cursor-pointer"
-          href={`/${params.lang}/blogs/${blog?.slug}`}
+          onClick={() => router.push(`/${params.lang}/blogs/${blog?.slug}`)}
         >
           {blog?.title}
-        </Link>
+        </div>
         <div
           className={`text-sm text-gray-500 leading-normal ${
             !isBlogPage && "line-clamp-3"
