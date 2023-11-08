@@ -7,27 +7,62 @@ import { BlogInterface } from "@/types/user-types";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { MdDeleteOutline } from "react-icons/md";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { deleteBlog, getBlog } from "@/features/api/Blog";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
+import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ColumnDef } from "@tanstack/react-table";
+import { DataTable } from "@/components/ui/data-table";
+import { useRouter, useSearchParams } from "next/navigation";
+import { AiOutlineEdit, AiOutlinePlusSquare } from "react-icons/ai";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { BsTrash } from "react-icons/bs";
 
 type Props = {};
 
 const Blog = (props: Props) => {
   const { data: session } = useSession();
+  const [selected, setSelected] = useState<string[]>([]);
+  const router = useRouter();
+  const lang = useSearchParams().get("lang");
   const axiosAuth = useAxiosAuth();
+
   // Queries fetch all blog
   const {
     data: dataBlog,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["blogs"],
-    queryFn: async () => await getBlog({ id: session?.user.id as string }),
+    queryKey: ["blogs", lang ? (lang as string) : "id"],
+    queryFn: async () =>
+      await getBlog({
+        id: session?.user.id as string,
+        lang: lang ? (lang as string) : "id",
+      }),
   });
 
   // Access the client
@@ -48,6 +83,109 @@ const Blog = (props: Props) => {
       },
     });
 
+  const columns = useMemo<ColumnDef<BlogInterface>[]>(
+    () => [
+      {
+        id: "select",
+        header: ({ table }) => (
+          <Checkbox
+            checked={table.getIsAllPageRowsSelected()}
+            onCheckedChange={(value: any) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value: any) => row.toggleSelected(value)}
+            aria-label="Select row"
+          />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+      },
+      {
+        accessorKey: "id",
+        header: ({ column }) => (
+          <DataTableColumnHeader column={column} title="ID Role" />
+        ),
+        enableGlobalFilter: true,
+      },
+      {
+        accessorKey: "lang",
+        header: ({ column }) => (
+          <DataTableColumnHeader column={column} title="Language" />
+        ),
+        enableGlobalFilter: true,
+      },
+      {
+        accessorKey: "title",
+        header: ({ column }) => (
+          <DataTableColumnHeader column={column} title="Title" />
+        ),
+        enableGlobalFilter: true,
+      },
+      {
+        accessorKey: "slug",
+        header: ({ column }) => (
+          <DataTableColumnHeader column={column} title="Slug" />
+        ),
+        enableGlobalFilter: true,
+      },
+      // {
+      //   accessorKey: "status",
+      //   header: ({ column }) => (
+      //     <DataTableColumnHeader column={column} title="Status" />
+      //   ),
+      //   cell: ({ row }) => {
+      //     let role = row.original;
+      //     return role.status ? (
+      //       <Badge>ON</Badge>
+      //     ) : (
+      //       <Badge variant="destructive">OFF</Badge>
+      //     );
+      //   },
+      // },
+      {
+        id: "actions",
+        header: "Action",
+        cell: ({ row }) => {
+          let blog = row.original;
+          return (
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="h-8 w-8 p-0">
+                    <span className="sr-only">Open menu</span>
+                    <DotsHorizontalIcon className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                  <DropdownMenuItem
+                    onClick={() => navigator.clipboard.writeText(blog.id)}
+                  >
+                    Copy payment ID
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={() => router.push(`/admin/blog/edit/${blog.id}`)}
+                  >
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>View payment details</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          );
+        },
+      },
+    ],
+    []
+  );
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -58,100 +196,70 @@ const Blog = (props: Props) => {
   return (
     <div className="rounded-md border bg-card text-card-foreground p-3">
       <div className="flex flex-row justify-end items-center">
-        <Button asChild>
-          <Link href="/admin/blog/create">Create Blog</Link>
+        <Button size={"sm"} className="rounded-none" asChild>
+          <Link href="/admin/blog/create">
+            <AiOutlinePlusSquare className="w-4 h-4" />
+          </Link>
         </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant={"destructive"}
+              size={"sm"}
+              className="ml-2 rounded-none"
+              disabled={isPendingDeleted}
+            >
+              <BsTrash className="w-4 h-4" />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => {
+                  if (selected.length > 0) {
+                    deleteBlogMutation({ idArray: selected, axiosAuth });
+                  } else {
+                    toast.error("You not have any seleceted data");
+                  }
+                }}
+                disabled={isPendingDeleted}
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
-      <Tabs defaultValue="publish" className="w-full">
-        <TabsList>
-          <TabsTrigger value="publish">Publish</TabsTrigger>
-          <TabsTrigger value="not_publish">Not Publish</TabsTrigger>
+      <Tabs defaultValue={!lang ? "id" : lang} className="w-full">
+        <TabsList className="grid grid-cols-2 w-[400px]">
+          <TabsTrigger value="en" onClick={() => router.push("?lang=en")}>
+            English
+          </TabsTrigger>
+          <TabsTrigger value="id" onClick={() => router.push("?lang=id")}>
+            Indonesia
+          </TabsTrigger>
         </TabsList>
-        <TabsContent value="publish">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {dataBlog &&
-              dataBlog?.map((row: BlogInterface, key: number) => {
-                return (
-                  <div key={key} className="bg-card text-card-foreground ">
-                    <div>
-                      <Image
-                        alt={row?.title}
-                        src={row?.image}
-                        width={200}
-                        height={150}
-                        className="w-full object-fit h-[200px]"
-                      />
-                    </div>
-
-                    <div className="text-primary font-medium text-sm mr-1 mt-3">
-                      {row?.Categories?.name}
-                    </div>
-
-                    <div className="flex items-center mt-1">
-                      <div className="text-xs text-gray-500">
-                        {row?.Author?.fullname}
-                      </div>
-
-                      <div className="w-1 h-1 bg-gray-500 rounded-full mr-1 ml-1"></div>
-                      <div className="text-xs text-gray-500">
-                        {dateToHumanDate(row.createdAt.toString())}
-                      </div>
-                    </div>
-                    <div className="mt-1">
-                      <Link href={`/admin/blog/${row.id}`}>
-                        <div className="font-semibold text-1xl mb-1 cursor-pointer">
-                          {row?.title}
-                        </div>
-                      </Link>
-                      <div className="text-sm text-gray-500 leading-normal line-clamp-3 text-justify">
-                        {row?.des}
-                      </div>
-                    </div>
-                    <div className="mt-2">
-                      <div className="flex flex-wrap items-center gap-1">
-                        {row?.Tags.map((row, key) => {
-                          return (
-                            <Badge key={row.id} variant={"outline"}>
-                              {row.name}
-                            </Badge>
-                          );
-                        })}
-                      </div>
-                    </div>
-                    <div className="mt-2 flex justify-end">
-                      <Button
-                        disabled={isPendingDeleted}
-                        onClick={() =>
-                          deleteBlogMutation({
-                            id: row.id,
-                            session: session?.user.token as string,
-                            axiosAuth: axiosAuth,
-                          })
-                        }
-                        variant={"destructive"}
-                        className="rounded-none"
-                      >
-                        <MdDeleteOutline className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant={"warning"}
-                        className="rounded-none"
-                        asChild
-                      >
-                        <Link href={`/admin/blog/edit/${row.id}`}>
-                          <HiOutlinePencilAlt className="w-4 h-4" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
+        <TabsContent value="en">
+          <DataTable
+            columns={columns}
+            data={dataBlog}
+            onRowSelect={setSelected}
+          />
         </TabsContent>
-        <TabsContent value="not_publish">
-          <div className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
-            not publish
-          </div>
+        <TabsContent value="id">
+          <DataTable
+            columns={columns}
+            data={dataBlog}
+            onRowSelect={setSelected}
+          />
         </TabsContent>
       </Tabs>
     </div>

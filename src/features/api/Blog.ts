@@ -5,10 +5,11 @@ import { z } from "zod";
 
 interface getBlog {
   id: string;
+  lang: string;
 }
 // get all blog by user
-export const getBlog = async ({ id }: getBlog) => {
-  const response = await axiosAuth.get(`/blogs/user/${id}`);
+export const getBlog = async ({ id, lang }: getBlog) => {
+  const response = await axiosAuth.get(`/blogs/user/${id}?lang=${lang}`);
 
   return response.data.blog;
 };
@@ -28,26 +29,36 @@ export const createBlog = async ({ axiosAuth, val }: createBlog) => {
   formData.append("draft", val.draft ? "1" : "0");
   formData.append("Tags", JSON.stringify(val.tags));
   formData.append("categoryId", val.category);
+  formData.append("slug", val.slug);
+  formData.append("lang", val.lang);
 
   const response = await axiosAuth.post(`/blogs`, formData);
 
   return response.data.blog;
 };
 interface DeleteBlog {
-  id: string;
-  session: string;
   axiosAuth: any;
+  idArray: string[];
 }
 
 // delete blog
-export const deleteBlog = async ({ session, id, axiosAuth }: DeleteBlog) => {
-  const configD = {
-    headers: { Authorization: `Bearer ${session}` },
-  };
-  const response = await axiosAuth.delete(`/blogs/${id}`, configD);
+export const deleteBlog = async ({ axiosAuth, idArray }: DeleteBlog) => {
+  const response = await axiosAuth.post(`/blogs/delete/multiple`, {
+    idArray: idArray,
+  });
 
-  return response.data.blog;
+  return response.data.role;
 };
+
+// delete blog
+// export const deleteBlog = async ({ session, id, axiosAuth }: DeleteBlog) => {
+//   const configD = {
+//     headers: { Authorization: `Bearer ${session}` },
+//   };
+//   const response = await axiosAuth.delete(`/blogs/${id}`, configD);
+
+//   return response.data.blog;
+// };
 
 // get all blog
 export const getAllBlog = async () => {
@@ -67,13 +78,17 @@ export const getAllBlog = async () => {
 
 interface DetailBlog {
   slug: string | string[];
+  lang: string;
 }
 
 // get detail blog
-export const getDetailBlog = async ({ slug }: DetailBlog) => {
-  const res = await fetch(`${config["BACKEND_URL"]}/blogs/detail/${slug}`, {
-    next: { revalidate: 3600 },
-  });
+export const getDetailBlog = async ({ slug, lang }: DetailBlog) => {
+  const res = await fetch(
+    `${config["BACKEND_URL"]}/blogs/detail/${slug}?lang=${lang}`,
+    {
+      next: { revalidate: 3600 },
+    }
+  );
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 

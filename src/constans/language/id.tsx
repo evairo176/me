@@ -38,7 +38,7 @@ const ID = {
       stack: "Developer Full-Stack",
       description:
         "Pengembang dengan fokus kuat pada Full Stack Development. Mahir dalam TypeScript dan berpengalaman dalam semua aspek teknologi web. Pemain tim kolaboratif yang berdedikasi untuk menghadirkan aplikasi web yang efisien, terukur, dan menarik secara visual. Saya menikmati membangun situs & aplikasi.",
-      place: "Tinggal di jakarta",
+      place: "Lokasi di Indramayu, Jawa Barat",
     },
     career: {
       career: "Karir",

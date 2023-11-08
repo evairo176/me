@@ -5,12 +5,18 @@ import { BsFillMenuButtonFill } from "react-icons/bs";
 import { FaUserShield } from "react-icons/fa";
 import { HiOutlineLogout } from "react-icons/hi";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
+import { LiaLanguageSolid } from "react-icons/lia";
 
 export const MENU_DASHBOARD: DASHBOARD_MENU_INTERFACE[] = [
   {
     name: "Dashboard",
     url: "/admin/dashboard",
     icon: <AiOutlineHome />,
+  },
+  {
+    name: "Language",
+    url: "/admin/language",
+    icon: <LiaLanguageSolid />,
   },
   {
     name: "Blogs",

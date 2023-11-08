@@ -11,6 +11,10 @@ export const CreateBlogSchema = z.object({
   title: z
     .string({ required_error: "Title is required" })
     .min(3, { message: "Title must be at least 3 characters" }),
+  slug: z
+    .string({ required_error: "Slug is required" })
+    .min(3, { message: "Slug must be at least 3 characters" }),
+  lang: z.string({ required_error: "Lang is required" }),
   tags: z
     .string({ required_error: "Tag Stack is required" })
     .array()

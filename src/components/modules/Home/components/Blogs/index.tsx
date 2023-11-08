@@ -11,17 +11,23 @@ import { BlogInterface } from "@/types/user-types";
 import Link from "next/link";
 import BlogContent from "@/components/elements/BlogContent";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
+import { useParams } from "next/navigation";
 
 type Props = {};
 
 const Blogs = (props: Props) => {
+  const params = useParams();
   const {
     data: blog,
     isLoading: isLoadingBlog,
     isError: isErrorBlog,
   } = useQuery({
     queryKey: ["blogs"],
-    queryFn: async () => await getBlog({ id: "clnye4mzg0000nls08cyb4q36" }),
+    queryFn: async () =>
+      await getBlog({
+        id: "clnye4mzg0000nls08cyb4q36",
+        lang: params.lang as string,
+      }),
   });
 
   if (isLoadingBlog) {

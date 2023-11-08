@@ -47,8 +47,8 @@ const Sidebar = ({ lang }: SidebarProps) => {
   return (
     // <div className="sticky top-0 left-0 w-full lg:w-64 bg-white shadow-sm p-4">
     <motion.div
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
       className="sticky transition-all duration-300 top-0 z-10 flex flex-col lg:py-8 lg:h-full"
     >
       <div className="z-20 fixed bg-card text-card-foreground shadow lg:shadow-none  w-full lg:w-64 p-5 md:relative lg:p-0">

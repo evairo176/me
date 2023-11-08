@@ -38,7 +38,7 @@ const EN = {
       stack: "Full-Stack Developer",
       description:
         "A developer with a strong focus on Full Stack Development. Proficient in TypeScript and experienced in all aspects of web technology. A collaborative team player dedicated to delivering efficient, measurable, and visually appealing web applications. I enjoy building websites & apps.",
-      place: "Based in Jakarta",
+      place: "Based in Indramayu, West Java",
     },
     career: {
       career: "Career",

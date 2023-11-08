@@ -16,7 +16,7 @@ import { BsArrowLeftCircle } from "react-icons/bs";
 type Props = {};
 
 const DetailBlog = (props: Props) => {
-  const { slug } = useParams();
+  const { slug, lang } = useParams();
 
   // Queries fetch all blog
   const {
@@ -24,7 +24,8 @@ const DetailBlog = (props: Props) => {
     isLoading,
     isError,
   } = useQuery({
-    queryFn: async () => await getDetailBlog({ slug: slug }),
+    queryFn: async () =>
+      await getDetailBlog({ slug: slug, lang: lang as string }),
     queryKey: ["blogs", slug],
   });
 

@@ -53,7 +53,7 @@ const Profile = ({ isOpen, user, lang }: Props) => {
         >
           <Image
             alt="Dicki Prasetya"
-            className="lg:hover:scale-105"
+            className="lg:hover:scale-105 transition-all duration-300"
             src={profile}
           />
           <AvatarFallback>CN</AvatarFallback>

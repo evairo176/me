@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CreateBlogSchema } from "@/utils/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -38,19 +37,8 @@ type Props = {};
 
 const EditBlog = (props: Props) => {
   const router = useRouter();
-  const { data: session } = useSession();
   const { id } = useParams();
   const axiosAuth = useAxiosAuth();
-
-  // Queries fetch all category
-  const { data: dataCategory } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const response = await axiosAuth.get(`/category`);
-
-      return response.data;
-    },
-  });
 
   // Queries fetch all blog
   const {
@@ -63,6 +51,17 @@ const EditBlog = (props: Props) => {
       return response.data.blog;
     },
     queryKey: ["blogs", id],
+  });
+
+  // Queries fetch all category
+  const { data: dataCategory } = useQuery({
+    queryKey: ["categories", dataDetailBlog?.lang],
+    queryFn: async () => {
+      const response = await axiosAuth.get(
+        `/category?lang=${dataDetailBlog?.lang}`
+      );
+      return response.data;
+    },
   });
 
   const form = useForm<z.infer<typeof CreateBlogSchema>>({
@@ -80,8 +79,9 @@ const EditBlog = (props: Props) => {
 
   useEffect(() => {
     const category = dataDetailBlog?.categoryId;
+    const selectLang = dataDetailBlog?.lang;
 
-    if (dataDetailBlog) {
+    if (dataDetailBlog && dataCategory) {
       let defaultValue = {
         title: dataDetailBlog?.title,
         des: dataDetailBlog?.des,
@@ -89,11 +89,13 @@ const EditBlog = (props: Props) => {
         imageBanner: dataDetailBlog?.image,
         content: dataDetailBlog?.content,
         draft: dataDetailBlog?.draft,
+        lang: selectLang,
+        slug: dataDetailBlog?.slug,
       };
 
       form.reset(defaultValue);
     }
-  }, [form, dataDetailBlog]);
+  }, [form, dataDetailBlog, dataCategory]);
 
   // Access the client
   const queryClient = useQueryClient();
@@ -105,6 +107,8 @@ const EditBlog = (props: Props) => {
       formData.append("title", val.title);
       formData.append("content", val.content);
       formData.append("des", val.des);
+      formData.append("lang", val.lang);
+      formData.append("slug", val.slug);
       formData.append("draft", val.draft ? "1" : "0");
       formData.append("Tags", JSON.stringify(val.tags));
       formData.append("categoryId", val.category);
@@ -140,6 +144,31 @@ const EditBlog = (props: Props) => {
           onSubmit={form.handleSubmit((val) => submitUpdateBlog(val))}
           className="mt-5 space-y-6 pt-6"
         >
+          <FormField
+            control={form.control}
+            name="lang"
+            render={({ field }) => (
+              <FormItem className="w-full lg:w-full">
+                <FormLabel>Language</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select language" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="id">Indonesia</SelectItem>
+                    <SelectItem value="en">English</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="category"
@@ -182,6 +211,23 @@ const EditBlog = (props: Props) => {
                 <FormControl>
                   <Input
                     placeholder="e.g. Software Engineer Technology"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>At least 3 characters</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="slug"
+            render={({ field }) => (
+              <FormItem className="w-full lg:w-full">
+                <FormLabel>Slug</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g. software-engineer-technology"
                     {...field}
                   />
                 </FormControl>

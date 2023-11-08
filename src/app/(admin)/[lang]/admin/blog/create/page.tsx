@@ -13,14 +13,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { defaultEditorContent } from "@/lib/default-content";
-import config from "@/utils/config";
 import { CreateBlogSchema } from "@/utils/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import React, { Suspense, useState } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Switch } from "@/components/ui/switch";
@@ -37,16 +33,20 @@ import { CategoryInterface } from "@/types/user-types";
 import { createBlog } from "@/features/api/Blog";
 import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type Props = {};
 
-const Create = (props: Props) => {
-  const form = useForm<z.infer<typeof CreateBlogSchema>>({
-    resolver: zodResolver(CreateBlogSchema),
-  });
-
+const Create = ({}: Props) => {
   const router = useRouter();
   const axiosAuth = useAxiosAuth();
+
+  const form = useForm<z.infer<typeof CreateBlogSchema>>({
+    resolver: zodResolver(CreateBlogSchema),
+    defaultValues: {
+      lang: "id",
+    },
+  });
 
   // Queries fetch all category
   const {
@@ -54,9 +54,16 @@ const Create = (props: Props) => {
     isLoading: isLoadingQuery,
     isError,
   } = useQuery({
-    queryKey: ["categories"],
+    queryKey: [
+      "categories",
+      form.getValues("lang") ? form.getValues("lang") : "id",
+    ],
     queryFn: async () => {
-      const response = await axiosAuth.get(`/category`);
+      const response = await axiosAuth.get(
+        `/category?lang=${
+          form.getValues("lang") ? form.getValues("lang") : "id"
+        }`
+      );
 
       return response.data;
     },
@@ -69,7 +76,12 @@ const Create = (props: Props) => {
     mutationFn: createBlog,
     onSuccess: async () => {
       // Invalidate and refetch
-      await queryClient.invalidateQueries({ queryKey: ["blogs"] });
+      await queryClient.invalidateQueries({
+        queryKey: [
+          "blogs",
+          form.getValues("lang") ? form.getValues("lang") : "id",
+        ],
+      });
       toast.success("Created Blog Successfully");
       router.push("/admin/blog");
     },
@@ -79,7 +91,7 @@ const Create = (props: Props) => {
   });
 
   return (
-    <div className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
+    <div className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground w-full">
       <div className="font-semibold text-medium">
         Create <span className="text-primary">Blog</span>
       </div>
@@ -90,6 +102,31 @@ const Create = (props: Props) => {
           )}
           className="mt-5 space-y-6 pt-6"
         >
+          <FormField
+            control={form.control}
+            name="lang"
+            render={({ field }) => (
+              <FormItem className="w-full lg:w-full">
+                <FormLabel>Language</FormLabel>
+
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select language" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="id">Indonesia</SelectItem>
+                    <SelectItem value="en">English</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="category"
@@ -137,6 +174,23 @@ const Create = (props: Props) => {
                 <FormControl>
                   <Input
                     placeholder="e.g. Software Engineer Technology"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>At least 3 characters</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="slug"
+            render={({ field }) => (
+              <FormItem className="w-full lg:w-full">
+                <FormLabel>Slug</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g. software-engineer-technology"
                     {...field}
                   />
                 </FormControl>
