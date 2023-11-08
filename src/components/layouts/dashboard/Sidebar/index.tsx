@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { FC } from "react";
 import { FaTimes } from "react-icons/fa";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { MENU_DASHBOARD, MENU_SETTING_DASHBOARD } from "@/constans/dashboard";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toggleDashboard } from "@/redux/features/menuSlices";
@@ -15,6 +15,7 @@ const Sidebar: FC<SidebarProps> = () => {
   const { isOpenMenuDashboard } = useAppSelector((state) => state.menuReducer);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
+  const params = useParams();
 
   return (
     <>
@@ -44,7 +45,7 @@ const Sidebar: FC<SidebarProps> = () => {
                     className="w-full flex flex-row justify-center"
                     asChild
                   >
-                    <Link href={row.url}>{row.icon}</Link>
+                    <Link href={`/${params.lang}${row.url}`}>{row.icon}</Link>
                   </Button>
                 );
               })}
@@ -59,7 +60,7 @@ const Sidebar: FC<SidebarProps> = () => {
                     className="w-full flex flex-row justify-start gap-2"
                     asChild
                   >
-                    <Link href={row.url}>
+                    <Link href={`/${params.lang}${row.url}`}>
                       {row.icon} {row.name}
                     </Link>
                   </Button>
@@ -96,7 +97,7 @@ const Sidebar: FC<SidebarProps> = () => {
                     className="w-full flex flex-row justify-center"
                     asChild
                   >
-                    <Link href={row.url}>{row.icon}</Link>
+                    <Link href={`/${params.lang}${row.url}`}>{row.icon}</Link>
                   </Button>
                 );
               })}
@@ -123,7 +124,7 @@ const Sidebar: FC<SidebarProps> = () => {
                     className="w-full flex flex-row justify-start gap-2"
                     asChild
                   >
-                    <Link href={row.url}>
+                    <Link href={`/${params.lang}${row.url}`}>
                       {row.icon} {row.name}
                     </Link>
                   </Button>
@@ -157,7 +158,7 @@ const Sidebar: FC<SidebarProps> = () => {
                   className="w-full flex flex-row justify-start gap-2"
                   asChild
                 >
-                  <Link href={row.url}>
+                  <Link href={`/${params.lang}${row.url}`}>
                     {row.icon} {row.name}
                   </Link>
                 </Button>
@@ -187,7 +188,7 @@ const Sidebar: FC<SidebarProps> = () => {
                   className="w-full flex flex-row justify-start gap-2"
                   asChild
                 >
-                  <Link href={row.url}>
+                  <Link href={`/${params.lang}${row.url}`}>
                     {row.icon} {row.name}
                   </Link>
                 </Button>
