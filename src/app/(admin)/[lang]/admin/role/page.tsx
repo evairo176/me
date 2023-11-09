@@ -71,7 +71,7 @@ const RolesPage = (props: Props) => {
   // Access the client
   const queryClient = useQueryClient();
 
-  // Queries fetch all blog
+  // Queries fetch all role
   const {
     data: dataRole,
     isLoading,

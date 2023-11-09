@@ -41,6 +41,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { BsTrash } from "react-icons/bs";
+import { getAllLanguage } from "@/features/api/Language";
+import { LANGUAGE_INTERFACE } from "@/types/dashboard-types";
 
 type Props = {};
 
@@ -50,6 +52,12 @@ const Blog = (props: Props) => {
   const router = useRouter();
   const lang = useSearchParams().get("lang");
   const axiosAuth = useAxiosAuth();
+
+  // Queries fetch all language
+  const { data: dataLanguage } = useQuery({
+    queryFn: async () => await getAllLanguage({ axiosAuth: axiosAuth }),
+    queryKey: ["languages"],
+  });
 
   // Queries fetch all blog
   const {
@@ -258,27 +266,29 @@ const Blog = (props: Props) => {
       </div>
       <Tabs defaultValue={!lang ? "id" : lang} className="w-full">
         <TabsList className="grid grid-cols-2 w-[400px]">
-          <TabsTrigger value="en" onClick={() => router.push("?lang=en")}>
-            English
-          </TabsTrigger>
-          <TabsTrigger value="id" onClick={() => router.push("?lang=id")}>
-            Indonesia
-          </TabsTrigger>
+          {dataLanguage?.map((row: LANGUAGE_INTERFACE) => {
+            return (
+              <TabsTrigger
+                key={row.id}
+                value={row.code}
+                onClick={() => router.push(`?lang=${row.code}`)}
+              >
+                {row.name}
+              </TabsTrigger>
+            );
+          })}
         </TabsList>
-        <TabsContent value="en">
-          <DataTable
-            columns={columns}
-            data={dataBlog}
-            onRowSelect={setSelected}
-          />
-        </TabsContent>
-        <TabsContent value="id">
-          <DataTable
-            columns={columns}
-            data={dataBlog}
-            onRowSelect={setSelected}
-          />
-        </TabsContent>
+        {dataLanguage?.map((row: LANGUAGE_INTERFACE) => {
+          return (
+            <TabsContent key={row.id} value={row.code}>
+              <DataTable
+                columns={columns}
+                data={dataBlog}
+                onRowSelect={setSelected}
+              />
+            </TabsContent>
+          );
+        })}
       </Tabs>
     </div>
   );

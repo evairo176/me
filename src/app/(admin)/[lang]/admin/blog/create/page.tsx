@@ -34,18 +34,30 @@ import { createBlog } from "@/features/api/Blog";
 import MDXEditorComponent from "@/components/elements/MDXEditorComponent";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getAllLanguage } from "@/features/api/Language";
+import { LANGUAGE_INTERFACE } from "@/types/dashboard-types";
 
 type Props = {};
 
 const Create = ({}: Props) => {
+  const [lang, setLang] = useState<string>("");
   const router = useRouter();
   const axiosAuth = useAxiosAuth();
 
   const form = useForm<z.infer<typeof CreateBlogSchema>>({
     resolver: zodResolver(CreateBlogSchema),
-    defaultValues: {
-      lang: "id",
-    },
+  });
+
+  const handleLang = (e: string) => {
+    let valueLang = e;
+    setLang(valueLang);
+    form.setValue("lang", valueLang);
+  };
+
+  // Queries fetch all language
+  const { data: dataLanguage } = useQuery({
+    queryFn: async () => await getAllLanguage({ axiosAuth: axiosAuth }),
+    queryKey: ["languages"],
   });
 
   // Queries fetch all category
@@ -54,20 +66,16 @@ const Create = ({}: Props) => {
     isLoading: isLoadingQuery,
     isError,
   } = useQuery({
-    queryKey: [
-      "categories",
-      form.getValues("lang") ? form.getValues("lang") : "id",
-    ],
+    queryKey: ["categories", lang ? lang : "id"],
     queryFn: async () => {
       const response = await axiosAuth.get(
-        `/category?lang=${
-          form.getValues("lang") ? form.getValues("lang") : "id"
-        }`
+        `/category?lang=${lang ? lang : "id"}`
       );
 
       return response.data;
     },
   });
+  console.log(form.getValues("lang"));
 
   // Access the client
   const queryClient = useQueryClient();
@@ -77,10 +85,7 @@ const Create = ({}: Props) => {
     onSuccess: async () => {
       // Invalidate and refetch
       await queryClient.invalidateQueries({
-        queryKey: [
-          "blogs",
-          form.getValues("lang") ? form.getValues("lang") : "id",
-        ],
+        queryKey: ["blogs", lang ? lang : "id"],
       });
       toast.success("Created Blog Successfully");
       router.push("/admin/blog");
@@ -110,7 +115,7 @@ const Create = ({}: Props) => {
                 <FormLabel>Language</FormLabel>
 
                 <Select
-                  onValueChange={field.onChange}
+                  onValueChange={(value) => handleLang(value)}
                   defaultValue={field.value}
                 >
                   <FormControl>
@@ -119,8 +124,13 @@ const Create = ({}: Props) => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="id">Indonesia</SelectItem>
-                    <SelectItem value="en">English</SelectItem>
+                    {dataLanguage?.map((row: LANGUAGE_INTERFACE) => {
+                      return (
+                        <SelectItem key={row.code} value={row.code}>
+                          {row.name}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
                 <FormMessage />
