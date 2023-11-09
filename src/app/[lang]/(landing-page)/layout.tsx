@@ -28,14 +28,14 @@ export default function RootLayout({
     <html lang="en">
       <Script
         strategy="afterInteractive"
-        src="https://www.googletagmanager.com/gtag/js?id=G-0F3ZEB2GSM"
+        src="https://www.googletagmanager.com/gtag/js?id=G-TFKFNCY918"
       ></Script>
       <Script id="google-analytics">
         {`  window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-0F3ZEB2GSM');`}
+        gtag('config', 'G-TFKFNCY918');`}
       </Script>
       <body
         className={`${inter.className} bg-background`}

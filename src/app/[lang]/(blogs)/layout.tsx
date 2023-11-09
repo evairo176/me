@@ -6,6 +6,7 @@ import ReduxProvider from "@/redux/ReduxProvider";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import QueryClientProvider from "@/context/QueryClientProvider";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-TFKFNCY918"
+      ></Script>
+      <Script id="google-analytics">
+        {`  window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-TFKFNCY918');`}
+      </Script>
       <body
         className={`${inter.className} bg-background`}
         suppressHydrationWarning={true}
