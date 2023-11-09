@@ -51,6 +51,7 @@ const EditBlog = (props: Props) => {
       return response.data.blog;
     },
     queryKey: ["blogs", id],
+    refetchOnWindowFocus: false,
   });
 
   // Queries fetch all category
@@ -62,6 +63,7 @@ const EditBlog = (props: Props) => {
       );
       return response.data;
     },
+    refetchOnWindowFocus: false,
   });
 
   const form = useForm<z.infer<typeof CreateBlogSchema>>({

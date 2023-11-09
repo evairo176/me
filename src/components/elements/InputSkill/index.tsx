@@ -40,7 +40,7 @@ const InputSkill: FC<InputSkillProps> = ({
     };
 
     getDefaultValue();
-  }, [form, name, defaultValue]);
+  }, [form, name]);
 
   const handleSaveValue = () => {
     const value = form.getValues(name);
