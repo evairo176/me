@@ -91,6 +91,7 @@ const EditBlog = (props: Props) => {
         draft: dataDetailBlog?.draft,
         lang: selectLang,
         slug: dataDetailBlog?.slug,
+        tags: dataDetailBlog?.Tags.map((item: TagInterface) => item.name),
       };
 
       form.reset(defaultValue);
