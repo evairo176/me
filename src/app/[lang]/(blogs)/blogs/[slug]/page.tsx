@@ -1,82 +1,58 @@
-"use client";
-import BlogBody from "@/components/elements/BlogBody";
-import BlogContent from "@/components/elements/BlogContent";
-import CtaCard from "@/components/elements/CtaCard";
-import SocialLink from "@/components/elements/SocialLink";
-import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
+import DetailBlogModule from "@/components/modules/Blogs/DetailBlogModule";
+import siteConfig from "@/constans/siteConfig";
 import { getDetailBlog } from "@/features/api/Blog";
-import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
-import { useParams } from "next/navigation";
+import { BlogInterface } from "@/types/user-types";
 import React from "react";
-import { BsArrowLeftCircle } from "react-icons/bs";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
 type Props = {};
 
-const DetailBlog = (props: Props) => {
-  const { slug, lang } = useParams();
-
-  // Queries fetch all blog
-  const {
-    data: dataBlog,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryFn: async () =>
-      await getDetailBlog({ slug: slug, lang: lang as string }),
-    queryKey: ["blogs", slug],
+export const generateMetadata = async ({
+  params: { slug, lang },
+}: {
+  params: {
+    slug: string;
+    lang: string;
+  };
+}) => {
+  const blog: BlogInterface = await getDetailBlog({
+    slug: slug,
+    lang: lang as string,
   });
 
-  if (isLoading) {
-    return <BlogDetailSkeleton />;
-  }
-  if (isError) {
-    return <p>Error fething data...</p>;
-  }
-  return (
-    <>
-      <div className="mb-4">
-        <Link
-          className="flex gap-3 items-center group cursor-pointer"
-          href={"/blogs"}
-        >
-          <BsArrowLeftCircle className="w-5 h-5 group-hover:mr-3 transition-all duration-300" />
-          <span className="font-semibold text-2xl">Back</span>
-        </Link>
-      </div>
-      <div className="space-y-10">
-        {/* <PostHero locale={params.lang} post={post} /> */}
-        <BlogContent isBlogPage={true} blog={dataBlog?.blog} />
-        <div className="flex flex-col gap-5 md:flex-row">
-          <div className="relative">
-            <div className="sticky top-20  flex items-center gap-5   md:flex-col">
-              <div className="font-medium md:hidden">Share this content</div>
-              <SocialLink
-                isShareURL
-                platform="facebook"
-                link={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_SITE_URL}/post/${slug}`}
-              />
-              <SocialLink
-                isShareURL
-                platform="twitter"
-                link={`https://www.twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_SITE_URL}/post/${slug}`}
-              />
-              <SocialLink
-                isShareURL
-                platform="linkedin"
-                link={`https://www.linkedin.com/shareArticle?mini=true&url=${process.env.NEXT_PUBLIC_SITE_URL}/post/${slug}`}
-              />
-            </div>
-          </div>
-          {/* <PostBody body={post.body} /> */}
-          <BlogBody body={dataBlog?.blog?.content} />
-        </div>
-        <CtaCard />
-      </div>
-    </>
-  );
+  return {
+    title: blog?.title,
+    description: blog?.content,
+    openGraph: {
+      title: blog?.title + " " + lang,
+      description: blog?.content,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}`,
+      siteName: siteConfig.siteName,
+      // images: [
+      //   {
+      //     url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/post/${slug}/opengraph-image.png`,
+      //     width: 1200,
+      //     height: 628,
+      //   },
+      // ],
+      locale: lang,
+      type: "website",
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blogs/${slug}`,
+      languages: {
+        "en-US": `${process.env.NEXT_PUBLIC_SITE_URL}/en/blogs/${slug}`,
+        "id-ID": `${process.env.NEXT_PUBLIC_SITE_URL}/id/blogs/${slug}`,
+        "ru-RU": `${process.env.NEXT_PUBLIC_SITE_URL}/ru/blogs/${slug}`,
+        "cn-CN": `${process.env.NEXT_PUBLIC_SITE_URL}/cn/blogs/${slug}`,
+      },
+    },
+  };
+};
+
+const DetailBlog = (props: Props) => {
+  return <DetailBlogModule />;
 };
 
 export default DetailBlog;
