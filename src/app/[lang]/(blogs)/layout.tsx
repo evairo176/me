@@ -23,7 +23,7 @@ export const generateMetadata = async ({
 
   return {
     title: {
-      template: "All Blogs | " + lang,
+      // template: "All Blogs | " + lang,
       default: "All Blogs | " + lang,
     },
     description: dictionary.footer.description,

@@ -16,26 +16,27 @@ export const generateMetadata = async ({
     lang: string;
   };
 }) => {
-  const blog: BlogInterface = await getDetailBlog({
+  const blodDetail = await getDetailBlog({
     slug: slug,
     lang: lang as string,
   });
+  const blog: BlogInterface = blodDetail?.blog;
 
   return {
-    title: blog?.title,
-    description: blog?.content,
+    title: blog?.title + " | " + lang,
+    description: blog?.des,
     openGraph: {
-      title: blog?.title + " " + lang,
+      title: blog?.title + " | " + lang,
       description: blog?.content,
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}`,
       siteName: siteConfig.siteName,
-      // images: [
-      //   {
-      //     url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/post/${slug}/opengraph-image.png`,
-      //     width: 1200,
-      //     height: 628,
-      //   },
-      // ],
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}/opengraph-image.tsx`,
+          width: 1200,
+          height: 628,
+        },
+      ],
       locale: lang,
       type: "website",
     },
