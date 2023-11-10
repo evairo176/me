@@ -41,12 +41,12 @@ export const generateMetadata = async ({
       type: "website",
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blogs/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}`,
       languages: {
         "en-US": `${process.env.NEXT_PUBLIC_SITE_URL}/en/blogs/${slug}`,
         "id-ID": `${process.env.NEXT_PUBLIC_SITE_URL}/id/blogs/${slug}`,
         "ru-RU": `${process.env.NEXT_PUBLIC_SITE_URL}/ru/blogs/${slug}`,
-        "cn-CN": `${process.env.NEXT_PUBLIC_SITE_URL}/cn/blogs/${slug}`,
+        "zh-Hant": `${process.env.NEXT_PUBLIC_SITE_URL}/cn/blogs/${slug}`,
       },
     },
   };
