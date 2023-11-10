@@ -23,8 +23,7 @@ export const generateMetadata = async ({
 
   return {
     title: {
-      template: "%s | " + siteConfig.siteName,
-      default: siteConfig.siteName,
+      default: siteConfig.siteName + " | " + lang,
     },
     description: dictionary.footer.description,
     openGraph: {

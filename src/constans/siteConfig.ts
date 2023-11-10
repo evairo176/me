@@ -26,7 +26,7 @@ export interface SiteConfig {
 }
 
 const siteConfig: SiteConfig = {
-  siteName: "My Blog and Portofolios",
+  siteName: "Hi i'm Dicki Prasetya | Welcome to my personal blog and portfolio",
   description:
     "Welcome to my personal blog and portfolio showcase! This platform serves as a creative outlet for me to share my thoughts, experiences, and projects with the world. Whether you're looking for insightful articles, captivating stories, or a glimpse into my professional work, you'll find it all here. Join me on this journey as I explore various topics, showcase my skills, and engage with a diverse community of reader!",
   currentlyAt: "Jakarta",
