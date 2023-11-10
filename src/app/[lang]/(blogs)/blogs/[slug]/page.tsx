@@ -30,13 +30,13 @@ export const generateMetadata = async ({
       description: blog?.des,
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}`,
       siteName: siteConfig.siteName,
-      images: [
-        {
-          url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}/opengraph-image.png`,
-          width: 1200,
-          height: 628,
-        },
-      ],
+      // images: [
+      //   {
+      //     url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}/opengraph-image.png`,
+      //     width: 1200,
+      //     height: 628,
+      //   },
+      // ],
       locale: lang,
       type: "website",
     },

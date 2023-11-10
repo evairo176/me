@@ -9,6 +9,7 @@ import QueryClientProvider from "@/context/QueryClientProvider";
 import Script from "next/script";
 import siteConfig from "@/constans/siteConfig";
 import { getDictionary } from "@/lib/getDictionaries";
+import { getDetailBlog } from "@/features/api/Blog";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export const generateMetadata = async ({
   };
 }) => {
   const dictionary = await getDictionary(lang);
+
   return {
     title: {
       // template: "All Blogs | " + lang,

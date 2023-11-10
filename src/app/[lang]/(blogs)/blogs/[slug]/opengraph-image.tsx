@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { getDetailBlog } from "@/features/api/Blog";
+import { dateToHumanDate } from "@/helper";
 import { BlogInterface } from "@/types/user-types";
 import { ImageResponse } from "next/server";
 
@@ -25,13 +26,13 @@ export default async function og({
 
   return new ImageResponse(
     (
-      <div tw="relative flex w-full h-full flex items-center justify-center">
+      <div tw="relative flex w-full h-full flex items-center justify-center p-4">
         {/* Background */}
         <div tw="absolute flex inset-0">
           <img
             tw="flex flex-1 object-cover w-full h-full object-center"
-            src={blog?.image}
-            alt={blog?.title}
+            src={`${blog?.image}`}
+            alt={blog?.title as string}
           />
           {/* Overlay */}
           <div tw="absolute flex inset-0 bg-black bg-opacity-50" />
@@ -49,9 +50,9 @@ export default async function og({
             <div tw="w-4 h-4 mx-6 rounded-full bg-neutral-300 " />
             <div>{`${blog?.Author.fullname}`}</div>
             {/* <div tw="w-4 h-4 mx-6 rounded-full bg-neutral-300" />
-            <div>{getReadingTime(post?.body!!, lang)}</div>
+            <div>{getReadingTime(post?.body!!, lang)}</div> */}
             <div tw="w-4 h-4 mx-6 rounded-full bg-neutral-300" />
-            <div>{getRelativeDate(post?.date_created!!, lang)}</div> */}
+            <div>{dateToHumanDate(blog?.createdAt?.toString())}</div>
           </div>
         </div>
       </div>
