@@ -17,12 +17,11 @@ export default async function og({
   params: { slug: string; lang: string };
 }) {
   // Get Data blog
-  const blog: BlogInterface = await getDetailBlog({
+  const dataBlog = await getDetailBlog({
     slug: slug,
     lang: lang as string,
   });
-
-  console.log({ ck: blog });
+  const blog: BlogInterface = dataBlog.blog;
 
   return new ImageResponse(
     (

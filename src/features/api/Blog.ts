@@ -78,7 +78,7 @@ export const getAllBlog = async ({ lang }: { lang: string }) => {
 
 interface DetailBlog {
   slug: string | string[];
-  lang: string;
+  lang?: string;
 }
 
 // get detail blog

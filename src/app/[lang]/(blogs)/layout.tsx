@@ -20,7 +20,6 @@ export const generateMetadata = async ({
   };
 }) => {
   const dictionary = await getDictionary(lang);
-
   return {
     title: {
       // template: "All Blogs | " + lang,
@@ -50,10 +49,6 @@ export const generateMetadata = async ({
         "ru-RU": `${process.env.NEXT_PUBLIC_SITE_URL}/ru`,
         "cn-CN": `${process.env.NEXT_PUBLIC_SITE_URL}/cn`,
       },
-    },
-    /* Verification for Google Search Console */
-    verification: {
-      google: `8xnhMuMJZnHzVBeWXO6w0Tt9AuOvkc8XpKP3DYOjNGk`,
     },
   };
 };
