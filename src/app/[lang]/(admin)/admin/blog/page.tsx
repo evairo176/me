@@ -265,7 +265,7 @@ const Blog = (props: Props) => {
         </AlertDialog>
       </div>
       <Tabs defaultValue={!lang ? "id" : lang} className="w-full">
-        <TabsList className="grid grid-cols-2 w-[400px]">
+        <TabsList className={`flex flex-row flex-wrap w-[400px] h-auto`}>
           {dataLanguage?.map((row: LANGUAGE_INTERFACE) => {
             return (
               <TabsTrigger
