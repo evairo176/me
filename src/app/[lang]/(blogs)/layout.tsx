@@ -31,7 +31,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: siteConfig.siteName,
       description: dictionary.footer.description,
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs`,
       siteName: siteConfig.siteName,
       images: [
         {
@@ -44,12 +44,12 @@ export const generateMetadata = async ({
       type: "website",
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs`,
       languages: {
-        "en-US": `${process.env.NEXT_PUBLIC_SITE_URL}/en`,
-        "id-ID": `${process.env.NEXT_PUBLIC_SITE_URL}/id`,
-        "ru-RU": `${process.env.NEXT_PUBLIC_SITE_URL}/ru`,
-        "zh-Hant": `${process.env.NEXT_PUBLIC_SITE_URL}/cn`,
+        "en-US": `${process.env.NEXT_PUBLIC_SITE_URL}/en/blogs`,
+        "id-ID": `${process.env.NEXT_PUBLIC_SITE_URL}/id/blogs`,
+        "ru-RU": `${process.env.NEXT_PUBLIC_SITE_URL}/ru/blogs`,
+        "zh-Hant": `${process.env.NEXT_PUBLIC_SITE_URL}/cn/blogs`,
       },
     },
   };
