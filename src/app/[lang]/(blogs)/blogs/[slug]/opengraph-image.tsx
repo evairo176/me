@@ -22,6 +22,8 @@ export default async function og({
     lang: lang as string,
   });
 
+  console.log({ ck: blog });
+
   return new ImageResponse(
     (
       <div tw="relative flex w-full h-full flex items-center justify-center">
@@ -39,7 +41,7 @@ export default async function og({
           {/* Title */}
           <div tw="text-[60px]">{blog?.title}</div>
           {/* Description */}
-          <div tw="text-2xl max-w-4xl">{blog?.content}</div>
+          <div tw="text-2xl max-w-4xl">{blog?.des}</div>
           {/* Tags */}
           <div tw="flex mt-6 flex-wrap items-center text-3xl text-neutral-200">
             <div tw={`font-medium text-indigo-600`}>

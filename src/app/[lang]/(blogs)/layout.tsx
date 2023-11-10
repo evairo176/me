@@ -1,6 +1,6 @@
 import Master from "@/components/layouts/blogs/Master";
 import "./globals.css";
-import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import NextTopLoader from "nextjs-toploader";
@@ -24,7 +24,7 @@ export const generateMetadata = async ({
   return {
     title: {
       // template: "All Blogs | " + lang,
-      default: "All Blogs | " + lang,
+      default: "Blogs for anything | " + lang,
     },
     description: dictionary.footer.description,
     openGraph: {
@@ -34,7 +34,7 @@ export const generateMetadata = async ({
       siteName: siteConfig.siteName,
       images: [
         {
-          url: "https://localhost:3001/opengraph-image.png",
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/opengraph-image.jpg`,
           width: 1200,
           height: 628,
         },
