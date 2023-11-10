@@ -47,7 +47,7 @@ export const generateMetadata = async ({
         "en-US": `${process.env.NEXT_PUBLIC_SITE_URL}/en`,
         "id-ID": `${process.env.NEXT_PUBLIC_SITE_URL}/id`,
         "ru-RU": `${process.env.NEXT_PUBLIC_SITE_URL}/ru`,
-        "cn-CN": `${process.env.NEXT_PUBLIC_SITE_URL}/cn`,
+        "zh-Hant": `${process.env.NEXT_PUBLIC_SITE_URL}/cn`,
       },
     },
     /* Verification for Google Search Console */
