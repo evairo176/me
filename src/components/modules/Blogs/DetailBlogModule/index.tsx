@@ -56,17 +56,17 @@ const DetailBlogModule = (props: Props) => {
               <SocialLink
                 isShareURL
                 platform="facebook"
-                link={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_SITE_URL}/post/${slug}`}
+                link={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}`}
               />
               <SocialLink
                 isShareURL
                 platform="twitter"
-                link={`https://www.twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_SITE_URL}/post/${slug}`}
+                link={`https://www.twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}`}
               />
               <SocialLink
                 isShareURL
                 platform="linkedin"
-                link={`https://www.linkedin.com/shareArticle?mini=true&url=${process.env.NEXT_PUBLIC_SITE_URL}/post/${slug}`}
+                link={`https://www.linkedin.com/shareArticle?mini=true&url=${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blogs/${slug}`}
               />
             </div>
           </div>
