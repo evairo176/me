@@ -1,7 +1,9 @@
 import CategoryModule from "@/components/modules/Blogs/CategoryModule";
 import siteConfig from "@/constans/siteConfig";
+import { getCategoryBySlug } from "@/features/api/Category";
 import { capitalizeFirstLetter } from "@/helper";
 import { getDictionary } from "@/lib/getDictionaries";
+import { BlogInterface, CategoryInterface } from "@/types/user-types";
 import React from "react";
 
 export const generateMetadata = async ({
@@ -14,10 +16,16 @@ export const generateMetadata = async ({
 }) => {
   const dictionary = await getDictionary(lang);
 
+  const categoryData = await getCategoryBySlug({
+    categorySlug: slug as string,
+    lang: lang as string,
+  });
+  const category: CategoryInterface = categoryData?.category;
+
   return {
     title: {
       // template: "All Blogs | " + lang,
-      default: capitalizeFirstLetter(slug) + " | " + lang,
+      default: category?.name + " | " + lang,
     },
     description: dictionary.footer.description,
     openGraph: {
