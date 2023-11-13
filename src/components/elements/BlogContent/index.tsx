@@ -5,6 +5,7 @@ import { BlogInterface } from "@/types/user-types";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { CgDetailsMore } from "react-icons/cg";
 import React from "react";
 
 interface BlogContentProps {
@@ -15,7 +16,7 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
   const router = useRouter();
   const params = useParams();
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 relative">
       <div>
         <Image
           alt={blog?.title}
@@ -41,12 +42,9 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
         </div>
       </div>
       <div className="mt-1">
-        <Link
-          className="font-semibold text-1xl mb-1 cursor-pointer"
-          href={`/${params.lang}/blogs/${blog?.slug}`}
-        >
+        <div className="font-semibold text-1xl mb-1 cursor-pointer">
           {blog?.title}
-        </Link>
+        </div>
         <div
           className={`text-sm text-gray-500 leading-normal ${
             !isBlogPage && "line-clamp-3"
@@ -66,6 +64,14 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
           })}
         </div>
       </div>
+      {!isBlogPage && (
+        <Link
+          className="cursor-pointer absolute top-0 right-1 z-[10]"
+          href={`/${params.lang}/blogs/${blog?.slug}`}
+        >
+          <CgDetailsMore />
+        </Link>
+      )}
     </div>
   );
 };
