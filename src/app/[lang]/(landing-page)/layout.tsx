@@ -33,7 +33,7 @@ export const generateMetadata = async ({
       siteName: siteConfig.siteName,
       images: [
         {
-          url: "https://localhost:3001/opengraph-image.png",
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/opengraph-image.jpg`,
           width: 1200,
           height: 628,
         },
