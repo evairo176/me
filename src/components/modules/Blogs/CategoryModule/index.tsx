@@ -36,7 +36,7 @@ const CategoryModule = (props: Props) => {
     return (
       <section className="p-4 mt-3 lg:p-8 rounded-md border bg-card text-card-foreground">
         <SectionHeading
-          title={`${dataBlog?.blog?.name} Blogs`}
+          title={`${dataBlog?.blog?.name ? dataBlog?.blog?.name : "..."} Blogs`}
           icon={<PiArticleLight className="mr-2" />}
         />
         <SectionSubHeading>
