@@ -65,7 +65,7 @@ const Project = ({
           </Link>
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <p className="mt-2 text-sm leading-relaxed text-justify line-clamp-5">
                   {description}
                 </p>
