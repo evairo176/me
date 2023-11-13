@@ -1,5 +1,6 @@
 import CategoryModule from "@/components/modules/Blogs/CategoryModule";
 import siteConfig from "@/constans/siteConfig";
+import { capitalizeFirstLetter } from "@/helper";
 import { getDictionary } from "@/lib/getDictionaries";
 import React from "react";
 
@@ -16,7 +17,7 @@ export const generateMetadata = async ({
   return {
     title: {
       // template: "All Blogs | " + lang,
-      default: slug + " | " + lang,
+      default: capitalizeFirstLetter(slug) + " | " + lang,
     },
     description: dictionary.footer.description,
     openGraph: {

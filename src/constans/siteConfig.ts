@@ -10,6 +10,7 @@ export interface SiteConfig {
     linkedin: string;
   };
   footer: {
+    siteName: string;
     description: string;
     rightText: string;
     creatorText: string;
@@ -39,6 +40,7 @@ const siteConfig: SiteConfig = {
     linkedin: "https://www.linkedin.com/in/dicki-prasetya-3a7587195",
   },
   footer: {
+    siteName: "My Blog & Portofolio",
     description:
       "Sebuah blog perjalanan minimalis dan indah yang berbagi pengalaman dan kota-kota di seluruh dunia!",
     rightText: "Seluruh hak cipta dilindungi | hak cipta",
