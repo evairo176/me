@@ -66,7 +66,7 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
       </div>
       {!isBlogPage && (
         <Link
-          className="cursor-pointer absolute top-0 right-1 z-[10]"
+          className="cursor-pointer absolute top-0 right-1 z-[10] bg-muted rounded-md"
           href={`/${params.lang}/blogs/${blog?.slug}`}
         >
           <CgDetailsMore />
