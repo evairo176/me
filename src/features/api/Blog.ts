@@ -94,7 +94,7 @@ export const getDetailBlog = async ({ slug, lang }: DetailBlog) => {
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    return res.json();
   }
 
   return res.json();
@@ -108,16 +108,9 @@ export const getAllBlogByCategorySlug = async ({
   lang: string;
   categorySlug: string;
 }) => {
-  const res = await fetch(
-    `${config["BACKEND_URL"]}/blogs/category/${categorySlug}?lang=${lang}`
+  const response = await axiosAuth.get(
+    `/blogs/category/${categorySlug}?lang=${lang}`
   );
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
+  return response.data.blog;
 };

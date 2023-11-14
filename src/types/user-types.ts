@@ -27,7 +27,7 @@ export interface BlogInterface {
   title: string;
   image: string;
   des?: string;
-  content: any[]; // You might want to define a more specific type for content.
+  content: string; // You might want to define a more specific type for content.
   Tags: TagInterface[];
   Author: UserInterface;
   Categories: CategoryInterface;

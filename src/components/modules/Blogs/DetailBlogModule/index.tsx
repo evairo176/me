@@ -5,6 +5,7 @@ import CtaCard from "@/components/elements/CtaCard";
 import SocialLink from "@/components/elements/SocialLink";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { getDetailBlog } from "@/features/api/Blog";
+import { BlogInterface } from "@/types/user-types";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -13,28 +14,13 @@ import { BsArrowLeftCircle } from "react-icons/bs";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
-type Props = {};
+interface DetailBlogModuleInterface {
+  blogDetail: BlogInterface;
+}
 
-const DetailBlogModule = (props: Props) => {
+const DetailBlogModule = ({ blogDetail }: DetailBlogModuleInterface) => {
   const { slug, lang } = useParams();
 
-  // Queries fetch all blog
-  const {
-    data: dataBlog,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryFn: async () =>
-      await getDetailBlog({ slug: slug, lang: lang as string }),
-    queryKey: ["blogs", slug],
-  });
-
-  if (isLoading) {
-    return <BlogDetailSkeleton />;
-  }
-  if (isError) {
-    return <p>Error fething data...</p>;
-  }
   return (
     <>
       <div className="mb-4">
@@ -48,7 +34,7 @@ const DetailBlogModule = (props: Props) => {
       </div>
       <div className="space-y-10">
         {/* <PostHero locale={params.lang} post={post} /> */}
-        <BlogContent isBlogPage={true} blog={dataBlog?.blog} />
+        <BlogContent isBlogPage={true} blog={blogDetail} />
         <div className="flex flex-col gap-5 md:flex-row">
           <div className="relative">
             <div className="sticky top-20  flex items-center gap-5   md:flex-col">
@@ -71,7 +57,7 @@ const DetailBlogModule = (props: Props) => {
             </div>
           </div>
           {/* <PostBody body={post.body} /> */}
-          <BlogBody body={dataBlog?.blog?.content} />
+          <BlogBody body={blogDetail?.content} />
         </div>
         <CtaCard />
       </div>

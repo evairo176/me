@@ -1,12 +1,28 @@
 import DetailBlogModule from "@/components/modules/Blogs/DetailBlogModule";
+import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import siteConfig from "@/constans/siteConfig";
 import { getDetailBlog } from "@/features/api/Blog";
 import { BlogInterface } from "@/types/user-types";
-import React from "react";
+import { notFound } from "next/navigation";
+import React, { cache } from "react";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
 type Props = {};
+
+export const getBlogData = cache(async (slug: string, lang: string) => {
+  try {
+    const blodDetail = await getDetailBlog({
+      slug: slug,
+      lang: lang as string,
+    });
+
+    return blodDetail?.blog;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error fetching posts");
+  }
+});
 
 export const generateMetadata = async ({
   params: { slug, lang },
@@ -16,11 +32,7 @@ export const generateMetadata = async ({
     lang: string;
   };
 }) => {
-  const blodDetail = await getDetailBlog({
-    slug: slug,
-    lang: lang as string,
-  });
-  const blog: BlogInterface = blodDetail?.blog;
+  const blog: BlogInterface = await getBlogData(slug, lang);
 
   return {
     title: blog?.title + " | " + lang,
@@ -52,8 +64,20 @@ export const generateMetadata = async ({
   };
 };
 
-const DetailBlog = (props: Props) => {
-  return <DetailBlogModule />;
+interface DetailBlogInterface {
+  params: {
+    slug: string;
+    lang: string;
+  };
+}
+
+const DetailBlog = async ({ params: { slug, lang } }: DetailBlogInterface) => {
+  const blog: BlogInterface = await getBlogData(slug, lang);
+
+  if (!blog) {
+    return notFound();
+  }
+  return <DetailBlogModule blogDetail={blog} />;
 };
 
 export default DetailBlog;
