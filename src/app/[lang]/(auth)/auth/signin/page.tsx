@@ -113,7 +113,7 @@ const SignInPage = ({}: {}) => {
 
               <div className="text-sm">
                 Dont have an account{" "}
-                <Link className="text-blue-500" href="/auth/signup">
+                <Link className="text-blue-500" href="/en/auth/signup">
                   sign up
                 </Link>
               </div>
