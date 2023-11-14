@@ -13,7 +13,6 @@ const TagsInput = ({ form, name, label }: TagsInputProps) => {
   const [tags, setTags] = useState<string[]>([]);
   const addtags = (e: any) => {
     if (e.keyCode === 9 && tagValue) {
-      alert("check");
       setTags([...tags, tagValue]);
     }
   };

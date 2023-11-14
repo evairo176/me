@@ -62,7 +62,6 @@ export const authOption: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, account, user }) {
-      console.log("check");
       if (account) {
         // call the signToken function which returns a JWT token
         try {
