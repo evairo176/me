@@ -60,7 +60,6 @@ const getBlogData = cache(async (slug: string, lang: string) => {
     return blodDetail;
   } catch (error) {
     console.log(error);
-    throw new Error("Error fetching posts");
   }
 });
 
