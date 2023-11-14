@@ -81,7 +81,7 @@ const Blog = (props: Props) => {
         </Button>
       </SectionSubHeading>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
-        {dataBlog?.blog?.map((row: BlogInterface, key: number) => {
+        {dataBlog?.map((row: BlogInterface, key: number) => {
           return <BlogContent key={key} blog={row} />;
         })}
       </div>

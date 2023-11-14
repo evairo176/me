@@ -16,11 +16,10 @@ export const generateMetadata = async ({
 }) => {
   const dictionary = await getDictionary(lang);
 
-  const categoryData = await getCategoryBySlug({
+  const category: CategoryInterface = await getCategoryBySlug({
     categorySlug: slug as string,
     lang: lang as string,
   });
-  const category: CategoryInterface = categoryData?.category;
 
   return {
     title: {

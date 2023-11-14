@@ -62,18 +62,9 @@ export const deleteBlog = async ({ axiosAuth, idArray }: DeleteBlog) => {
 
 // get all blog
 export const getAllBlog = async ({ lang }: { lang: string }) => {
-  const res = await fetch(`${config["BACKEND_URL"]}/blogs?lang=${lang}`, {
-    next: { revalidate: 3600 },
-  });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+  const response = await axiosAuth.get(`/blogs?lang=${lang}`);
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
+  return response.data.blog;
 };
 
 interface DetailBlog {
@@ -83,21 +74,9 @@ interface DetailBlog {
 
 // get detail blog
 export const getDetailBlog = async ({ slug, lang }: DetailBlog) => {
-  const res = await fetch(
-    `${config["BACKEND_URL"]}/blogs/detail/${slug}?lang=${lang}`,
-    {
-      next: { revalidate: 3600 },
-    }
-  );
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+  const response = await axiosAuth.get(`/blogs/detail/${slug}?lang=${lang}`);
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    return res.json();
-  }
-
-  return res.json();
+  return response.data.blog;
 };
 
 // get all blog by category slug

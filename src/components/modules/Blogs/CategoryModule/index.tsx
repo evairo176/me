@@ -36,7 +36,7 @@ const CategoryModule = (props: Props) => {
     return (
       <section className="p-4 mt-3 lg:p-8 rounded-md border bg-card text-card-foreground">
         <SectionHeading
-          title={`${dataBlog?.blog?.name ? dataBlog?.blog?.name : "..."} Blogs`}
+          title={`${dataBlog?.name ? dataBlog?.name : "..."} Blogs`}
           icon={<PiArticleLight className="mr-2" />}
         />
         <SectionSubHeading>
@@ -68,7 +68,7 @@ const CategoryModule = (props: Props) => {
   return (
     <section className="p-4 mt-3 lg:p-8 rounded-md border bg-card text-card-foreground">
       <SectionHeading
-        title={`${dataBlog?.blog?.name} Blogs`}
+        title={`${dataBlog?.name} Blogs`}
         icon={<PiArticleLight className="mr-2" />}
       />
       <SectionSubHeading>
@@ -86,7 +86,7 @@ const CategoryModule = (props: Props) => {
         </Button>
       </SectionSubHeading>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
-        {dataBlog?.blog?.Blog?.map((row: BlogInterface, key: number) => {
+        {dataBlog?.Blog?.map((row: BlogInterface, key: number) => {
           return <BlogContent key={key} blog={row} />;
         })}
       </div>

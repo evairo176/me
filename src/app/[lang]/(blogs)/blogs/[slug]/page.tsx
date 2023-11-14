@@ -17,7 +17,7 @@ export const getBlogData = cache(async (slug: string, lang: string) => {
       lang: lang as string,
     });
 
-    return blodDetail?.blog;
+    return blodDetail;
   } catch (error) {
     console.log(error);
     throw new Error("Error fetching posts");
@@ -77,6 +77,7 @@ const DetailBlog = async ({ params: { slug, lang } }: DetailBlogInterface) => {
   if (!blog) {
     return notFound();
   }
+
   return <DetailBlogModule blogDetail={blog} />;
 };
 
