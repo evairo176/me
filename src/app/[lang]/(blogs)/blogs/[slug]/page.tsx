@@ -10,20 +10,6 @@ import React, { cache } from "react";
 
 type Props = {};
 
-export const getBlogData = cache(async (slug: string, lang: string) => {
-  try {
-    const blodDetail = await getDetailBlog({
-      slug: slug,
-      lang: lang as string,
-    });
-
-    return blodDetail;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Error fetching posts");
-  }
-});
-
 export const generateMetadata = async ({
   params: { slug, lang },
 }: {
@@ -63,6 +49,20 @@ export const generateMetadata = async ({
     },
   };
 };
+
+export const getBlogData = cache(async (slug: string, lang: string) => {
+  try {
+    const blodDetail = await getDetailBlog({
+      slug: slug,
+      lang: lang as string,
+    });
+
+    return blodDetail;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error fetching posts");
+  }
+});
 
 interface DetailBlogInterface {
   params: {
