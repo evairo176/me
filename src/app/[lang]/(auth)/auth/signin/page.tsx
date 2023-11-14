@@ -15,19 +15,28 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { PiSpinner } from "react-icons/pi";
+import { FcGoogle } from "react-icons/fc";
 import { signInSchema } from "@/utils/form-schema";
+import { Separator } from "@/components/ui/separator";
 
 type Props = {};
 
-const SignInPage = (props: Props) => {
+const SignInPage = ({}: {}) => {
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
   });
+
   const [isLoading, setIsloading] = useState<boolean>(false);
   const router = useRouter();
+  const params = useParams();
+
+  const loginWithGoogle = () =>
+    signIn("google", {
+      callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/${params?.lang}/admin/dashboard`,
+    });
 
   const onSubmit = async (val: z.infer<typeof signInSchema>) => {
     setIsloading(true);
@@ -92,6 +101,16 @@ const SignInPage = (props: Props) => {
               <Button disabled={isLoading} className="w-full">
                 {isLoading ? <PiSpinner /> : "Sign In"}
               </Button>
+              <Separator />
+              <Button
+                type="button"
+                onClick={loginWithGoogle}
+                variant={"outline"}
+                className="w-full "
+              >
+                <FcGoogle className="mr-2" /> Google
+              </Button>
+
               <div className="text-sm">
                 Dont have an account{" "}
                 <Link className="text-blue-500" href="/auth/signup">

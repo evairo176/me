@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/context/ThemeProvider";
-import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Toaster } from "sonner";
 import NextAuthProvider from "@/context/NextAuthProvider";
 import Master from "@/components/layouts/dashboard/Master";
@@ -26,6 +25,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOption);
+  // console.log(session);
 
   if (session === null) {
     return redirect("/auth/signin");
@@ -48,21 +48,19 @@ export default async function RootLayout({
             speed={200}
             shadow="0 0 10px #05b6d3,0 0 5px #45c6c0"
           />
-          <EdgeStoreProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <NextAuthProvider>
-                <QueryClientProvider>
-                  <Master>{children}</Master>
-                </QueryClientProvider>
-                <Toaster position="top-right" />
-              </NextAuthProvider>
-            </ThemeProvider>
-          </EdgeStoreProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextAuthProvider>
+              <QueryClientProvider>
+                <Master>{children}</Master>
+              </QueryClientProvider>
+              <Toaster position="top-right" />
+            </NextAuthProvider>
+          </ThemeProvider>
         </ReduxProvider>
       </body>
     </html>

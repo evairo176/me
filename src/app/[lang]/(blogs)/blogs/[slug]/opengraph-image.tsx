@@ -48,7 +48,7 @@ export default async function og({
               {blog?.Categories.name}
             </div>
             <div tw="w-4 h-4 mx-6 rounded-full bg-neutral-300 " />
-            <div>{`${blog?.Author.fullname}`}</div>
+            <div>{`${blog?.Author.name}`}</div>
             {/* <div tw="w-4 h-4 mx-6 rounded-full bg-neutral-300" />
             <div>{getReadingTime(post?.body!!, lang)}</div> */}
             <div tw="w-4 h-4 mx-6 rounded-full bg-neutral-300" />

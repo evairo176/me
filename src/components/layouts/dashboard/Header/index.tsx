@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { TbSettingsCog } from "react-icons/tb";
 import React, { FC } from "react";
 import { CiMenuFries } from "react-icons/ci";
+import Image from "next/image";
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
@@ -36,18 +37,16 @@ const Header: FC<HeaderProps> = () => {
         </div>
         <div className="flex flex-row  items-center">
           <div className="mr-2">
-            <Avatar className="w-[25px] h-[25px]">
-              <AvatarImage
-                width={30}
-                height={30}
-                src="https://github.com/shadcn.png"
-                alt="@shadcn"
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <Image
+              alt={session?.user?.name as string | "profile"}
+              width={30}
+              height={30}
+              className="rounded-full w-[25px] h-[25px]"
+              src={session?.user?.image as string}
+            />
           </div>
           <div className="text-sm font-semibold mr-3">
-            {session?.user.fullname}
+            {session?.user?.name}
           </div>
           <div>
             <Button size={"sm"}>

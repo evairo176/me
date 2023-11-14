@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/context/ThemeProvider";
-import { EdgeStoreProvider } from "@/lib/edgestore";
 import { Toaster } from "sonner";
 import { getServerSession } from "next-auth";
 import { authOption } from "../../api/auth/[...nextauth]/route";
@@ -26,7 +25,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOption);
 
   if (session !== null) {
-    return redirect("/");
+    return redirect("/admin/dashboard");
   }
   return (
     <html lang="en">
@@ -46,17 +45,15 @@ export default async function RootLayout({
             speed={200}
             shadow="0 0 10px #05b6d3,0 0 5px #45c6c0"
           />
-          <EdgeStoreProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-              <Toaster position="top-right" />
-            </ThemeProvider>
-          </EdgeStoreProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster position="top-right" />
+          </ThemeProvider>
         </ReduxProvider>
       </body>
     </html>
