@@ -50,7 +50,7 @@ export const generateMetadata = async ({
   };
 };
 
-export const getBlogData = cache(async (slug: string, lang: string) => {
+const getBlogData = cache(async (slug: string, lang: string) => {
   try {
     const blodDetail = await getDetailBlog({
       slug: slug,
