@@ -4,6 +4,7 @@ import Sidebar from "../Sidebar";
 import Footer from "../Footer";
 import { motion } from "framer-motion";
 import AOS from "aos";
+import { LANGUAGE_INTERFACE } from "@/types/dashboard-types";
 
 type Props = {
   children: React.ReactNode;

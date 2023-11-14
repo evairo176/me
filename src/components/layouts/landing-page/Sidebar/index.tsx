@@ -15,6 +15,7 @@ import Profile from "@/components/elements/Profile";
 import { useParams, usePathname } from "next/navigation";
 import ModeToggle from "@/components/elements/ModeToggle";
 import ToggleLanguage from "@/components/elements/ToggleLanguage";
+import { LANGUAGE_INTERFACE } from "@/types/dashboard-types";
 
 type SidebarProps = {};
 
