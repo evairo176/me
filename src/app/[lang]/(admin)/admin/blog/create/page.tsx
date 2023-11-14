@@ -56,7 +56,7 @@ const Create = ({}: Props) => {
 
   // Queries fetch all language
   const { data: dataLanguage } = useQuery({
-    queryFn: async () => await getAllLanguage({ axiosAuth: axiosAuth }),
+    queryFn: async () => await getAllLanguage(),
     queryKey: ["languages"],
   });
 
