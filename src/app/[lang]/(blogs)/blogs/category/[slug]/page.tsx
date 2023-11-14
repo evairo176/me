@@ -1,10 +1,11 @@
 import CategoryModule from "@/components/modules/Blogs/CategoryModule";
 import siteConfig from "@/constans/siteConfig";
+import { getAllBlogByCategorySlug } from "@/features/api/Blog";
 import { getCategoryBySlug } from "@/features/api/Category";
 import { capitalizeFirstLetter } from "@/helper";
 import { getDictionary } from "@/lib/getDictionaries";
 import { BlogInterface, CategoryInterface } from "@/types/user-types";
-import React from "react";
+import React, { cache } from "react";
 
 export const generateMetadata = async ({
   params: { lang, slug },
@@ -16,10 +17,7 @@ export const generateMetadata = async ({
 }) => {
   const dictionary = await getDictionary(lang);
 
-  const category: CategoryInterface = await getCategoryBySlug({
-    categorySlug: slug as string,
-    lang: lang as string,
-  });
+  const category: CategoryInterface = await getAllCategoryData({ lang, slug });
 
   return {
     title: {
@@ -54,8 +52,53 @@ export const generateMetadata = async ({
   };
 };
 
-const Category = (props: {}) => {
-  return <CategoryModule />;
+const getAllCategoryData = cache(
+  async ({ lang, slug }: { lang: string; slug: string }) => {
+    try {
+      const allCategory = await getCategoryBySlug({
+        categorySlug: slug as string,
+        lang: lang as string,
+      });
+
+      return allCategory;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+const getAllBlogData = cache(
+  async ({ lang, slug }: { lang: string; slug: string }) => {
+    try {
+      const allBlog = await getAllBlogByCategorySlug({
+        lang: lang as string,
+        categorySlug: slug as string,
+      });
+
+      return allBlog;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+const Category = async ({
+  params: { lang, slug },
+}: {
+  params: {
+    lang: string;
+    slug: string;
+  };
+}) => {
+  const allCategory: CategoryInterface = await getAllCategoryData({
+    lang,
+    slug,
+  });
+  const AllBlogByCategory = await getAllBlogData({
+    lang,
+    slug: allCategory?.slug,
+  });
+
+  return <CategoryModule AllBlogByCategory={AllBlogByCategory} />;
 };
 
 export default Category;

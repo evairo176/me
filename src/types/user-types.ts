@@ -43,6 +43,8 @@ export interface BlogInterface {
 export interface CategoryInterface {
   id: string;
   name: string;
+  slug: string;
+  Blog: BlogInterface[];
 }
 
 export interface TagInterface {
