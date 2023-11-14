@@ -14,8 +14,12 @@ import AOS from "aos";
 import Profile from "@/components/elements/Profile";
 import { useParams, usePathname } from "next/navigation";
 import ModeToggle from "@/components/elements/ModeToggle";
-import ToggleLanguage from "@/components/elements/ToggleLanguage";
+// import ToggleLanguage from "@/components/elements/ToggleLanguage";
+const ToggleLanguage = dynamic(
+  () => import("@/components/elements/ToggleLanguage")
+);
 import { LANGUAGE_INTERFACE } from "@/types/dashboard-types";
+import dynamic from "next/dynamic";
 
 type SidebarProps = {};
 

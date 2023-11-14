@@ -55,15 +55,15 @@ export const generateMetadata = async ({
   };
 };
 
-// const getAllLanguageData = cache(async () => {
-//   try {
-//     const allLanguage = await getAllLanguage();
+export const getAllLanguageData = cache(async () => {
+  try {
+    const allLanguage = await getAllLanguage();
 
-//     return allLanguage;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+    return allLanguage;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export default async function RootLayout({
   children,
