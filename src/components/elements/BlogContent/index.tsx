@@ -5,7 +5,7 @@ import { BlogInterface } from "@/types/user-types";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { CgDetailsMore } from "react-icons/cg";
+import { AiOutlineMenuUnfold } from "react-icons/ai";
 import React from "react";
 
 interface BlogContentProps {
@@ -22,7 +22,7 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
           src={blog?.image}
           width={200}
           height={150}
-          className={`w-full object-fit ${
+          className={`w-full object-fill ${
             isBlogPage ? "h-[500px]" : "h-[200px]"
           }`}
         />
@@ -65,10 +65,11 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
       </div>
       {!isBlogPage && (
         <Link
-          className="cursor-pointer absolute top-0 right-1 z-[10] bg-muted rounded-md"
+          aria-label={blog?.title}
+          className="cursor-pointer absolute top-0 right-1 z-1 bg-muted rounded-md"
           href={`/${params.lang}/blogs/${blog?.slug}`}
         >
-          <CgDetailsMore />
+          <AiOutlineMenuUnfold />
         </Link>
       )}
     </div>

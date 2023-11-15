@@ -51,15 +51,6 @@ const Header = ({ language }: Props) => {
                 <li>
                   <ModeToggle />
                 </li>
-                <li>
-                  <Link href={`/blogs/category/technology`}>technology</Link>
-                </li>
-                <li>
-                  <Link href={`/blogs/category/experience`}>experience</Link>
-                </li>
-                <li>
-                  <Link href={`/blogs/category/foods`}>foods</Link>
-                </li>
               </ul>
             </nav>
           </div>

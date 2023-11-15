@@ -25,7 +25,7 @@ const Blogs = ({ lang, allBlog }: BlogsInterface) => {
         <Button variant={"secondary"} asChild>
           <Link
             href={`/${lang}/blogs`}
-            aria-label="view all blog"
+            aria-label="view all blog page"
             className="flex gap-2 transition-all duration-300 items-center"
           >
             <span>View all Blogs</span>

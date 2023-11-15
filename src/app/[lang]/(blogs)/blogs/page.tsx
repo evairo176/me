@@ -1,6 +1,7 @@
 import BlogContent from "@/components/elements/BlogContent";
 import SectionHeading from "@/components/elements/SectionHeading";
 import SectionSubHeading from "@/components/elements/SectionSubHeading";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllBlog, getBlog } from "@/features/api/Blog";
 import { BlogInterface } from "@/types/user-types";
@@ -34,29 +35,44 @@ const Blog = async ({
   const dataBlog = await getAllBlogData(lang);
 
   return (
-    <section className="p-4 mt-3 lg:p-8 rounded-md border bg-card text-card-foreground">
-      <SectionHeading
-        title="Blogs"
-        icon={<PiArticleLight className="mr-2" />}
-      />
-      <SectionSubHeading>
-        <p className="dark:text-neutral-400">My Blogs.</p>
-        <Button variant={"secondary"} aria-label="Back To Home" asChild>
-          <Link
-            href={"/"}
-            className="flex gap-2 transition-all duration-300 items-center"
-          >
-            <div className="overflow-hidden dark:border-neutral-500">
-              <BsArrowLeftCircle className="animate-rain-arrow" />
+    <section className="flex flex-row gap-3 justify-between">
+      <div className="flex flex-col">
+        {dataBlog?.length > 0 ? (
+          dataBlog?.map((row: BlogInterface, key: number) => {
+            return (
+              <div
+                key={key}
+                className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground mb-4"
+              >
+                <BlogContent blog={row} />
+              </div>
+            );
+          })
+        ) : (
+          <div>Sorry data not found</div>
+        )}
+      </div>
+      <div className="relative hidden md:block ">
+        <div className="w-52 sticky top-20 flex flex-col gap-3">
+          <div className="rounded-md border bg-card text-card-foreground p-2">
+            <div className="font-semibold text-sm">Tags Relevant For You</div>
+            <div className="mt-2 flex flex-row flex-wrap gap-2">
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((row, key) => {
+                return (
+                  <Badge variant={"outline"} key={key}>
+                    abc
+                  </Badge>
+                );
+              })}
             </div>
-            <span>Back To Home</span>
-          </Link>
-        </Button>
-      </SectionSubHeading>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
-        {dataBlog?.map((row: BlogInterface, key: number) => {
-          return <BlogContent key={key} blog={row} />;
-        })}
+          </div>
+          <div className="rounded-md border bg-card text-card-foreground p-2">
+            <div className="font-semibold text-sm">#Discuss</div>
+            <div className="comment">comment</div>
+            <div>Like</div>
+            <div>Read</div>
+          </div>
+        </div>
       </div>
     </section>
   );

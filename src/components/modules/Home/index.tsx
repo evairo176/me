@@ -38,8 +38,8 @@ const HomeModules = async ({ lang, dictionary }: Props) => {
       <Introduction lang={lang} dictionary={dictionary} />
       <CareerList lang={lang} dictionary={dictionary} />
       <Projects dictionary={dictionary} />
-      <Skills />
       <Blogs lang={lang} allBlog={allBlog} />
+      <Skills />
     </>
   );
 };
