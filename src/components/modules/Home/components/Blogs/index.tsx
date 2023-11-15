@@ -25,10 +25,10 @@ const Blogs = ({ lang, allBlog }: BlogsInterface) => {
         <Button variant={"secondary"} asChild>
           <Link
             href={`/${lang}/blogs`}
-            aria-label="view all blog page"
+            aria-label="View all Blogs"
             className="flex gap-2 transition-all duration-300 items-center"
           >
-            <span>View all Blogs</span>
+            View all Blogs
             <div className="overflow-hidden dark:border-neutral-500">
               <BiDotsVerticalRounded className="animate-rain-arrow" />
             </div>

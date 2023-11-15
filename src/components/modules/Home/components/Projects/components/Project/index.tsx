@@ -11,6 +11,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { CgDetailsMore } from "react-icons/cg";
+import { useRouter } from "next/navigation";
 
 const Project = ({
   title,
@@ -20,6 +21,7 @@ const Project = ({
   link,
 }: ProjectsType) => {
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -56,13 +58,12 @@ const Project = ({
       "
         />
         <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2  sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
-          <div className="text-2xl font-semibold">{title}</div>
-          <Link
-            className="cursor-pointer absolute top-2 right-2 z-[10] bg-muted rounded-md"
-            href={link}
+          <div
+            className="text-2xl font-semibold cursor-pointer"
+            onClick={() => router.push(link)}
           >
-            <CgDetailsMore className="w-5 h-5" />
-          </Link>
+            {title}
+          </div>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
