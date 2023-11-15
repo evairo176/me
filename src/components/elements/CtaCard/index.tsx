@@ -8,8 +8,8 @@ type Props = {};
 
 const CtaCard = (props: Props) => {
   return (
-    <div className="relative overflow-hidden rounded-md bg-slate-100 px-6 py-10">
-      <div className="absolute inset-0 z-10 bg-gradient-to-br from-white/95 via-white/70 to-white/30" />
+    <div className="relative overflow-hidden rounded-md  px-6 py-10">
+      <div className="absolute inset-0 z-10 bg-gradient-to-br from-white/95 via-white/70 dark:from-black/95 dark:via-black/70 dark:to-black/30" />
       <Image
         fill
         className="object-cover object-center"

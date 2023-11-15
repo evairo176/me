@@ -3,9 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { dateToHumanDate } from "@/helper";
 import { BlogInterface } from "@/types/user-types";
 import Image from "next/image";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { AiOutlineMenuUnfold } from "react-icons/ai";
 import React from "react";
 
 interface BlogContentProps {
@@ -14,6 +12,7 @@ interface BlogContentProps {
 }
 const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
   const params = useParams();
+  const router = useRouter();
   return (
     <div className="space-y-2 relative">
       <div>
@@ -41,7 +40,10 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
         </div>
       </div>
       <div className="mt-1">
-        <div className="font-semibold text-1xl mb-1 cursor-pointer">
+        <div
+          className="font-semibold text-1xl mb-1 cursor-pointer"
+          onClick={() => router.push(`/${params.lang}/blogs/${blog?.slug}`)}
+        >
           {blog?.title}
         </div>
         <div
@@ -63,15 +65,6 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
           })}
         </div>
       </div>
-      {!isBlogPage && (
-        <Link
-          aria-label={blog?.title}
-          className="cursor-pointer absolute top-0 right-1 z-1 bg-muted rounded-md"
-          href={`/${params.lang}/blogs/${blog?.slug}`}
-        >
-          <AiOutlineMenuUnfold />
-        </Link>
-      )}
     </div>
   );
 };
