@@ -209,6 +209,7 @@ const Blog = (props: Props) => {
         },
       },
     ],
+    // eslint-disable-next-line
     []
   );
 

@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const AllLanguage = cache(async () => {
+export const AllLanguage = cache(async () => {
   try {
     const allBlog = await getAllLanguage();
 

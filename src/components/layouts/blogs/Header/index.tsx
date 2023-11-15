@@ -8,9 +8,9 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
-type Props = {};
+type Props = { language: any };
 
-const Header = (props: Props) => {
+const Header = ({ language }: Props) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const params = useParams();
 
@@ -46,7 +46,7 @@ const Header = (props: Props) => {
                   <LangSwithcer locale={locale} />
                 </li> */}
                 <li>
-                  <ToggleLanguage />
+                  <ToggleLanguage language={language} />
                 </li>
                 <li>
                   <ModeToggle />
@@ -97,7 +97,7 @@ const Header = (props: Props) => {
             </ul>
             <Separator className="mb-2 mt-2" />
             <div className="flex items-center gap-2">
-              <ToggleLanguage />
+              <ToggleLanguage language={language} />
               <ModeToggle />
             </div>
           </div>

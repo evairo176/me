@@ -40,6 +40,7 @@ const InputSkill: FC<InputSkillProps> = ({
     };
 
     getDefaultValue();
+    // eslint-disable-next-line
   }, [form, name]);
 
   const handleSaveValue = () => {

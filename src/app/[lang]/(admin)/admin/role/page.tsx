@@ -289,6 +289,7 @@ const RolesPage = (props: Props) => {
         },
       },
     ],
+    // eslint-disable-next-line
     []
   );
 
