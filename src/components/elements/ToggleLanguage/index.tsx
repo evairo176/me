@@ -11,14 +11,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HiOutlineLanguage } from "react-icons/hi2";
-import { useQuery } from "@tanstack/react-query";
-import { getAllLanguage } from "@/features/api/Language";
-import { axiosAuth } from "@/lib/axios";
+// import { useQuery } from "@tanstack/react-query";
+// import { getAllLanguage } from "@/features/api/Language";
+// import { axiosAuth } from "@/lib/axios";
 import { LANGUAGE_INTERFACE } from "@/types/dashboard-types";
 
-const ToggleLanguage = ({}) => {
+const ToggleLanguage = ({ language }: { language: LANGUAGE_INTERFACE[] }) => {
   const params = useParams();
-  const targetLanguage = params.lang === "en" ? "id" : "en";
+  // const targetLanguage = params.lang === "en" ? "id" : "en";
   const pathname = usePathname();
   const router = useRouter();
   const redirectTarget = (lang: string) => {
@@ -32,10 +32,10 @@ const ToggleLanguage = ({}) => {
   };
 
   // Queries fetch all language
-  const { data: dataLanguage } = useQuery({
-    queryFn: async () => await getAllLanguage(),
-    queryKey: ["languages"],
-  });
+  // const { data: dataLanguage } = useQuery({
+  //   queryFn: async () => await getAllLanguage(),
+  //   queryKey: ["languages"],
+  // });
   // come
   return (
     <DropdownMenu>
@@ -45,7 +45,7 @@ const ToggleLanguage = ({}) => {
       <DropdownMenuContent>
         <DropdownMenuLabel>Change Language</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {dataLanguage?.map((row: LANGUAGE_INTERFACE) => {
+        {language?.map((row: LANGUAGE_INTERFACE) => {
           return (
             <DropdownMenuItem
               onClick={() => router.push(redirectTarget(row.code))}

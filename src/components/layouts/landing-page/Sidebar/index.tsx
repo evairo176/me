@@ -21,9 +21,11 @@ const ToggleLanguage = dynamic(
 import { LANGUAGE_INTERFACE } from "@/types/dashboard-types";
 import dynamic from "next/dynamic";
 
-type SidebarProps = {};
+type SidebarProps = {
+  language: any;
+};
 
-const Sidebar = ({}: SidebarProps) => {
+const Sidebar = ({ language }: SidebarProps) => {
   const { isOpen } = useAppSelector((state) => state.menuReducer);
   const isMobile = useIsMobile();
   // const imageSize = isMobile ? 40 : 100;
@@ -57,7 +59,7 @@ const Sidebar = ({}: SidebarProps) => {
     >
       <div className="z-20 fixed bg-card text-card-foreground shadow lg:shadow-none  w-full lg:w-64 p-5 md:relative lg:p-0">
         <div className={`flex flex-row lg:flex-col justify-between  space-y-1`}>
-          <Profile isOpen={isOpen} />
+          <Profile language={language} isOpen={isOpen} />
           <div
             className={`flex items-center lg:hidden gap-5 mt-2 ${
               isOpen
@@ -68,7 +70,7 @@ const Sidebar = ({}: SidebarProps) => {
             <div className="flex flex-row items-center gap-2">
               <ModeToggle />
               <div className={`${isOpen ? "block" : "hidden"}`}>
-                <ToggleLanguage />
+                <ToggleLanguage language={language} />
               </div>
             </div>
             <MenuOpen

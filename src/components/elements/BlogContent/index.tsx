@@ -13,7 +13,6 @@ interface BlogContentProps {
   isBlogPage?: boolean;
 }
 const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
-  const router = useRouter();
   const params = useParams();
   return (
     <div className="space-y-2 relative">

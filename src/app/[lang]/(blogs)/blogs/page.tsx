@@ -21,6 +21,8 @@ const getAllBlogData = cache(async (lang: string) => {
   }
 });
 
+export const revalidate = 10; // revalidate at every 10 seconds
+
 const Blog = async ({
   params: { lang },
 }: {

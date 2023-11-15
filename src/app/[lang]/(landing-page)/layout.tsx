@@ -9,8 +9,6 @@ import QueryClientProvider from "@/context/QueryClientProvider";
 import Script from "next/script";
 import { getDictionary } from "@/lib/getDictionaries";
 import siteConfig from "@/constans/siteConfig";
-import { cache } from "react";
-import { getAllLanguage } from "@/features/api/Language";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,15 +53,15 @@ export const generateMetadata = async ({
   };
 };
 
-export const getAllLanguageData = cache(async () => {
-  try {
-    const allLanguage = await getAllLanguage();
+// export const getAllLanguageData = cache(async () => {
+//   try {
+//     const allLanguage = await getAllLanguage();
 
-    return allLanguage;
-  } catch (error) {
-    console.log(error);
-  }
-});
+//     return allLanguage;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 export default async function RootLayout({
   children,

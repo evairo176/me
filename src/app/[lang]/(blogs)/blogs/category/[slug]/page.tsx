@@ -81,6 +81,8 @@ const getAllBlogData = cache(
   }
 );
 
+export const revalidate = 10; // revalidate at every 10 seconds
+
 const Category = async ({
   params: { lang, slug },
 }: {

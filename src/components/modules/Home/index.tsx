@@ -2,13 +2,13 @@ import React, { cache } from "react";
 
 import Introduction from "./components/Introduction";
 import CareerList from "./components/CareerList";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import { getBlog } from "@/features/api/Blog";
-import { BlogInterface } from "@/types/user-types";
-// import Blogs from "./components/Blogs";
-const Blogs = dynamic(() => import("./components/Blogs"));
+
+import Blogs from "./components/Blogs";
+// const Blogs = dynamic(() => import("./components/Blogs"));
 // const Skills = dynamic(() => import("./components/Skills"));
 type Props = {
   lang: string;
@@ -28,8 +28,11 @@ const getAllBlogData = cache(async (lang: string) => {
   }
 });
 
+export const revalidate = 10; // revalidate at every 10 seconds
+
 const HomeModules = async ({ lang, dictionary }: Props) => {
   const allBlog = await getAllBlogData(lang);
+
   return (
     <>
       <Introduction lang={lang} dictionary={dictionary} />

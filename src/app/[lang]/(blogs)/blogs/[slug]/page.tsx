@@ -1,5 +1,4 @@
 import DetailBlogModule from "@/components/modules/Blogs/DetailBlogModule";
-import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import siteConfig from "@/constans/siteConfig";
 import { getDetailBlog } from "@/features/api/Blog";
 import { BlogInterface } from "@/types/user-types";
@@ -62,6 +61,8 @@ const getBlogData = cache(async (slug: string, lang: string) => {
     console.log(error);
   }
 });
+
+export const revalidate = 10; // revalidate at every 10 seconds
 
 interface DetailBlogInterface {
   params: {
