@@ -57,10 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: baseURL,
-      lastModified: new Date(),
-    },
-    {
       url: `${baseURL}/en`,
       lastModified: new Date(),
     },
