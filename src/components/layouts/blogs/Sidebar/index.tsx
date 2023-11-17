@@ -21,7 +21,7 @@ const Sidebar = (props: Props) => {
               variant={"ghost"}
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
               onClick={() =>
-                router.push(`${params?.lang}/blogs/category/technology`)
+                router.push(`/${params?.lang}/blogs/category/technology`)
               }
             >
               <BiCategory /> technology
@@ -32,7 +32,7 @@ const Sidebar = (props: Props) => {
               variant={"ghost"}
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
               onClick={() =>
-                router.push(`${params?.lang}/blogs/category/experience`)
+                router.push(`/${params?.lang}/blogs/category/experience`)
               }
             >
               <BiCategory /> experience
@@ -43,7 +43,7 @@ const Sidebar = (props: Props) => {
               variant={"ghost"}
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
               onClick={() =>
-                router.push(`${params?.lang}/blogs/category/foods`)
+                router.push(`/${params?.lang}/blogs/category/foods`)
               }
             >
               <BiCategory /> foods
