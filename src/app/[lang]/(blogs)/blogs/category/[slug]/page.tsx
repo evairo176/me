@@ -101,7 +101,6 @@ const Category = async ({
   });
   const AllBlogByCategory = allBlog?.blog;
   const tag = allBlog?.tagsRelevant;
-  console.log(tag);
 
   return <CategoryModule AllBlogByCategory={AllBlogByCategory} tag={tag} />;
 };
