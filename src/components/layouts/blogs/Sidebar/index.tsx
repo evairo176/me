@@ -1,12 +1,17 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import React from "react";
 import { BiCategory } from "react-icons/bi";
 
 type Props = {};
 
 const Sidebar = (props: Props) => {
+  const params = useParams();
+  const router = useRouter();
   return (
     <div className="relative hidden md:block">
       <div className="w-52 sticky top-20">
@@ -16,10 +21,11 @@ const Sidebar = (props: Props) => {
               variant={"ghost"}
               asChild
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
+              onClick={() =>
+                router.push(`${params?.lang}/blogs/category/technology`)
+              }
             >
-              <Link href={`/blogs/category/technology`}>
-                <BiCategory /> technology
-              </Link>
+              <BiCategory /> technology
             </Button>
           </li>
           <li>
@@ -27,10 +33,11 @@ const Sidebar = (props: Props) => {
               variant={"ghost"}
               asChild
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
+              onClick={() =>
+                router.push(`${params?.lang}/blogs/category/experience`)
+              }
             >
-              <Link href={`/blogs/category/experience`}>
-                <BiCategory /> experience
-              </Link>
+              <BiCategory /> experience
             </Button>
           </li>
           <li>
@@ -38,10 +45,11 @@ const Sidebar = (props: Props) => {
               variant={"ghost"}
               asChild
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
+              onClick={() =>
+                router.push(`${params?.lang}/blogs/category/foods`)
+              }
             >
-              <Link href={`/blogs/category/foods`}>
-                <BiCategory /> foods
-              </Link>
+              <BiCategory /> foods
             </Button>
           </li>
         </ul>
