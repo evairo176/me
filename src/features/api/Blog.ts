@@ -75,9 +75,9 @@ export const getAllBlog = async ({
   limit,
 }: getAllBlogInterface) => {
   const langSlug = lang ? `?lang=${lang}` : "";
-  const categorySlug = category ? `&?category=${category}` : "";
-  const userQuery = user ? `&?user=${user}` : "";
-  const limitQuery = limit ? `&?limit=${limit}` : "";
+  const categorySlug = category ? `&category=${category}` : "";
+  const userQuery = user ? `&user=${user}` : "";
+  const limitQuery = limit ? `&limit=${limit}` : "";
   try {
     const response = await axiosAuth.get(
       `/blogs${langSlug}${categorySlug}${userQuery}${limitQuery}`
