@@ -19,7 +19,6 @@ const Sidebar = (props: Props) => {
           <li>
             <Button
               variant={"ghost"}
-              asChild
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
               onClick={() =>
                 router.push(`${params?.lang}/blogs/category/technology`)
@@ -31,7 +30,6 @@ const Sidebar = (props: Props) => {
           <li>
             <Button
               variant={"ghost"}
-              asChild
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
               onClick={() =>
                 router.push(`${params?.lang}/blogs/category/experience`)
@@ -43,7 +41,6 @@ const Sidebar = (props: Props) => {
           <li>
             <Button
               variant={"ghost"}
-              asChild
               className="gap-2 flex flex-row items-center justify-start w-full px-2"
               onClick={() =>
                 router.push(`${params?.lang}/blogs/category/foods`)
