@@ -6,29 +6,51 @@ import SocialLink from "@/components/elements/SocialLink";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { Badge } from "@/components/ui/badge";
 import { getDetailBlog } from "@/features/api/Blog";
-import { BlogInterface, TagInterface } from "@/types/user-types";
+import { TagInterface } from "@/types/user-types";
 import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import React from "react";
-import { BsArrowLeftCircle } from "react-icons/bs";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
-interface DetailBlogModuleInterface {
-  blogDetail: BlogInterface;
-  tag: TagInterface[];
-}
+interface DetailBlogModuleInterface {}
 
-const DetailBlogModule = ({ blogDetail, tag }: DetailBlogModuleInterface) => {
+const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
+  // Queries fetch all blog
   const { slug, lang } = useParams();
+  const {
+    data: detailBlog,
+    isLoading: isLoadingBlog,
+    isError: isErrorBlog,
+  } = useQuery({
+    queryKey: ["blogs", slug],
+    queryFn: async () =>
+      await getDetailBlog({
+        slug: slug,
+        lang: lang as string,
+      }),
+  });
+  const blog = detailBlog?.blog;
+  const tag: TagInterface[] = detailBlog?.tagsRelevant;
+
+  if (isLoadingBlog) {
+    return (
+      <>
+        <BlogDetailSkeleton />
+      </>
+    );
+  }
+
+  if (isErrorBlog) {
+    return <div>Something wrong</div>;
+  }
 
   return (
     <>
       <div className="flex flex-row gap-3 justify-between">
         <div className="space-y-10">
           {/* <PostHero locale={params.lang} post={post} /> */}
-          <BlogContent isBlogPage={true} blog={blogDetail} />
+          <BlogContent isBlogPage={true} blog={blog} />
           <div className="flex flex-col gap-5 md:flex-row">
             <div className="relative">
               <div className="sticky top-20  flex items-center gap-5   md:flex-col">
@@ -51,7 +73,7 @@ const DetailBlogModule = ({ blogDetail, tag }: DetailBlogModuleInterface) => {
               </div>
             </div>
             {/* <PostBody body={post.body} /> */}
-            <BlogBody body={blogDetail?.content} />
+            <BlogBody body={blog?.content} />
           </div>
           <CtaCard />
         </div>

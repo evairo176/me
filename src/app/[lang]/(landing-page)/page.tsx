@@ -12,7 +12,7 @@ type Props = {
 const Home = async ({ params }: Props) => {
   const dictionary = await getDictionary(params.lang);
 
-  return <HomeModules lang={params?.lang} dictionary={dictionary} />;
+  return <HomeModules dictionary={dictionary} />;
 };
 
 export default Home;

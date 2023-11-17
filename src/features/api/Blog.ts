@@ -60,11 +60,33 @@ export const deleteBlog = async ({ axiosAuth, idArray }: DeleteBlog) => {
 //   return response.data.blog;
 // };
 
-// get all blog
-export const getAllBlog = async ({ lang }: { lang?: string }) => {
-  const response = await axiosAuth.get(`/blogs?lang=${lang}`);
+interface getAllBlogInterface {
+  lang?: string;
+  category?: string;
+  user?: string;
+  limit?: number;
+}
 
-  return response.data;
+// get all blog
+export const getAllBlog = async ({
+  lang,
+  category,
+  user,
+  limit,
+}: getAllBlogInterface) => {
+  const langSlug = lang ? `?lang=${lang}` : "";
+  const categorySlug = category ? `&?category=${category}` : "";
+  const userQuery = user ? `&?user=${user}` : "";
+  const limitQuery = limit ? `&?limit=${limit}` : "";
+  try {
+    const response = await axiosAuth.get(
+      `/blogs${langSlug}${categorySlug}${userQuery}${limitQuery}`
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 interface DetailBlog {
@@ -74,9 +96,13 @@ interface DetailBlog {
 
 // get detail blog
 export const getDetailBlog = async ({ slug, lang }: DetailBlog) => {
-  const response = await axiosAuth.get(`/blogs/detail/${slug}?lang=${lang}`);
+  try {
+    const response = await axiosAuth.get(`/blogs/detail/${slug}?lang=${lang}`);
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // get all blog by category slug
@@ -87,9 +113,13 @@ export const getAllBlogByCategorySlug = async ({
   lang: string;
   categorySlug: string;
 }) => {
-  const response = await axiosAuth.get(
-    `/blogs/category/${categorySlug}?lang=${lang}`
-  );
+  try {
+    const response = await axiosAuth.get(
+      `/blogs/category/${categorySlug}?lang=${lang}`
+    );
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };

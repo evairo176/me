@@ -2,9 +2,9 @@ import CategoryModule from "@/components/modules/Blogs/CategoryModule";
 import siteConfig from "@/constans/siteConfig";
 import { getAllBlogByCategorySlug } from "@/features/api/Blog";
 import { getCategoryBySlug } from "@/features/api/Category";
-import { capitalizeFirstLetter } from "@/helper";
+// import { capitalizeFirstLetter } from "@/helper";
 import { getDictionary } from "@/lib/getDictionaries";
-import { BlogInterface, CategoryInterface } from "@/types/user-types";
+import { CategoryInterface } from "@/types/user-types";
 import React, { cache } from "react";
 
 export const generateMetadata = async ({
@@ -66,22 +66,8 @@ const getAllCategoryData = cache(
     }
   }
 );
-const getAllBlogData = cache(
-  async ({ lang, slug }: { lang: string; slug: string }) => {
-    try {
-      const allBlog = await getAllBlogByCategorySlug({
-        lang: lang as string,
-        categorySlug: slug as string,
-      });
 
-      return allBlog;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-export const revalidate = 1800; // revalidate at every 10 seconds
+export const revalidate = 10; // revalidate at every 10 seconds
 
 const Category = async ({
   params: { lang, slug },
@@ -95,14 +81,14 @@ const Category = async ({
     lang,
     slug,
   });
-  const allBlog = await getAllBlogData({
-    lang,
-    slug: allCategory?.slug,
-  });
-  const AllBlogByCategory = allBlog?.blog;
-  const tag = allBlog?.tagsRelevant;
+  // const allBlog = await getAllBlogData({
+  //   lang,
+  //   slug: allCategory?.slug,
+  // });
+  // const AllBlogByCategory = allBlog?.blog;
+  // const tag = allBlog?.tagsRelevant;
 
-  return <CategoryModule AllBlogByCategory={AllBlogByCategory} tag={tag} />;
+  return <CategoryModule slug={allCategory?.slug} />;
 };
 
 export default Category;

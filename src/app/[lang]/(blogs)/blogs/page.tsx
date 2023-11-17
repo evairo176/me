@@ -1,58 +1,54 @@
+"use client";
 import BlogContent from "@/components/elements/BlogContent";
-import SectionHeading from "@/components/elements/SectionHeading";
-import SectionSubHeading from "@/components/elements/SectionSubHeading";
+import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { getAllBlog, getBlog } from "@/features/api/Blog";
+import { getAllBlog } from "@/features/api/Blog";
 import { BlogInterface, TagInterface } from "@/types/user-types";
-import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import React, { cache } from "react";
-import { BsArrowLeftCircle } from "react-icons/bs";
-import { PiArticleLight } from "react-icons/pi";
 
 type Props = {};
 
-const getAllBlogData = cache(async (lang: string) => {
-  try {
-    const allBlog = await getAllBlog({ lang: lang as string });
-
-    return allBlog;
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-export const revalidate = 1800; // revalidate at every 10 seconds
-
-const Blog = async ({
-  params: { lang },
-}: {
-  params: {
-    lang: string;
-  };
-}) => {
+const Blog = ({}: {}) => {
   // Queries fetch all blog
-  const allBlog = await getAllBlogData(lang);
+  const params = useParams();
+  const {
+    data: allBlog,
+    isLoading: isLoadingBlog,
+    isError: isErrorBlog,
+  } = useQuery({
+    queryKey: ["blogs"],
+    queryFn: async () => await getAllBlog({ lang: params.lang as string }),
+  });
   const dataBlog = allBlog?.blog;
   const tag: TagInterface[] = allBlog?.tagsRelevant;
 
+  if (isLoadingBlog) {
+    return (
+      <>
+        <BlogDetailSkeleton />
+      </>
+    );
+  }
+
+  if (isErrorBlog) {
+    return <div>Something wrong</div>;
+  }
+
   return (
-    <section className="flex flex-row gap-3 justify-between">
+    <section className="flex flex-row gap-3">
       <div className="flex flex-col">
-        {dataBlog?.length > 0 ? (
-          dataBlog?.map((row: BlogInterface, key: number) => {
-            return (
-              <div
-                key={key}
-                className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground mb-4"
-              >
-                <BlogContent blog={row} />
-              </div>
-            );
-          })
-        ) : (
-          <div>Sorry data not found</div>
-        )}
+        {dataBlog?.map((row: BlogInterface, key: number) => {
+          return (
+            <div
+              key={key}
+              className="p-4 lg:p-8 rounded-md border bg-card text-card-foreground mb-4"
+            >
+              <BlogContent blog={row} />
+            </div>
+          );
+        })}
       </div>
       <div className="relative hidden md:block ">
         <div className="w-52 sticky top-20 flex flex-col gap-3">
