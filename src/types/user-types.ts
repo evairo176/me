@@ -50,4 +50,5 @@ export interface CategoryInterface {
 export interface TagInterface {
   id: string;
   name: string;
+  blogCount: number;
 }

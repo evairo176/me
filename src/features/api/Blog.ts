@@ -64,7 +64,7 @@ export const deleteBlog = async ({ axiosAuth, idArray }: DeleteBlog) => {
 export const getAllBlog = async ({ lang }: { lang: string }) => {
   const response = await axiosAuth.get(`/blogs?lang=${lang}`);
 
-  return response.data.blog;
+  return response.data;
 };
 
 interface DetailBlog {
@@ -76,7 +76,7 @@ interface DetailBlog {
 export const getDetailBlog = async ({ slug, lang }: DetailBlog) => {
   const response = await axiosAuth.get(`/blogs/detail/${slug}?lang=${lang}`);
 
-  return response.data.blog;
+  return response.data;
 };
 
 // get all blog by category slug
@@ -91,5 +91,5 @@ export const getAllBlogByCategorySlug = async ({
     `/blogs/category/${categorySlug}?lang=${lang}`
   );
 
-  return response.data.blog;
+  return response.data;
 };

@@ -1,7 +1,7 @@
 import DetailBlogModule from "@/components/modules/Blogs/DetailBlogModule";
 import siteConfig from "@/constans/siteConfig";
 import { getDetailBlog } from "@/features/api/Blog";
-import { BlogInterface } from "@/types/user-types";
+import { BlogInterface, TagInterface } from "@/types/user-types";
 import { notFound } from "next/navigation";
 import React, { cache } from "react";
 
@@ -17,7 +17,8 @@ export const generateMetadata = async ({
     lang: string;
   };
 }) => {
-  const blog: BlogInterface = await getBlogData(slug, lang);
+  const blogDetail = await getBlogData(slug, lang);
+  const blog: BlogInterface = blogDetail?.blog;
 
   return {
     title: blog?.title + " | " + lang,
@@ -72,13 +73,15 @@ interface DetailBlogInterface {
 }
 
 const DetailBlog = async ({ params: { slug, lang } }: DetailBlogInterface) => {
-  const blog: BlogInterface = await getBlogData(slug, lang);
+  const blogDetail = await getBlogData(slug, lang);
+  const blog: BlogInterface = blogDetail?.blog;
+  const tag = blogDetail?.tagsRelevant;
 
   if (!blog) {
     return notFound();
   }
 
-  return <DetailBlogModule blogDetail={blog} />;
+  return <DetailBlogModule blogDetail={blog} tag={tag} />;
 };
 
 export default DetailBlog;

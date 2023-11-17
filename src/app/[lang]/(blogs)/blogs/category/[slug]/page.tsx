@@ -95,12 +95,15 @@ const Category = async ({
     lang,
     slug,
   });
-  const AllBlogByCategory = await getAllBlogData({
+  const allBlog = await getAllBlogData({
     lang,
     slug: allCategory?.slug,
   });
+  const AllBlogByCategory = allBlog?.blog;
+  const tag = allBlog?.tagsRelevant;
+  console.log(tag);
 
-  return <CategoryModule AllBlogByCategory={AllBlogByCategory} />;
+  return <CategoryModule AllBlogByCategory={AllBlogByCategory} tag={tag} />;
 };
 
 export default Category;

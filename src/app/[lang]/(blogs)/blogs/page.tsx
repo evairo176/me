@@ -4,7 +4,7 @@ import SectionSubHeading from "@/components/elements/SectionSubHeading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllBlog, getBlog } from "@/features/api/Blog";
-import { BlogInterface } from "@/types/user-types";
+import { BlogInterface, TagInterface } from "@/types/user-types";
 import Link from "next/link";
 import React, { cache } from "react";
 import { BsArrowLeftCircle } from "react-icons/bs";
@@ -32,7 +32,9 @@ const Blog = async ({
   };
 }) => {
   // Queries fetch all blog
-  const dataBlog = await getAllBlogData(lang);
+  const allBlog = await getAllBlogData(lang);
+  const dataBlog = allBlog?.blog;
+  const tag: TagInterface[] = allBlog?.tagsRelevant;
 
   return (
     <section className="flex flex-row gap-3 justify-between">
@@ -57,10 +59,11 @@ const Blog = async ({
           <div className="rounded-md border bg-card text-card-foreground p-2">
             <div className="font-semibold text-sm">Tags Relevant For You</div>
             <div className="mt-2 flex flex-row flex-wrap gap-2">
-              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((row, key) => {
+              {tag?.map((row, key) => {
                 return (
                   <Badge variant={"outline"} key={key}>
-                    abc
+                    <span className="text-xs mr-2">{"#" + row?.blogCount}</span>
+                    {row?.name}
                   </Badge>
                 );
               })}
