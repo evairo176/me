@@ -61,7 +61,7 @@ export const deleteBlog = async ({ axiosAuth, idArray }: DeleteBlog) => {
 // };
 
 // get all blog
-export const getAllBlog = async ({ lang }: { lang: string }) => {
+export const getAllBlog = async ({ lang }: { lang?: string }) => {
   const response = await axiosAuth.get(`/blogs?lang=${lang}`);
 
   return response.data;

@@ -6,7 +6,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseURL = process.env.NEXT_PUBLIC_SITE_URL as string;
 
   // Get Posts
-  const dataBlog = await getAllBlog({ lang: "" });
+  const allBlog = await getAllBlog({ lang: "" });
+  const dataBlog = allBlog?.blog;
   //   console.log(data);
 
   const blogLinks = dataBlog?.map((blog: BlogInterface) => {
