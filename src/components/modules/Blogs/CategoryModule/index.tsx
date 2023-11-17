@@ -30,7 +30,7 @@ const CategoryModule = ({ slug }: CategoryModuleInterface) => {
     isLoading: isLoadingBlog,
     isError: isErrorBlog,
   } = useQuery({
-    queryKey: ["category_blogs", slug],
+    queryKey: ["blogs", slug],
     queryFn: async () =>
       await getAllBlog({
         lang: params.lang as string,
