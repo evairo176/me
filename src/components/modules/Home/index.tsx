@@ -28,7 +28,7 @@ const getAllBlogData = cache(async (lang: string) => {
   }
 });
 
-export const revalidate = 10; // revalidate at every 10 seconds
+export const revalidate = 1800; // revalidate at every 10 seconds
 
 const HomeModules = async ({ lang, dictionary }: Props) => {
   const allBlog = await getAllBlogData(lang);

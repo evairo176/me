@@ -63,7 +63,7 @@ const getBlogData = cache(async (slug: string, lang: string) => {
   }
 });
 
-export const revalidate = 10; // revalidate at every 10 seconds
+export const revalidate = 1800; // revalidate at every 10 seconds
 
 interface DetailBlogInterface {
   params: {

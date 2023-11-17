@@ -16,7 +16,7 @@ export const AllLanguage = cache(async () => {
   }
 });
 
-export const revalidate = 10; // revalidate at every 10 seconds
+export const revalidate = 1800; // revalidate at every 10 seconds
 
 const Master = async ({ children }: Props) => {
   const language = await AllLanguage();
