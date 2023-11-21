@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/context/ThemeProvider";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/toaster";
 import { getServerSession } from "next-auth";
 import { authOption } from "../../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
@@ -52,7 +52,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            <Toaster position="top-right" />
+            <Toaster />
           </ThemeProvider>
         </ReduxProvider>
       </body>

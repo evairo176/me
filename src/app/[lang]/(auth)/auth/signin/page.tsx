@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,15 +17,16 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { signIn } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { PiSpinner } from "react-icons/pi";
 import { FcGoogle } from "react-icons/fc";
 import { signInSchema } from "@/utils/form-schema";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/components/ui/use-toast";
 
 type Props = {};
 
 const SignInPage = ({}: {}) => {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
   });
@@ -46,13 +48,22 @@ const SignInPage = ({}: {}) => {
     });
 
     if (authenticated?.error) {
-      toast.error("Authentication Error");
+      console.log(authenticated);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: authenticated?.error,
+      });
       setIsloading(false);
       return;
     }
     setIsloading(false);
     router.push("/admin/dashboard");
-    toast.success("Login Successfully");
+    toast({
+      variant: "default",
+      title: "Ohh great!.",
+      description: "Login Successfully",
+    });
   };
 
   return (

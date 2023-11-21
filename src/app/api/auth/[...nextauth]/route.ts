@@ -46,11 +46,9 @@ export const authOption: NextAuthOptions = {
               token: response.data.token,
               refreshToken: response.data.refreshToken,
             };
-          } else {
-            return null;
           }
-        } catch (error) {
-          return null;
+        } catch (error: any) {
+          throw new Error(error.response.data.message);
         }
       },
     }),
