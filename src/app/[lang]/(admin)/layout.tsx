@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 
 import QueryClientProvider from "@/context/QueryClientProvider";
 import "./globals.css";
-import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/helper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +25,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOption);
+  const session = await getServerSession(authOptions);
   // console.log(session);
 
   if (session === null) {

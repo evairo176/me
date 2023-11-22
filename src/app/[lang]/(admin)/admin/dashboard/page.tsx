@@ -1,11 +1,11 @@
-import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/helper";
 import { getServerSession } from "next-auth";
 import React from "react";
 
 type Props = {};
 
 const Dashboard = async (props: Props) => {
-  const session = await getServerSession(authOption);
+  const session = await getServerSession(authOptions);
 
   return <div>Dashboard</div>;
 };

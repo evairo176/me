@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/context/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/helper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +22,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOption);
+  const session = await getServerSession(authOptions);
 
   if (session !== null) {
     return redirect("/admin/dashboard");
