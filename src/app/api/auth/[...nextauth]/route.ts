@@ -1,9 +1,9 @@
-import NextAuth, { NextAuthOptions, User } from "next-auth";
+import NextAuth, { AuthOptions, User } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
 
-export const authOption: NextAuthOptions = {
+export const authOption: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET as string,
   providers: [
     GoogleProvider({
