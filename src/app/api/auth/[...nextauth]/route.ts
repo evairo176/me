@@ -1,7 +1,6 @@
 import NextAuth, { NextAuthOptions, User } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import nextAuth from "next-auth";
 import axios from "axios";
 
 export const authOption: NextAuthOptions = {
@@ -172,6 +171,6 @@ export const authOption: NextAuthOptions = {
   },
 };
 
-const handler = nextAuth(authOption);
+const handler = NextAuth(authOption);
 
 export { handler as GET, handler as POST };
