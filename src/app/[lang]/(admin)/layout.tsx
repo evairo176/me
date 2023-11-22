@@ -8,9 +8,10 @@ import NextAuthProvider from "@/context/NextAuthProvider";
 import Master from "@/components/layouts/dashboard/Master";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOption } from "../../api/auth/[...nextauth]/route";
+
 import QueryClientProvider from "@/context/QueryClientProvider";
 import "./globals.css";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
 
 const inter = Inter({ subsets: ["latin"] });
 

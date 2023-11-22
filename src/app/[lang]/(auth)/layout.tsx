@@ -7,8 +7,8 @@ import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { getServerSession } from "next-auth";
-import { authOption } from "../../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
 
 const inter = Inter({ subsets: ["latin"] });
 
