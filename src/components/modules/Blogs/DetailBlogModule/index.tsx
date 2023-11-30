@@ -57,19 +57,9 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
   const tag: TagInterface[] = detailBlog?.tagsRelevant;
 
   useEffect(() => {
-    if (blog)
-      if (value != "") {
-        const checkIfSlugExist = value.includes(blog?.id);
-        if (!checkIfSlugExist) {
-          submitReadBlog({ id: blog?.id });
-          setValue([...value, blog?.id]);
-          console.log("2 generate read slug");
-        }
-      } else {
-        submitReadBlog({ id: blog?.id });
-        setValue([...value, blog?.id]);
-        console.log("1 read slug");
-      }
+    if (blog) {
+      HandleReadBlog();
+    }
   }, [blog]);
 
   // Access the client
@@ -109,6 +99,21 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
     },
   });
 
+  const HandleReadBlog = () => {
+    if (value != "") {
+      const checkIfSlugExist = value.includes(blog?.id);
+      if (!checkIfSlugExist) {
+        submitReadBlog({ id: blog?.id });
+        setValue([...value, blog?.id]);
+        console.log("2 generate read slug");
+      }
+    } else {
+      submitReadBlog({ id: blog?.id });
+      setValue([...value, blog?.id]);
+      console.log("1 read slug");
+    }
+  };
+
   if (isLoadingBlog) {
     return (
       <>
@@ -137,7 +142,7 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
 
   return (
     <div className="relative">
-      <div className="flex flex-col lg:flex-row gap-3 lg:justify-between">
+      <div className="flex flex-col md:flex-row gap-3 md:justify-between">
         <div className="space-y-10 ">
           {/* <PostHero locale={params.lang} post={post} /> */}
           <BlogContent isBlogPage={true} blog={blog} />
@@ -164,7 +169,7 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
             </div>
             {/* <PostBody body={post.body} /> */}
             <BlogBody body={blog?.content} />
-            <div className="rounded-md border bg-card text-card-foreground p-2 lg:hidden">
+            <div className="rounded-md border bg-card text-card-foreground p-2 md:hidden">
               <div className="flex gap-2 items-center justify-around">
                 <div className="flex items-center gap-2">
                   <div>
@@ -206,7 +211,7 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
           </div>
           <CtaCard />
         </div>
-        <div className="relative hidden lg:block">
+        <div className="relative hidden md:block">
           <div className="w-52 sticky top-20 flex flex-col gap-3">
             <div className="rounded-md border bg-card text-card-foreground p-2">
               <div className="font-semibold text-sm">Tags Relevant For You</div>

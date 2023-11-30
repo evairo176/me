@@ -15,7 +15,7 @@ const MenuOpen = ({ expandMenu, setExpandMenu }: MenuOpenProps) => {
 
   const menuSpanData = [{ index: 1 }, { index: 2 }, { index: 3 }];
   return (
-    <div className="flex md:hidden" onClick={handleMenuToggle}>
+    <div className="flex lg:hidden" onClick={handleMenuToggle}>
       <StyledMenu>
         {menuSpanData.map((item) => (
           <StyledMenuSpan

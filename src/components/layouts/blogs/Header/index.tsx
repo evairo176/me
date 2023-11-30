@@ -45,7 +45,7 @@ const Header = ({ language }: Props) => {
               aria-label="Mobile Menu Button"
               variant={"ghost"}
               id="mobileMenuButton"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={toggleMobileMenu}
             >
               <MenuOpen
@@ -125,7 +125,7 @@ const Header = ({ language }: Props) => {
       <aside
         className={`fixed inset-0 z-[10] w-64 transform border-b bg-white bg-opacity-70 backdrop-blur-md transition-transform duration-300 ease-in-out dark:border-none dark:bg-black ${
           isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
-        } md:hidden`}
+        } lg:hidden`}
       >
         <div className=" h-16  px-4 py-4 text-right">
           <Button
