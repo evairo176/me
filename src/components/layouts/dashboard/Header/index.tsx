@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { toggleDashboard } from "@/redux/features/menuSlices";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { TbSettingsCog } from "react-icons/tb";
 import React, { FC } from "react";
 import { CiMenuFries } from "react-icons/ci";
@@ -14,6 +14,9 @@ interface HeaderProps {}
 const Header: FC<HeaderProps> = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  if (session?.user.Role.name === "User") {
+    return notFound();
+  }
   const { isOpenMenuDashboard } = useAppSelector((state) => state.menuReducer);
   const dispatch = useAppDispatch();
 
