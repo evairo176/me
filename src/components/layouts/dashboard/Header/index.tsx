@@ -14,11 +14,13 @@ interface HeaderProps {}
 const Header: FC<HeaderProps> = () => {
   const router = useRouter();
   const { data: session } = useSession();
+
+  const { isOpenMenuDashboard } = useAppSelector((state) => state.menuReducer);
+  const dispatch = useAppDispatch();
+
   if (session?.user.Role.name === "User") {
     return notFound();
   }
-  const { isOpenMenuDashboard } = useAppSelector((state) => state.menuReducer);
-  const dispatch = useAppDispatch();
 
   return (
     <div className="fixed top-0 z-[2] bg-card  w-full px-3 py-3 border-b border-border flex flex-row items-center justify-between">

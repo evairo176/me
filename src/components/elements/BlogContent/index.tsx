@@ -15,17 +15,15 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
   const router = useRouter();
   return (
     <div className="space-y-2 relative">
-      <div>
-        <Image
-          alt={blog?.title}
-          src={blog?.image}
-          width={200}
-          height={150}
-          className={`w-full object-fill ${
-            isBlogPage ? "h-[500px]" : "h-[200px]"
-          }`}
-        />
-      </div>
+      <Image
+        alt={blog?.title}
+        src={blog?.image}
+        width={200}
+        height={150}
+        className={`w-full object-fill ${
+          isBlogPage ? "h-[500px]" : "h-[200px]"
+        }`}
+      />
 
       <div className="text-primary font-medium text-sm mr-1 mt-3">
         {blog?.Categories?.name}

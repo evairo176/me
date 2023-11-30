@@ -13,7 +13,7 @@ const Sidebar = (props: Props) => {
   const params = useParams();
   const router = useRouter();
   return (
-    <div className="relative hidden md:block">
+    <div className="relative hidden lg:block">
       <div className="w-52 sticky top-20">
         <ul>
           <li>

@@ -136,14 +136,14 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
   };
 
   return (
-    <>
-      <div className="flex flex-row gap-3 justify-between">
-        <div className="space-y-10">
+    <div className="relative">
+      <div className="flex flex-col lg:flex-row gap-3 lg:justify-between">
+        <div className="space-y-10 ">
           {/* <PostHero locale={params.lang} post={post} /> */}
           <BlogContent isBlogPage={true} blog={blog} />
-          <div className="flex flex-col gap-5 md:flex-row">
+          <div className="flex flex-col gap-5 lg:flex-row">
             <div className="relative">
-              <div className="sticky top-20  flex items-center gap-5   md:flex-col">
+              <div className="sticky top-20  flex items-center gap-5   lg:flex-col">
                 <div className="font-medium md:hidden">Share this content</div>
                 <SocialLink
                   isShareURL
@@ -164,7 +164,7 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
             </div>
             {/* <PostBody body={post.body} /> */}
             <BlogBody body={blog?.content} />
-            <div className="rounded-md border bg-card text-card-foreground p-2 md:hidden">
+            <div className="rounded-md border bg-card text-card-foreground p-2 lg:hidden">
               <div className="flex gap-2 items-center justify-around">
                 <div className="flex items-center gap-2">
                   <div>
@@ -206,7 +206,7 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
           </div>
           <CtaCard />
         </div>
-        <div className="relative hidden md:block ">
+        <div className="relative hidden lg:block">
           <div className="w-52 sticky top-20 flex flex-col gap-3">
             <div className="rounded-md border bg-card text-card-foreground p-2">
               <div className="font-semibold text-sm">Tags Relevant For You</div>
@@ -266,7 +266,7 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -38,7 +38,7 @@ const Header = ({ language }: Props) => {
   const loginWithGoogle = () => signIn("google");
   return (
     <>
-      <div className="sticky left-0 right-0 top-0 z-[10] border-b bg-white bg-opacity-70 backdrop-blur-md dark:border-none dark:bg-black">
+      <div className="sticky left-0 right-0 top-0 z-[10] border-b bg-white bg-opacity-70 backdrop-blur-md dark:border-none dark:bg-black ">
         <div className="mx-auto w-full max-w-7xl px-4">
           <div className="flex items-center justify-between py-5">
             <Button

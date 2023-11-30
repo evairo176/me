@@ -55,7 +55,7 @@ const CodeBlock = ({ className = "", children, inline, ...props }: any) => {
   return (
     <>
       {!inline ? (
-        <div className="relative">
+        <div className="relative ">
           <button
             className="absolute top-3 right-3 p-2 border border-neutral-700 rounded-lg hover:bg-neutral-800"
             type="button"
