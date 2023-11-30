@@ -112,8 +112,9 @@ const Header = ({ language }: Props) => {
                     <Button
                       onClick={loginWithGoogle}
                       variant={!isAlert ? "outline" : "destructive"}
+                      className="p-0 w-[30px] h-[30px]"
                     >
-                      Login
+                      <PiSignInLight />
                     </Button>
                   )}
                 </li>

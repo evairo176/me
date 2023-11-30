@@ -17,7 +17,7 @@ const CtaCard = (props: Props) => {
         alt="CTA card image"
       />
       <div className="relative z-2">
-        <div className="text-lg font-medium text-primary-foreground">
+        <div className="text-lg font-medium text-primary-foreground ">
           #ExplorerTheWorld
         </div>
         <h3 className="mt-3 text-4xl font-semibold text-primary-foreground">
