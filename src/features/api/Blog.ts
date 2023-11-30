@@ -134,3 +134,15 @@ export const readBlog = async ({ id }: readBlogInterface) => {
 
   return response.data.blog;
 };
+
+interface likeBlogInterface {
+  axiosAuth: any;
+  val: { blogId: string };
+}
+
+// like blog
+export const likeBlog = async ({ axiosAuth, val }: likeBlogInterface) => {
+  const response = await axiosAuth.post(`/blogs/like`, val);
+
+  return response.data;
+};

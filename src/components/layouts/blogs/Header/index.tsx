@@ -4,19 +4,38 @@ import ModeToggle from "@/components/elements/ModeToggle";
 import ToggleLanguage from "@/components/elements/ToggleLanguage";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useAppSelector } from "@/redux/hooks";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
+import { PiSignInLight } from "react-icons/pi";
+import Image from "next/image";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 type Props = { language: any };
 
 const Header = ({ language }: Props) => {
+  const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const params = useParams();
+  const { isAlert } = useAppSelector((state) => state.alertReducer);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const loginWithGoogle = () => signIn("google");
   return (
     <>
       <div className="sticky left-0 right-0 top-0 z-[10] border-b bg-white bg-opacity-70 backdrop-blur-md dark:border-none dark:bg-black">
@@ -50,6 +69,53 @@ const Header = ({ language }: Props) => {
                 </li>
                 <li>
                   <ModeToggle />
+                </li>
+                <li>
+                  {session ? (
+                    <div className="flex flex-row  items-center">
+                      <AlertDialog>
+                        <AlertDialogTrigger>
+                          <div className="mr-2">
+                            <Image
+                              alt={session?.user?.name as string | "profile"}
+                              width={30}
+                              height={30}
+                              className="rounded-full w-[25px] h-[25px]"
+                              src={session?.user?.image as string}
+                            />
+                          </div>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you absolutely sure?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will
+                              permanently delete your account and remove your
+                              data from our servers.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction asChild>
+                              <Button onClick={() => signOut()}>Logout</Button>
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                      <div className="text-sm font-semibold mr-3">
+                        {session?.user?.name}
+                      </div>
+                    </div>
+                  ) : (
+                    <Button
+                      onClick={loginWithGoogle}
+                      variant={!isAlert ? "outline" : "destructive"}
+                    >
+                      Login
+                    </Button>
+                  )}
                 </li>
               </ul>
             </nav>
@@ -90,6 +156,49 @@ const Header = ({ language }: Props) => {
             <div className="flex items-center gap-2">
               <ToggleLanguage language={language} />
               <ModeToggle />
+              {session ? (
+                <div className="flex flex-row  items-center">
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <div className="mr-2">
+                        <Image
+                          alt={session?.user?.name as string | "profile"}
+                          width={30}
+                          height={30}
+                          className="rounded-full w-[25px] h-[25px]"
+                          src={session?.user?.image as string}
+                        />
+                      </div>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Are you absolutely sure?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently
+                          delete your account and remove your data from our
+                          servers.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction asChild>
+                          <Button onClick={() => signOut()}>Logout</Button>
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+              ) : (
+                <Button
+                  onClick={loginWithGoogle}
+                  variant={!isAlert ? "outline" : "destructive"}
+                  className="p-0 w-[30px] h-[30px]"
+                >
+                  <PiSignInLight />
+                </Button>
+              )}
             </div>
           </div>
         </nav>

@@ -5,7 +5,7 @@ import CtaCard from "@/components/elements/CtaCard";
 import SocialLink from "@/components/elements/SocialLink";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { Badge } from "@/components/ui/badge";
-import { getDetailBlog, readBlog } from "@/features/api/Blog";
+import { getDetailBlog, likeBlog, readBlog } from "@/features/api/Blog";
 import useLocalStorage from "@/hooks/use-local-storage.ts";
 import { TagInterface } from "@/types/user-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -16,6 +16,11 @@ import { FaRegComments } from "react-icons/fa6";
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { alertLogin } from "@/redux/features/alertLoginSlices";
+import useAxiosAuth from "@/hooks/useAxiosAuth";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
@@ -27,6 +32,11 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
   const { data: session } = useSession();
   // Get the value from local storage if it exists
   const [value, setValue] = useLocalStorage("reads", []);
+
+  const axiosAuth = useAxiosAuth();
+
+  const { isAlert } = useAppSelector((state) => state.alertReducer);
+  const dispatch = useAppDispatch();
 
   // Queries fetch all blog
   const { slug, lang } = useParams();
@@ -65,15 +75,37 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
   // Access the client
   const queryClient = useQueryClient();
 
-  const { mutate: submitReadBlog, isPending } = useMutation({
+  // Read Blog
+  const { mutate: submitReadBlog, isPending: isPendingRead } = useMutation({
     mutationFn: readBlog,
     onSuccess: async () => {
       // Invalidate and refetch
-      await queryClient.invalidateQueries({ queryKey: ["blogs"] });
-      console.log("Like blog successfully");
+      await queryClient.invalidateQueries({ queryKey: ["blogs", slug] });
+      console.log("Read blog successfully");
     },
     onError: () => {
-      console.log("Like error");
+      console.log("Read error");
+    },
+  });
+
+  // Like Blog
+  const { mutate: submitLikeBlog, isPending: isPendingLike } = useMutation({
+    mutationFn: likeBlog,
+    onSuccess: async (response) => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["blogs", slug] });
+      toast({
+        variant: "default",
+        title: response?.message,
+        description: "Like other blog if you want!",
+      });
+    },
+    onError: (response) => {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Please Try Again.",
+        description: response?.message,
+      });
     },
   });
 
@@ -91,12 +123,16 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
 
   const handleClickLike = () => {
     if (!session) {
+      dispatch(alertLogin(true));
       toast({
         variant: "destructive",
         title: "Uh oh! Please login first.",
         description: "You can make action like comment and like",
       });
+      return;
     }
+
+    submitLikeBlog({ axiosAuth, val: { blogId: blog?.id as string } });
   };
 
   return (
@@ -128,6 +164,45 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
             </div>
             {/* <PostBody body={post.body} /> */}
             <BlogBody body={blog?.content} />
+            <div className="rounded-md border bg-card text-card-foreground p-2 md:hidden">
+              <div className="flex gap-2 items-center justify-around">
+                <div className="flex items-center gap-2">
+                  <div>
+                    <FaRegComments />
+                  </div>
+                  <div className="text-sm text-muted-foreground">{0}</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant={"ghost"}
+                    onClick={handleClickLike}
+                    className={`cursor-pointer p-0 h-auto`}
+                    disabled={isPendingLike || isLoadingBlog}
+                  >
+                    <AiOutlineLike />
+                  </Button>
+                  <div className="text-sm text-muted-foreground">
+                    {isPendingLike || isLoadingBlog ? (
+                      <Skeleton className="w-[30px] h-[20px] " />
+                    ) : (
+                      blog?.total_likes
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <TfiEye />
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {isPendingRead || isLoadingBlog ? (
+                      <Skeleton className="w-[30px] h-[20px] " />
+                    ) : (
+                      blog?.total_reads
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <CtaCard />
         </div>
@@ -158,20 +233,32 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
                   <div className="text-sm text-muted-foreground">{0}</div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div>
-                    <AiOutlineLike
-                      onClick={handleClickLike}
-                      className="cursor-pointer"
-                    />
+                  <Button
+                    variant={"ghost"}
+                    onClick={handleClickLike}
+                    className={`cursor-pointer p-0 h-auto`}
+                    disabled={isPendingLike || isLoadingBlog}
+                  >
+                    <AiOutlineLike />
+                  </Button>
+                  <div className="text-sm text-muted-foreground">
+                    {isPendingLike || isLoadingBlog ? (
+                      <Skeleton className="w-[30px] h-[20px] " />
+                    ) : (
+                      blog?.total_likes
+                    )}
                   </div>
-                  <div className="text-sm text-muted-foreground">{0}</div>
                 </div>
                 <div className="flex items-center gap-2">
                   <div>
                     <TfiEye />
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    {blog?.total_reads}
+                    {isPendingRead || isLoadingBlog ? (
+                      <Skeleton className="w-[30px] h-[20px] " />
+                    ) : (
+                      blog?.total_reads
+                    )}
                   </div>
                 </div>
               </div>

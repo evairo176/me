@@ -135,6 +135,7 @@ export const authOptions: AuthOptions = {
               name: profile?.name,
               email: profile?.email,
               image: profile?.picture,
+              password: generateRandomPassword(18),
             };
 
             await axios.post(
@@ -188,4 +189,17 @@ export const authOptions: AuthOptions = {
   },
   // Enable debug messages in the console if you are having problems
   debug: process.env.NODE_ENV === "development",
+};
+
+const generateRandomPassword = (length: number) => {
+  const charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]|;:,.<>?";
+  let password = "";
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+
+  return password;
 };
