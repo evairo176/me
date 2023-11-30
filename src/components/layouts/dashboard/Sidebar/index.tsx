@@ -3,26 +3,36 @@ import { Button } from "@/components/ui/button";
 import React, { FC } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useParams, usePathname } from "next/navigation";
-import { MENU_DASHBOARD, MENU_SETTING_DASHBOARD } from "@/constans/dashboard";
+import {
+  MENU_DASHBOARD_ADMIN,
+  MENU_DASHBOARD_USER,
+  MENU_SETTING_DASHBOARD,
+} from "@/constans/dashboard";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toggleDashboard } from "@/redux/features/menuSlices";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = () => {
+  const { data: session, status } = useSession();
   const { isOpenMenuDashboard } = useAppSelector((state) => state.menuReducer);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const params = useParams();
+
+  const MENU =
+    session?.user?.Role?.name === "Super Admin"
+      ? MENU_DASHBOARD_ADMIN
+      : MENU_DASHBOARD_USER;
 
   return (
     <>
       <div
         className={`${
           isOpenMenuDashboard ? "w-12" : "lg:w-64 "
-        }  h-full border-r fixed top-0 left-0 overflow-hidden hidden md:block transition-all duration-300`}
+        }  h-full fixed top-0 left-0 overflow-hidden hidden md:block transition-all duration-300`}
       >
         <div
           className={`space-y-2 mt-20 ${
@@ -37,7 +47,7 @@ const Sidebar: FC<SidebarProps> = () => {
 
           {isOpenMenuDashboard ? (
             <div className="w-full transition-all duration-300">
-              {MENU_DASHBOARD.map((row, key) => {
+              {MENU?.map((row, key) => {
                 return (
                   <Button
                     key={key}
@@ -52,7 +62,7 @@ const Sidebar: FC<SidebarProps> = () => {
             </div>
           ) : (
             <div className="w-full transition-all duration-300">
-              {MENU_DASHBOARD.map((row, key) => {
+              {MENU?.map((row, key) => {
                 return (
                   <Button
                     key={key}
@@ -150,7 +160,7 @@ const Sidebar: FC<SidebarProps> = () => {
           <div className="text-sm font-light">Main Navigation</div>
 
           <div className="w-full transition-all duration-300">
-            {MENU_DASHBOARD.map((row, key) => {
+            {MENU?.map((row, key) => {
               return (
                 <Button
                   key={key}

@@ -1,5 +1,5 @@
 import { DASHBOARD_MENU_INTERFACE } from "@/types/dashboard-types";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsFillMenuButtonFill } from "react-icons/bs";
 import { FaUserShield } from "react-icons/fa";
@@ -7,7 +7,7 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { LiaLanguageSolid } from "react-icons/lia";
 
-export const MENU_DASHBOARD: DASHBOARD_MENU_INTERFACE[] = [
+export const MENU_DASHBOARD_ADMIN: DASHBOARD_MENU_INTERFACE[] = [
   {
     name: "Dashboard",
     url: "/admin/dashboard",
@@ -28,10 +28,18 @@ export const MENU_DASHBOARD: DASHBOARD_MENU_INTERFACE[] = [
     url: "/admin/role",
     icon: <FaUserShield />,
   },
+];
+
+export const MENU_DASHBOARD_USER: DASHBOARD_MENU_INTERFACE[] = [
   {
-    name: "Menu",
-    url: "/admin/menu",
-    icon: <BsFillMenuButtonFill />,
+    name: "Dashboard",
+    url: "/user/dashboard",
+    icon: <AiOutlineHome />,
+  },
+  {
+    name: "Blogs",
+    url: "/user/blog",
+    icon: <HiOutlineBuildingOffice2 />,
   },
 ];
 

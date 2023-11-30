@@ -35,10 +35,7 @@ const SignInPage = ({}: {}) => {
   const router = useRouter();
   const params = useParams();
 
-  const loginWithGoogle = () =>
-    signIn("google", {
-      callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/${params?.lang}/admin/dashboard`,
-    });
+  const loginWithGoogle = () => signIn("google");
 
   const onSubmit = async (val: z.infer<typeof signInSchema>) => {
     setIsloading(true);
@@ -48,7 +45,6 @@ const SignInPage = ({}: {}) => {
     });
 
     if (authenticated?.error) {
-      console.log(authenticated);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
@@ -58,6 +54,7 @@ const SignInPage = ({}: {}) => {
       return;
     }
     setIsloading(false);
+    console.log(authenticated);
     router.push("/admin/dashboard");
     toast({
       variant: "default",

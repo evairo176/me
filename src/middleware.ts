@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { i18n } from "../i18n.config";
+import { getToken } from "next-auth/jwt";
 
 /* GET LOCALE HANDLER */
 function getLocale(request: NextRequest): string | undefined {
@@ -18,22 +19,33 @@ function getLocale(request: NextRequest): string | undefined {
 }
 
 /* MIDDLEWARE */
-export default function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Check if there is any supported locale in the pathname
-  const pathnameIsMissingLocale = i18n.locales.every(
+  const pathnameIsMissingLocale = i18n.locales?.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  );
+
+  const token = await getToken({ req: request });
+  const lang = i18n.locales?.filter(
+    (locale) => locale === pathname.split("/")[1]
   );
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
     // console.log({ locale });
+
     return NextResponse.redirect(
       new URL(`/${locale}/${pathname}`, request.url)
     );
+  } else {
   }
+
+  // if(AdminRole){
+  //   return NextResponse.rewrite(new URL(``, request.url))
+  // }
 }
 
 /* MATCHER */

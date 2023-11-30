@@ -1,5 +1,8 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
+import { AiOutlineLike } from "react-icons/ai";
+import { FaRegComments } from "react-icons/fa";
+import { TfiEye } from "react-icons/tfi";
 
 interface BlogDetailSkeletonProps {
   isBlogPage?: boolean;
@@ -64,9 +67,32 @@ const BlogDetailSkeleton = ({ isBlogPage }: BlogDetailSkeletonProps) => {
           </div>
           <div className="rounded-md border bg-card text-card-foreground p-2">
             <div className="font-semibold text-sm">#Discuss</div>
-            <div className="comment">comment</div>
-            <div>Like</div>
-            <div>Read</div>
+            <div className="flex gap-2 items-center justify-around">
+              <div className="flex items-center gap-2">
+                <div>
+                  <FaRegComments />
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <Skeleton className="w-[30px] h-[20px] " />
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div>
+                  <AiOutlineLike />
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <Skeleton className="w-[30px] h-[20px] " />
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div>
+                  <TfiEye />
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <Skeleton className="w-[30px] h-[20px] " />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import DetailBlogModule from "@/components/modules/Blogs/DetailBlogModule";
 import siteConfig from "@/constans/siteConfig";
 import { getDetailBlog } from "@/features/api/Blog";
+import { authOptions } from "@/helper";
 import { BlogInterface } from "@/types/user-types";
+import { getServerSession } from "next-auth";
 import React, { cache } from "react";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));

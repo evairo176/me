@@ -8,10 +8,9 @@ import NextAuthProvider from "@/context/NextAuthProvider";
 import Master from "@/components/layouts/dashboard/Master";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-
 import QueryClientProvider from "@/context/QueryClientProvider";
-import "./globals.css";
 import { authOptions } from "@/helper";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +21,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: {
+    lang: string;
+  };
 }) {
   const session = await getServerSession(authOptions);
   // console.log(session);
@@ -31,6 +34,7 @@ export default async function RootLayout({
   if (session === null) {
     return redirect("/auth/signin");
   }
+
   return (
     <html lang="en">
       <body

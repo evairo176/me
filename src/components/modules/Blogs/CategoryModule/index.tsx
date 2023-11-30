@@ -81,12 +81,6 @@ const CategoryModule = ({ slug }: CategoryModuleInterface) => {
               })}
             </div>
           </div>
-          <div className="rounded-md border bg-card text-card-foreground p-2">
-            <div className="font-semibold text-sm">#Discuss</div>
-            <div className="comment">comment</div>
-            <div>Like</div>
-            <div>Read</div>
-          </div>
         </div>
       </div>
     </section>

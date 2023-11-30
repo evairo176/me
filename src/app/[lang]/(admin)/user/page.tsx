@@ -9,10 +9,10 @@ type Props = {
   };
 };
 
-const Dashboard = async ({ params }: Props) => {
+const UserPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
 
-  return <div>Role: {session?.user.Role.name}</div>;
+  return <div>Role: {session?.user?.Role?.name}</div>;
 };
 
-export default Dashboard;
+export default UserPage;

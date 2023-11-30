@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-const useLocalStorage = <T>(
+const useLocalStorage = (
   key: string,
-  initialValue: T
+  initialValue: any
   // eslint-disable-next-line no-unused-vars
-): [T, (value: T) => void] => {
+) => {
   const [storedValue, setStoredValue] = useState(initialValue);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const useLocalStorage = <T>(
     }
   }, [key]);
 
-  const setValue = (value: T) => {
+  const setValue = (value: any) => {
     // Save state
     setStoredValue(value);
     // Save to localStorage

@@ -10,6 +10,8 @@ import Script from "next/script";
 import siteConfig from "@/constans/siteConfig";
 import { getDictionary } from "@/lib/getDictionaries";
 import { getDetailBlog } from "@/features/api/Blog";
+import NextAuthProvider from "@/context/NextAuthProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -99,9 +101,14 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <QueryClientProvider>
-              <Master>{children}</Master>
-            </QueryClientProvider>
+            <NextAuthProvider>
+              <QueryClientProvider>
+                <Master>
+                  {children}
+                  <Toaster />
+                </Master>
+              </QueryClientProvider>
+            </NextAuthProvider>
           </ThemeProvider>
         </ReduxProvider>
       </body>

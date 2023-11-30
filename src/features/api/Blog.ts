@@ -36,6 +36,7 @@ export const createBlog = async ({ axiosAuth, val }: createBlog) => {
 
   return response.data.blog;
 };
+
 interface DeleteBlog {
   axiosAuth: any;
   idArray: string[];
@@ -122,4 +123,14 @@ export const getAllBlogByCategorySlug = async ({
   } catch (error) {
     console.log(error);
   }
+};
+
+interface readBlogInterface {
+  id: string;
+}
+// read blog
+export const readBlog = async ({ id }: readBlogInterface) => {
+  const response = await axiosAuth.put(`/blogs/read/${id}`);
+
+  return response.data.blog;
 };

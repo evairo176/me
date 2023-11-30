@@ -24,7 +24,7 @@ const Sidebar = (props: Props) => {
                 router.push(`/${params?.lang}/blogs/category/technology`)
               }
             >
-              <BiCategory /> technology
+              <BiCategory /> Teknology
             </Button>
           </li>
           <li>
@@ -35,7 +35,7 @@ const Sidebar = (props: Props) => {
                 router.push(`/${params?.lang}/blogs/category/experience`)
               }
             >
-              <BiCategory /> experience
+              <BiCategory /> Experience
             </Button>
           </li>
           <li>
@@ -46,7 +46,7 @@ const Sidebar = (props: Props) => {
                 router.push(`/${params?.lang}/blogs/category/foods`)
               }
             >
-              <BiCategory /> foods
+              <BiCategory /> Foods
             </Button>
           </li>
         </ul>

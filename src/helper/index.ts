@@ -14,6 +14,9 @@ export const capitalizeFirstLetter = (text: string) => {
 };
 
 export const authOptions: AuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
   secret: process.env.NEXTAUTH_SECRET as string,
   providers: [
     GoogleProvider({
@@ -134,7 +137,7 @@ export const authOptions: AuthOptions = {
               image: profile?.picture,
             };
 
-            const response = await axios.post(
+            await axios.post(
               `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/register/provider`,
               data
             );
@@ -149,6 +152,7 @@ export const authOptions: AuthOptions = {
         return false;
       }
     },
+
     // async signIn({ account, profile }) {
     //   if (account?.provider === "google") {
     //     //check if user is in your database
@@ -179,4 +183,9 @@ export const authOptions: AuthOptions = {
     //   }
     // },
   },
+  theme: {
+    colorScheme: "auto", // "auto" | "dark" | "light"
+  },
+  // Enable debug messages in the console if you are having problems
+  debug: process.env.NODE_ENV === "development",
 };

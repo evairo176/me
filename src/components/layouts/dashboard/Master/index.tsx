@@ -16,7 +16,7 @@ const Master = ({ children }: Props) => {
       <Header />
       <Sidebar />
       <div
-        className={`relative col-span-3  lg:col-span-5 lg:border-l ${
+        className={`bg-card relative col-span-3  lg:col-span-5 lg:border-l border-border ${
           isOpenMenuDashboard ? "ml-0 md:ml-16" : "ml-0 md:ml-64"
         }   overflow-x-auto h-screen transition-all duration-300`}
       >

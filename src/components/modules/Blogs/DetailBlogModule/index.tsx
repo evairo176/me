@@ -5,19 +5,32 @@ import CtaCard from "@/components/elements/CtaCard";
 import SocialLink from "@/components/elements/SocialLink";
 import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { Badge } from "@/components/ui/badge";
-import { getDetailBlog } from "@/features/api/Blog";
+import { getDetailBlog, readBlog } from "@/features/api/Blog";
+import useLocalStorage from "@/hooks/use-local-storage.ts";
 import { TagInterface } from "@/types/user-types";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import React from "react";
+import { TfiEye } from "react-icons/tfi";
+import { AiOutlineLike } from "react-icons/ai";
+import { FaRegComments } from "react-icons/fa6";
+import React, { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useToast } from "@/components/ui/use-toast";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
 interface DetailBlogModuleInterface {}
 
 const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
+  const { toast } = useToast();
+  // get session
+  const { data: session } = useSession();
+  // Get the value from local storage if it exists
+  const [value, setValue] = useLocalStorage("reads", []);
+
   // Queries fetch all blog
   const { slug, lang } = useParams();
+
   const {
     data: detailBlog,
     isLoading: isLoadingBlog,
@@ -33,6 +46,37 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
   const blog = detailBlog?.blog;
   const tag: TagInterface[] = detailBlog?.tagsRelevant;
 
+  useEffect(() => {
+    if (blog)
+      if (value != "") {
+        const checkIfSlugExist = value.includes(blog?.id);
+        if (!checkIfSlugExist) {
+          submitReadBlog({ id: blog?.id });
+          setValue([...value, blog?.id]);
+          console.log("2 generate read slug");
+        }
+      } else {
+        submitReadBlog({ id: blog?.id });
+        setValue([...value, blog?.id]);
+        console.log("1 read slug");
+      }
+  }, [blog]);
+
+  // Access the client
+  const queryClient = useQueryClient();
+
+  const { mutate: submitReadBlog, isPending } = useMutation({
+    mutationFn: readBlog,
+    onSuccess: async () => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["blogs"] });
+      console.log("Like blog successfully");
+    },
+    onError: () => {
+      console.log("Like error");
+    },
+  });
+
   if (isLoadingBlog) {
     return (
       <>
@@ -44,6 +88,16 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
   if (isErrorBlog) {
     return <div>Something wrong</div>;
   }
+
+  const handleClickLike = () => {
+    if (!session) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Please login first.",
+        description: "You can make action like comment and like",
+      });
+    }
+  };
 
   return (
     <>
@@ -96,9 +150,31 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
             </div>
             <div className="rounded-md border bg-card text-card-foreground p-2">
               <div className="font-semibold text-sm">#Discuss</div>
-              <div className="comment">comment</div>
-              <div>Like</div>
-              <div>Read</div>
+              <div className="flex gap-2 items-center justify-around">
+                <div className="flex items-center gap-2">
+                  <div>
+                    <FaRegComments />
+                  </div>
+                  <div className="text-sm text-muted-foreground">{0}</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <AiOutlineLike
+                      onClick={handleClickLike}
+                      className="cursor-pointer"
+                    />
+                  </div>
+                  <div className="text-sm text-muted-foreground">{0}</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <TfiEye />
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {blog?.total_reads}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
