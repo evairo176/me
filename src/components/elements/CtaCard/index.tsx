@@ -16,12 +16,14 @@ const CtaCard = (props: Props) => {
         src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixid=MnwzODU2NTF8MHwxfHNlYXJjaHw2fHxOZXclMjBZb3J8ZW58MHx8fHwxNjcwMjUzMzMw&ixlib=rb-4.0.3"
         alt="CTA card image"
       />
-      <div className="relative z-20">
-        <div className="text-lg font-medium">#ExplorerTheWorld</div>
-        <h3 className="mt-3 text-4xl font-semibold">
+      <div className="relative z-2">
+        <div className="text-lg font-medium text-primary-foreground">
+          #ExplorerTheWorld
+        </div>
+        <h3 className="mt-3 text-4xl font-semibold text-primary-foreground">
           {siteConfig.ctaCard.title}
         </h3>
-        <p className="mt-3 max-w-lg text-lg">
+        <p className="mt-3 max-w-lg text-lg text-primary-foreground">
           {siteConfig.ctaCard.description}
         </p>
         <form action={"#"} className="mt-6 flex items-center gap-2">
