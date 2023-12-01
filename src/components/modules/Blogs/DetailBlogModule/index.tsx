@@ -21,6 +21,7 @@ import { alertLogin } from "@/redux/features/alertLoginSlices";
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import useCookieStorage from "@/hooks/use-cookies-storage";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
@@ -32,6 +33,7 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
   const { data: session } = useSession();
   // Get the value from local storage if it exists
   const [value, setValue] = useLocalStorage("reads", []);
+  const [cookie, setCookie] = useCookieStorage("reads", []);
 
   const axiosAuth = useAxiosAuth();
 
@@ -58,7 +60,7 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
 
   useEffect(() => {
     if (blog) {
-      HandleReadBlog();
+      handleCookies();
     }
   }, [blog]);
 
@@ -99,17 +101,17 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
     },
   });
 
-  const HandleReadBlog = () => {
-    if (value != "") {
-      const checkIfSlugExist = value.includes(blog?.id);
+  const handleCookies = () => {
+    if (cookie != "") {
+      const checkIfSlugExist = cookie.includes(blog?.id);
       if (!checkIfSlugExist) {
         submitReadBlog({ id: blog?.id });
-        setValue([...value, blog?.id]);
+        setCookie([...cookie, blog?.id]);
         console.log("2 generate read slug");
       }
     } else {
       submitReadBlog({ id: blog?.id });
-      setValue([...value, blog?.id]);
+      setCookie([...cookie, blog?.id]);
       console.log("1 read slug");
     }
   };

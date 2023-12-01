@@ -1,5 +1,6 @@
 import DetailBlogModule from "@/components/modules/Blogs/DetailBlogModule";
 import siteConfig from "@/constans/siteConfig";
+import { createCookies, getCookies } from "@/cookies";
 import { getDetailBlog } from "@/features/api/Blog";
 import { authOptions } from "@/helper";
 import { BlogInterface } from "@/types/user-types";
