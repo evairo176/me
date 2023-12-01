@@ -114,6 +114,8 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
       setCookie([...cookie, blog?.id]);
       console.log("1 read slug");
     }
+
+    console.log(cookie);
   };
 
   if (isLoadingBlog) {
