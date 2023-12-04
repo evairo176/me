@@ -362,115 +362,198 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
               <div className="flex gap-2 items-center justify-around">
                 <div className="flex items-center gap-2">
                   <div>
-                    <Sheet>
-                      <SheetTrigger asChild>
-                        <FaRegComments className="cursor-pointer" />
-                      </SheetTrigger>
-                      <SheetContent className="overflow-auto">
-                        <div className="text-2xl font-semibold mb-8">
-                          Comments
-                        </div>
-                        {blog?.Comment?.length > 0
-                          ? blog?.Comment?.map(
-                              (row: CommentInterface, key: number) => {
-                                return (
-                                  <>
-                                    <div key={key} className="">
-                                      <div className="text-lg font-semibold">
-                                        {row.User.name}
-                                      </div>
-                                      <div className="text-sm text-muted-foreground mb-1">
-                                        {row.content}
-                                      </div>
-                                      <div className="text-xs text-muted-foreground mb-1">
-                                        {getHumanDate(row.updatedAt)}
-                                      </div>
-                                      <div className="text-xs text-muted-foreground font-semibold cursor-pointer">
-                                        Balas
-                                      </div>
-                                    </div>
-                                    <Separator className="mt-2 mb-2" />
-                                    {row?.Replay?.length > 0
-                                      ? row?.Replay?.map((replay) => {
-                                          return (
-                                            <>
+                    {blog?.Comment?.filter(
+                      (row: CommentInterface) => !row.parentId
+                    ).length > 0 ? (
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <FaRegComments className="cursor-pointer" />
+                        </SheetTrigger>
+                        <SheetContent className="overflow-auto">
+                          <div className="text-2xl font-semibold mb-8">
+                            Comments
+                          </div>
+                          {blog?.Comment?.length > 0
+                            ? blog?.Comment?.map(
+                                (row: CommentInterface, key: number) => {
+                                  if (!row.parentId) {
+                                    return (
+                                      <>
+                                        <div key={key} className="">
+                                          <div className="text-lg font-semibold">
+                                            {row.User.name}
+                                          </div>
+                                          <div className="text-sm text-muted-foreground mb-1">
+                                            {row.content}
+                                          </div>
+                                          <div className="text-xs text-muted-foreground mb-1">
+                                            {getHumanDate(row.updatedAt)}
+                                          </div>
+                                          <div className="flex flex-row gap-2 items-center">
+                                            <div
+                                              onClick={() =>
+                                                handleComment(row.id)
+                                              }
+                                              className="text-xs text-muted-foreground font-semibold cursor-pointer"
+                                            >
+                                              Balas
+                                            </div>
+                                            {row.User.id ===
+                                            session?.user.id ? (
                                               <div
-                                                key={replay.id}
-                                                className="ml-5"
+                                                onClick={() =>
+                                                  handleDeleteComment(row.id)
+                                                }
+                                                className="text-xs text-muted-foreground text-red-400 font-semibold cursor-pointer"
                                               >
-                                                <div className="text-xs text-muted-foreground">
-                                                  Balasan for{" "}
-                                                  <span className="font-semibold">
-                                                    @{row.User.name}
-                                                  </span>
-                                                </div>
-                                                <div className="text-lg font-semibold">
-                                                  {replay.User.name}
-                                                </div>
-                                                <div className="text-sm text-muted-foreground mb-1">
-                                                  {replay.content}
-                                                </div>
-                                                <div className="text-xs text-muted-foreground mb-1">
-                                                  {getHumanDate(
-                                                    replay.updatedAt
-                                                  )}
-                                                </div>
-                                                <div className="text-xs text-muted-foreground font-semibold cursor-pointer">
-                                                  Balas
-                                                </div>
+                                                Hapus
                                               </div>
-                                              <Separator className="mt-2 mb-2" />
-                                              {replay?.Replay?.length > 0
-                                                ? replay?.Replay?.map(
-                                                    (replay2) => {
-                                                      return (
-                                                        <>
-                                                          <div
-                                                            key={replay2.id}
-                                                            className="ml-10"
-                                                          >
-                                                            <div className="text-xs text-muted-foreground">
-                                                              Balasan for{" "}
-                                                              <span className="font-semibold">
-                                                                @
-                                                                {
-                                                                  replay.User
-                                                                    .name
-                                                                }
-                                                              </span>
-                                                            </div>
-                                                            <div className="text-lg font-semibold">
-                                                              {
-                                                                replay2.User
-                                                                  .name
-                                                              }
-                                                            </div>
-                                                            <div className="text-sm text-muted-foreground mb-1">
-                                                              {replay2.content}
-                                                            </div>
-                                                            <div className="text-xs text-muted-foreground">
-                                                              {getHumanDate(
-                                                                replay2.updatedAt
-                                                              )}
-                                                            </div>
-                                                          </div>
-                                                          <Separator className="mt-2 mb-2" />
-                                                        </>
-                                                      );
-                                                    }
-                                                  )
-                                                : ""}
-                                            </>
-                                          );
-                                        })
-                                      : ""}
-                                  </>
-                                );
-                              }
-                            )
-                          : ""}
-                      </SheetContent>
-                    </Sheet>
+                                            ) : (
+                                              ""
+                                            )}
+                                          </div>
+                                        </div>
+                                        <Separator className="mt-2 mb-2" />
+                                        {row?.Replay?.length > 0
+                                          ? row?.Replay?.map((replay) => {
+                                              return (
+                                                <>
+                                                  <div
+                                                    key={replay.id}
+                                                    className="ml-5"
+                                                  >
+                                                    <div className="text-xs text-muted-foreground">
+                                                      Balasan for{" "}
+                                                      <span className="font-semibold">
+                                                        @{row.User.name}
+                                                      </span>
+                                                    </div>
+                                                    <div className="text-lg font-semibold">
+                                                      {replay.User.name}
+                                                    </div>
+                                                    <div className="text-sm text-muted-foreground mb-1">
+                                                      {replay.content}
+                                                    </div>
+                                                    <div className="text-xs text-muted-foreground mb-1">
+                                                      {getHumanDate(
+                                                        replay.updatedAt
+                                                      )}
+                                                    </div>
+                                                    <div className="flex flex-row gap-2 items-center">
+                                                      <div
+                                                        onClick={() =>
+                                                          handleComment(
+                                                            replay.id
+                                                          )
+                                                        }
+                                                        className="text-xs text-muted-foreground font-semibold cursor-pointer"
+                                                      >
+                                                        Balas
+                                                      </div>
+                                                      {replay.User.id ===
+                                                      session?.user.id ? (
+                                                        <div
+                                                          onClick={() =>
+                                                            handleDeleteComment(
+                                                              replay.id
+                                                            )
+                                                          }
+                                                          className="text-xs text-muted-foreground text-red-400 font-semibold cursor-pointer"
+                                                        >
+                                                          Hapus
+                                                        </div>
+                                                      ) : (
+                                                        ""
+                                                      )}
+                                                    </div>
+                                                  </div>
+                                                  <Separator className="mt-2 mb-2" />
+                                                  {replay?.Replay?.length > 0
+                                                    ? replay?.Replay?.map(
+                                                        (replay2) => {
+                                                          return (
+                                                            <>
+                                                              <div
+                                                                key={replay2.id}
+                                                                className="ml-10"
+                                                              >
+                                                                <div className="text-xs text-muted-foreground">
+                                                                  Balasan for{" "}
+                                                                  <span className="font-semibold">
+                                                                    @
+                                                                    {
+                                                                      replay
+                                                                        .User
+                                                                        .name
+                                                                    }
+                                                                  </span>
+                                                                </div>
+                                                                <div className="text-lg font-semibold">
+                                                                  {
+                                                                    replay2.User
+                                                                      .name
+                                                                  }
+                                                                </div>
+                                                                <div className="text-sm text-muted-foreground mb-1">
+                                                                  {
+                                                                    replay2.content
+                                                                  }
+                                                                </div>
+                                                                <div className="text-xs text-muted-foreground">
+                                                                  {getHumanDate(
+                                                                    replay2.updatedAt
+                                                                  )}
+                                                                </div>
+                                                                <div className="flex flex-row gap-2 items-center">
+                                                                  {replay2.User
+                                                                    .id ===
+                                                                  session?.user
+                                                                    .id ? (
+                                                                    <div
+                                                                      onClick={() =>
+                                                                        handleDeleteComment(
+                                                                          replay2.id
+                                                                        )
+                                                                      }
+                                                                      className="text-xs text-muted-foreground text-red-400 font-semibold cursor-pointer"
+                                                                    >
+                                                                      Hapus
+                                                                    </div>
+                                                                  ) : (
+                                                                    ""
+                                                                  )}
+                                                                </div>
+                                                              </div>
+                                                              <Separator className="mt-2 mb-2" />
+                                                            </>
+                                                          );
+                                                        }
+                                                      )
+                                                    : ""}
+                                                </>
+                                              );
+                                            })
+                                          : ""}
+                                      </>
+                                    );
+                                  }
+                                }
+                              )
+                            : ""}
+                          <Button
+                            disabled={isPendingComment}
+                            onClick={() => handleComment()}
+                          >
+                            Make Comment
+                          </Button>
+                        </SheetContent>
+                      </Sheet>
+                    ) : (
+                      <FaRegComments
+                        onClick={() => handleComment()}
+                        className="cursor-pointer"
+                      />
+                    )}
                   </div>
                   <div className="text-sm text-muted-foreground">
                     {
@@ -772,7 +855,6 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
         </div>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger>Open</DialogTrigger>
         <DialogContent>
           <div className="font-semibold">#Comment</div>
           {comment?.createBy && (
