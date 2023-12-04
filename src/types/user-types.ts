@@ -52,3 +52,21 @@ export interface TagInterface {
   name: string;
   blogCount: number;
 }
+
+interface Replay {
+  id: string;
+  content: string;
+  User: UserInterface;
+  createdAt: string;
+  updatedAt: string;
+  Replay: Replay[];
+}
+
+export interface CommentInterface {
+  id: string;
+  content: string;
+  User: UserInterface;
+  createdAt: string;
+  updatedAt: string;
+  Replay: Replay[];
+}

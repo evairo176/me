@@ -203,3 +203,8 @@ const generateRandomPassword = (length: number) => {
 
   return password;
 };
+
+export const getHumanDate = (value: string) => {
+  const date = moment(value).fromNow();
+  return date;
+};

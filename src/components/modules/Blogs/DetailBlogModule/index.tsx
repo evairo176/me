@@ -7,7 +7,7 @@ import BlogDetailSkeleton from "@/components/skeleton/BlogDetailSkeleton";
 import { Badge } from "@/components/ui/badge";
 import { getDetailBlog, likeBlog, readBlog } from "@/features/api/Blog";
 import useLocalStorage from "@/hooks/use-local-storage.ts";
-import { TagInterface } from "@/types/user-types";
+import { CommentInterface, TagInterface } from "@/types/user-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { TfiEye } from "react-icons/tfi";
@@ -22,6 +22,16 @@ import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import useCookieStorage from "@/hooks/use-cookies-storage";
+import { Separator } from "@/components/ui/separator";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { getHumanDate } from "@/helper";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
@@ -174,12 +184,140 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
             {/* <PostBody body={post.body} /> */}
             <BlogBody body={blog?.content} />
             <div className="rounded-md border bg-card text-card-foreground p-2 md:hidden">
+              <div className="">
+                <div className="font-semibold text-sm">
+                  Tags Relevant For You
+                </div>
+                <div className="mt-2 flex flex-row flex-wrap gap-2">
+                  {tag?.map((row, key) => {
+                    return (
+                      <Badge variant={"outline"} key={key}>
+                        <span className="text-xs mr-2">
+                          {"#" + row?.blogCount}
+                        </span>
+                        {row?.name}
+                      </Badge>
+                    );
+                  })}
+                </div>
+              </div>
+              <Separator className="mt-2 mb-2" />
               <div className="flex gap-2 items-center justify-around">
                 <div className="flex items-center gap-2">
                   <div>
-                    <FaRegComments />
+                    <Sheet>
+                      <SheetTrigger asChild>
+                        <FaRegComments className="cursor-pointer" />
+                      </SheetTrigger>
+                      <SheetContent className="overflow-auto">
+                        <div className="text-2xl font-semibold mb-8">
+                          Comments
+                        </div>
+                        {blog?.Comment?.length > 0
+                          ? blog?.Comment?.map(
+                              (row: CommentInterface, key: number) => {
+                                return (
+                                  <>
+                                    <div key={key} className="">
+                                      <div className="text-lg font-semibold">
+                                        {row.User.name}
+                                      </div>
+                                      <div className="text-sm text-muted-foreground mb-1">
+                                        {row.content}
+                                      </div>
+                                      <div className="text-xs text-muted-foreground mb-1">
+                                        {getHumanDate(row.updatedAt)}
+                                      </div>
+                                      <div className="text-xs text-muted-foreground font-semibold cursor-pointer">
+                                        Balas
+                                      </div>
+                                    </div>
+                                    <Separator className="mt-2 mb-2" />
+                                    {row?.Replay?.length > 0
+                                      ? row?.Replay?.map((replay) => {
+                                          return (
+                                            <>
+                                              <div
+                                                key={replay.id}
+                                                className="ml-5"
+                                              >
+                                                <div className="text-xs text-muted-foreground">
+                                                  Balasan for{" "}
+                                                  <span className="font-semibold">
+                                                    @{row.User.name}
+                                                  </span>
+                                                </div>
+                                                <div className="text-lg font-semibold">
+                                                  {replay.User.name}
+                                                </div>
+                                                <div className="text-sm text-muted-foreground mb-1">
+                                                  {replay.content}
+                                                </div>
+                                                <div className="text-xs text-muted-foreground mb-1">
+                                                  {getHumanDate(
+                                                    replay.updatedAt
+                                                  )}
+                                                </div>
+                                                <div className="text-xs text-muted-foreground font-semibold cursor-pointer">
+                                                  Balas
+                                                </div>
+                                              </div>
+                                              <Separator className="mt-2 mb-2" />
+                                              {replay?.Replay?.length > 0
+                                                ? replay?.Replay?.map(
+                                                    (replay2) => {
+                                                      return (
+                                                        <>
+                                                          <div
+                                                            key={replay2.id}
+                                                            className="ml-10"
+                                                          >
+                                                            <div className="text-xs text-muted-foreground">
+                                                              Balasan for{" "}
+                                                              <span className="font-semibold">
+                                                                @
+                                                                {
+                                                                  replay.User
+                                                                    .name
+                                                                }
+                                                              </span>
+                                                            </div>
+                                                            <div className="text-lg font-semibold">
+                                                              {
+                                                                replay2.User
+                                                                  .name
+                                                              }
+                                                            </div>
+                                                            <div className="text-sm text-muted-foreground mb-1">
+                                                              {replay2.content}
+                                                            </div>
+                                                            <div className="text-xs text-muted-foreground">
+                                                              {getHumanDate(
+                                                                replay2.updatedAt
+                                                              )}
+                                                            </div>
+                                                          </div>
+                                                          <Separator className="mt-2 mb-2" />
+                                                        </>
+                                                      );
+                                                    }
+                                                  )
+                                                : ""}
+                                            </>
+                                          );
+                                        })
+                                      : ""}
+                                  </>
+                                );
+                              }
+                            )
+                          : ""}
+                      </SheetContent>
+                    </Sheet>
                   </div>
-                  <div className="text-sm text-muted-foreground">{0}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {blog?.Comment?.length}
+                  </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -237,9 +375,119 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
               <div className="flex gap-2 items-center justify-around">
                 <div className="flex items-center gap-2">
                   <div>
-                    <FaRegComments />
+                    <Sheet>
+                      <SheetTrigger asChild>
+                        <FaRegComments className="cursor-pointer" />
+                      </SheetTrigger>
+                      <SheetContent className="overflow-auto">
+                        <div className="text-2xl font-semibold mb-8">
+                          Comments
+                        </div>
+                        {blog?.Comment?.length > 0
+                          ? blog?.Comment?.map(
+                              (row: CommentInterface, key: number) => {
+                                return (
+                                  <>
+                                    <div key={key} className="">
+                                      <div className="text-lg font-semibold">
+                                        {row.User.name}
+                                      </div>
+                                      <div className="text-sm text-muted-foreground mb-1">
+                                        {row.content}
+                                      </div>
+                                      <div className="text-xs text-muted-foreground mb-1">
+                                        {getHumanDate(row.updatedAt)}
+                                      </div>
+                                      <div className="text-xs text-muted-foreground font-semibold cursor-pointer">
+                                        Balas
+                                      </div>
+                                    </div>
+                                    <Separator className="mt-2 mb-2" />
+                                    {row?.Replay?.length > 0
+                                      ? row?.Replay?.map((replay) => {
+                                          return (
+                                            <>
+                                              <div
+                                                key={replay.id}
+                                                className="ml-5"
+                                              >
+                                                <div className="text-xs text-muted-foreground">
+                                                  Balasan for{" "}
+                                                  <span className="font-semibold">
+                                                    @{row.User.name}
+                                                  </span>
+                                                </div>
+                                                <div className="text-lg font-semibold">
+                                                  {replay.User.name}
+                                                </div>
+                                                <div className="text-sm text-muted-foreground mb-1">
+                                                  {replay.content}
+                                                </div>
+                                                <div className="text-xs text-muted-foreground mb-1">
+                                                  {getHumanDate(
+                                                    replay.updatedAt
+                                                  )}
+                                                </div>
+                                                <div className="text-xs text-muted-foreground font-semibold cursor-pointer">
+                                                  Balas
+                                                </div>
+                                              </div>
+                                              <Separator className="mt-2 mb-2" />
+                                              {replay?.Replay?.length > 0
+                                                ? replay?.Replay?.map(
+                                                    (replay2) => {
+                                                      return (
+                                                        <>
+                                                          <div
+                                                            key={replay2.id}
+                                                            className="ml-10"
+                                                          >
+                                                            <div className="text-xs text-muted-foreground">
+                                                              Balasan for{" "}
+                                                              <span className="font-semibold">
+                                                                @
+                                                                {
+                                                                  replay.User
+                                                                    .name
+                                                                }
+                                                              </span>
+                                                            </div>
+                                                            <div className="text-lg font-semibold">
+                                                              {
+                                                                replay2.User
+                                                                  .name
+                                                              }
+                                                            </div>
+                                                            <div className="text-sm text-muted-foreground mb-1">
+                                                              {replay2.content}
+                                                            </div>
+                                                            <div className="text-xs text-muted-foreground">
+                                                              {getHumanDate(
+                                                                replay2.updatedAt
+                                                              )}
+                                                            </div>
+                                                          </div>
+                                                          <Separator className="mt-2 mb-2" />
+                                                        </>
+                                                      );
+                                                    }
+                                                  )
+                                                : ""}
+                                            </>
+                                          );
+                                        })
+                                      : ""}
+                                  </>
+                                );
+                              }
+                            )
+                          : ""}
+                      </SheetContent>
+                    </Sheet>
                   </div>
-                  <div className="text-sm text-muted-foreground">{0}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {blog?.Comment?.length}
+                  </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button

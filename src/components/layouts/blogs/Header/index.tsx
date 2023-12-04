@@ -144,13 +144,17 @@ const Header = ({ language }: Props) => {
           <div className="mx-auto w-full max-w-7xl px-4">
             <ul className="space-y-3">
               <li>
-                <Link href={`/blogs/category/technology`}>Technology</Link>
+                <Link href={`/${params.lang}/blogs/category/technology`}>
+                  Technology
+                </Link>
               </li>
               <li>
-                <Link href={`/blogs/category/experience`}>Experience</Link>
+                <Link href={`/${params.lang}/blogs/category/experience`}>
+                  Experience
+                </Link>
               </li>
               <li>
-                <Link href={`/blogs/category/foods`}>Foods</Link>
+                <Link href={`/${params.lang}/blogs/category/foods`}>Foods</Link>
               </li>
             </ul>
             <Separator className="mb-2 mt-2" />
