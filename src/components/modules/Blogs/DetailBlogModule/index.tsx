@@ -53,6 +53,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Image from "next/image";
 
 // const BlogBody = dynamic(() => import("@/components/elements/BlogBody"));
 
@@ -380,8 +381,17 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
                                     return (
                                       <>
                                         <div key={key} className="">
-                                          <div className="text-lg font-semibold">
-                                            {row.User.name}
+                                          <div className="flex flex-row items-center gap-1">
+                                            <Image
+                                              src={row.User.image as string}
+                                              alt={row.User.name}
+                                              width={40}
+                                              height={40}
+                                              className="w-[20px] h-[20px] rounded-full"
+                                            />
+                                            <div className="text-lg font-semibold">
+                                              {row.User.name}
+                                            </div>
                                           </div>
                                           <div className="text-sm text-muted-foreground mb-1">
                                             {row.content}
@@ -428,9 +438,22 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
                                                         @{row.User.name}
                                                       </span>
                                                     </div>
-                                                    <div className="text-lg font-semibold">
-                                                      {replay.User.name}
+                                                    <div className="flex flex-row items-center gap-1">
+                                                      <Image
+                                                        src={
+                                                          replay.User
+                                                            .image as string
+                                                        }
+                                                        alt={replay.User.name}
+                                                        width={40}
+                                                        height={40}
+                                                        className="w-[20px] h-[20px] rounded-full"
+                                                      />
+                                                      <div className="text-lg font-semibold">
+                                                        {replay.User.name}
+                                                      </div>
                                                     </div>
+
                                                     <div className="text-sm text-muted-foreground mb-1">
                                                       {replay.content}
                                                     </div>
@@ -488,12 +511,31 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
                                                                     }
                                                                   </span>
                                                                 </div>
-                                                                <div className="text-lg font-semibold">
-                                                                  {
-                                                                    replay2.User
-                                                                      .name
-                                                                  }
+                                                                <div className="flex flex-row items-center gap-1">
+                                                                  <Image
+                                                                    src={
+                                                                      replay2
+                                                                        .User
+                                                                        .image as string
+                                                                    }
+                                                                    alt={
+                                                                      replay2
+                                                                        .User
+                                                                        .name
+                                                                    }
+                                                                    width={40}
+                                                                    height={40}
+                                                                    className="w-[20px] h-[20px] rounded-full"
+                                                                  />
+                                                                  <div className="text-lg font-semibold">
+                                                                    {
+                                                                      replay2
+                                                                        .User
+                                                                        .name
+                                                                    }
+                                                                  </div>
                                                                 </div>
+
                                                                 <div className="text-sm text-muted-foreground mb-1">
                                                                   {
                                                                     replay2.content
@@ -637,8 +679,17 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
                                     return (
                                       <>
                                         <div key={key} className="">
-                                          <div className="text-lg font-semibold">
-                                            {row.User.name}
+                                          <div className="flex flex-row items-center gap-1">
+                                            <Image
+                                              src={row.User.image as string}
+                                              alt={row.User.name}
+                                              width={40}
+                                              height={40}
+                                              className="w-[20px] h-[20px] rounded-full"
+                                            />
+                                            <div className="text-lg font-semibold">
+                                              {row.User.name}
+                                            </div>
                                           </div>
                                           <div className="text-sm text-muted-foreground mb-1">
                                             {row.content}
@@ -685,9 +736,22 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
                                                         @{row.User.name}
                                                       </span>
                                                     </div>
-                                                    <div className="text-lg font-semibold">
-                                                      {replay.User.name}
+                                                    <div className="flex flex-row items-center gap-1">
+                                                      <Image
+                                                        src={
+                                                          replay.User
+                                                            .image as string
+                                                        }
+                                                        alt={replay.User.name}
+                                                        width={40}
+                                                        height={40}
+                                                        className="w-[20px] h-[20px] rounded-full"
+                                                      />
+                                                      <div className="text-lg font-semibold">
+                                                        {replay.User.name}
+                                                      </div>
                                                     </div>
+
                                                     <div className="text-sm text-muted-foreground mb-1">
                                                       {replay.content}
                                                     </div>
@@ -745,12 +809,31 @@ const DetailBlogModule = ({}: DetailBlogModuleInterface) => {
                                                                     }
                                                                   </span>
                                                                 </div>
-                                                                <div className="text-lg font-semibold">
-                                                                  {
-                                                                    replay2.User
-                                                                      .name
-                                                                  }
+                                                                <div className="flex flex-row items-center gap-1">
+                                                                  <Image
+                                                                    src={
+                                                                      replay2
+                                                                        .User
+                                                                        .image as string
+                                                                    }
+                                                                    alt={
+                                                                      replay2
+                                                                        .User
+                                                                        .name
+                                                                    }
+                                                                    width={40}
+                                                                    height={40}
+                                                                    className="w-[20px] h-[20px] rounded-full"
+                                                                  />
+                                                                  <div className="text-lg font-semibold">
+                                                                    {
+                                                                      replay2
+                                                                        .User
+                                                                        .name
+                                                                    }
+                                                                  </div>
                                                                 </div>
+
                                                                 <div className="text-sm text-muted-foreground mb-1">
                                                                   {
                                                                     replay2.content
