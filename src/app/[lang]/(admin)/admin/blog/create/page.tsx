@@ -75,7 +75,6 @@ const Create = ({}: Props) => {
       return response.data;
     },
   });
-  console.log(form.getValues("lang"));
 
   // Access the client
   const queryClient = useQueryClient();

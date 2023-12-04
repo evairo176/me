@@ -1,6 +1,6 @@
 import { axiosAuth } from "@/lib/axios";
 import config from "@/utils/config";
-import { CreateBlogSchema } from "@/utils/form-schema";
+import { CreateBlogSchema, CreateCommentSchema } from "@/utils/form-schema";
 import { z } from "zod";
 
 interface getBlog {
@@ -143,6 +143,36 @@ interface likeBlogInterface {
 // like blog
 export const likeBlog = async ({ axiosAuth, val }: likeBlogInterface) => {
   const response = await axiosAuth.post(`/blogs/like`, val);
+
+  return response.data;
+};
+
+interface commentBlogInterface {
+  axiosAuth: any;
+  val: z.infer<typeof CreateCommentSchema>;
+}
+// comment blog
+export const createComment = async ({
+  axiosAuth,
+  val,
+}: commentBlogInterface) => {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  const response = await axiosAuth.post(`/blogs/comment`, val, headers);
+
+  return response.data;
+};
+
+interface deleteCommentBlog {
+  axiosAuth: any;
+  id: string;
+}
+
+// delete comment blog
+export const deleteComment = async ({ axiosAuth, id }: deleteCommentBlog) => {
+  const response = await axiosAuth.delete(`/blogs/comment/${id}`);
 
   return response.data;
 };

@@ -66,3 +66,11 @@ export const createMenuSchema = z.object({
   status: z.boolean().default(false),
   roles: z.any(),
 });
+
+export const CreateCommentSchema = z.object({
+  content: z
+    .string({ required_error: "Content is required" })
+    .min(1, { message: "Content must be at least 1 characters" }),
+  blogId: z.string({ required_error: "blogId is required" }),
+  parentId: z.any(),
+});

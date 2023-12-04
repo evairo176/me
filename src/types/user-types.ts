@@ -66,6 +66,7 @@ export interface CommentInterface {
   id: string;
   content: string;
   User: UserInterface;
+  parentId: string;
   createdAt: string;
   updatedAt: string;
   Replay: Replay[];
