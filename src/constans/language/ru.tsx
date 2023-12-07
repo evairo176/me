@@ -2,6 +2,8 @@ import paymentXenditCustom from "../../../public/images/projects/payment-xendit-
 import tnosPwa from "../../../public/images/projects/tnos-pwa.png";
 import myBlog from "../../../public/images/projects/my-blog.png";
 import news from "../../../public/images/projects/news.png";
+import ppa1 from "../../../public/images/projects/ppa1.jpeg";
+import ppaweb from "../../../public/images/projects/ppaweb.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -76,6 +78,29 @@ const RU = {
       description: "Мои профессиональные проекты.",
       projectsData: [
         {
+          title: "Приложение Photo Proof",
+          description:
+            "Приложение, которое предназначено для записи типов деятельности сотрудников плантации, чтобы мы могли легко контролировать и просматривать их.",
+          tags: ["Asp.net", "SQL SERVER", "API", "React Native", "Typescript"],
+          imageUrl: ppa1,
+          link: "",
+        },
+        {
+          title: "Photo Proof Web",
+          description:
+            "Веб-сайт, предназначенный для мониторинга и отчетности данных с Android для более удобного чтения",
+          tags: [
+            "Asp.net",
+            "SQL SERVER",
+            "API",
+            "Tailwind CSS",
+            "Next JS",
+            "Typescript",
+          ],
+          imageUrl: ppaweb,
+          link: "",
+        },
+        {
           title: "Оплата через Xendit",
           description:
             "Упростите процесс оплаты с помощью специальных платежей Xendit, таких как кредитные карты, банковские переводы, электронные кошельки и QR-коды.",
@@ -106,18 +131,18 @@ const RU = {
           tags: [
             "TypeScript",
             "Next.js",
-            "Tailwind",
-            "Directus js",
+            "Tailwind CSS",
             "Postgree",
+            "Express JS",
           ],
           imageUrl: myBlog,
-          link: "https://evairo-blog.vercel.app/",
+          link: "https://evairo-nice.vercel.app/en/blogs/",
         },
         {
           title: "Новости",
           description:
             "Ведущий новостной портал, предлагающий последние новости и глубокий анализ в различных областях, включая политику, экономику, развлечения и технологии.",
-          tags: ["Laravel"],
+          tags: ["Laravel", "Mysql", "Tailwind CSS", "Multi Language"],
           imageUrl: news,
           link: "#",
         },

@@ -2,6 +2,8 @@ import paymentXenditCustom from "../../../public/images/projects/payment-xendit-
 import tnosPwa from "../../../public/images/projects/tnos-pwa.png";
 import myBlog from "../../../public/images/projects/my-blog.png";
 import news from "../../../public/images/projects/news.png";
+import ppa1 from "../../../public/images/projects/ppa1.jpeg";
+import ppaweb from "../../../public/images/projects/ppaweb.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -74,6 +76,29 @@ const CN = {
       description: "我的专业项目。",
       projectsData: [
         {
+          title: "照片证明应用",
+          description:
+            "该应用程序用于记录种植园员工的各种活动类型，以便我们可以轻松地进行控制和查看。",
+          tags: ["Asp.net", "SQL SERVER", "API", "React Native", "Typescript"],
+          imageUrl: ppa1,
+          link: "",
+        },
+        {
+          title: "照片证明网站",
+          description:
+            "该网站用于监控和报告来自Android的数据，以便更轻松地阅读",
+          tags: [
+            "Asp.net",
+            "SQL SERVER",
+            "API",
+            "Tailwind CSS",
+            "Next JS",
+            "Typescript",
+          ],
+          imageUrl: ppaweb,
+          link: "",
+        },
+        {
           title: "自定义Xendit支付",
           description:
             "使用Xendit特殊支付，如信用卡、银行转账、电子钱包和QR码，使支付更加简便。",
@@ -104,18 +129,18 @@ const CN = {
           tags: [
             "TypeScript",
             "Next.js",
-            "Tailwind",
-            "Directus js",
+            "Tailwind CSS",
             "Postgree",
+            "Express JS",
           ],
           imageUrl: myBlog,
-          link: "https://evairo-blog.vercel.app/",
+          link: "https://evairo-nice.vercel.app/en/blogs/",
         },
         {
           title: "新闻",
           description:
             "领先的新闻门户，提供各个领域的最新新闻和深入分析，包括政治、经济、娱乐和技术。",
-          tags: ["Laravel"],
+          tags: ["Laravel", "Mysql", "Tailwind CSS", "Multi Language"],
           imageUrl: news,
           link: "#",
         },

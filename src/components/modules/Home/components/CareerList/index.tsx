@@ -61,7 +61,7 @@ const CareerList = ({ lang, dictionary }: CareerListInterface) => {
                   borderRight: "hsl(var(--muted))",
                 }}
                 date={row?.date}
-                dateClassName="mx-3"
+                dateClassName="md:mx-3"
                 icon={row.icon}
                 iconStyle={{
                   background: "hsl(var(--muted))",

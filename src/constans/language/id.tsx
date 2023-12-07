@@ -2,6 +2,8 @@ import paymentXenditCustom from "../../../public/images/projects/payment-xendit-
 import tnosPwa from "../../../public/images/projects/tnos-pwa.png";
 import myBlog from "../../../public/images/projects/my-blog.png";
 import news from "../../../public/images/projects/news.png";
+import ppa1 from "../../../public/images/projects/ppa1.jpeg";
+import ppaweb from "../../../public/images/projects/ppaweb.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -76,6 +78,29 @@ const ID = {
       description: "Proyek profesional saya.",
       projectsData: [
         {
+          title: "Aplikasi Photo Proof",
+          description:
+            "Aplikasi yang berfungsi untuk mencatat jenis-jenis kegiatan karyawan perkebunan, sehingga kita dapat mengontrol dan melihatnya dengan mudah.",
+          tags: ["Asp.net", "SQL SERVER", "API", "React Native", "Typescript"],
+          imageUrl: ppa1,
+          link: "",
+        },
+        {
+          title: "Photo Proof Web",
+          description:
+            "Sebuah situs web yang berfungsi untuk memantau dan melaporkan data dari Android agar lebih mudah dibaca",
+          tags: [
+            "Asp.net",
+            "SQL SERVER",
+            "API",
+            "Tailwind CSS",
+            "Next JS",
+            "Typescript",
+          ],
+          imageUrl: ppaweb,
+          link: "",
+        },
+        {
           title: "Pembayaran Kustom Xendit",
           description:
             "Memudahkan pembayaran dengan metode pembayaran khusus Xendit seperti Kartu Kredit, Transfer Bank, E-Wallet, & Kode QR",
@@ -106,18 +131,18 @@ const ID = {
           tags: [
             "TypeScript",
             "Next.js",
-            "Tailwind",
-            "Directus js",
-            "PostgreSQL",
+            "Tailwind CSS",
+            "Postgree",
+            "Express JS",
           ],
           imageUrl: myBlog, // You can translate the image filenames if needed
-          link: "https://evairo-blog.vercel.app/",
+          link: "https://evairo-nice.vercel.app/en/blogs/",
         },
         {
           title: "Berita",
           description:
             "Portal berita utama yang menawarkan berita terbaru dan analisis mendalam di berbagai bidang, termasuk politik, ekonomi, hiburan, dan teknologi.",
-          tags: ["Laravel"],
+          tags: ["Laravel", "Mysql", "Tailwind CSS", "Multi Language"],
           imageUrl: news, // You can translate the image filenames if needed
           link: "#",
         },

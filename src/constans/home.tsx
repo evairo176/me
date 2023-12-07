@@ -20,6 +20,7 @@ import paymentXenditCustom from "../../public/images/projects/payment-xendit-cus
 import tnosPwa from "../../public/images/projects/tnos-pwa.png";
 import myBlog from "../../public/images/projects/my-blog.png";
 import news from "../../public/images/projects/news.png";
+import ppa1 from "../../public/images/projects/ppa1.jpeg";
 import { BiLogoPostgresql } from "react-icons/bi";
 // import appstore from "../../public/images/projects/appstore.jpg";
 // import apps from "../../public/images/projects/appstore.jpg";
@@ -147,10 +148,26 @@ export const experiencesData: ExperiencesType[] = [
 
 export const projectsData: ProjectsType[] = [
   {
+    title: "Photo Proof App",
+    description:
+      "Make payments easier with Xendit special payments such as Credit Cards, Bank Transfers, E-Wallets & QR Codes",
+    tags: ["Asp.net", "SQL SERVER", "API"],
+    imageUrl: ppa1,
+    link: "",
+  },
+  {
     title: "Payment Costum Xendit",
     description:
       "Make payments easier with Xendit special payments such as Credit Cards, Bank Transfers, E-Wallets & QR Codes",
-    tags: ["React.js", "Laravel", "CSS", "Mysql", "Xendit"],
+    tags: [
+      "React.js",
+      "Laravel",
+      "Mysql",
+      "Xendit",
+      "Next JS",
+      "Express JS",
+      "Typescript",
+    ],
     imageUrl: paymentXenditCustom,
     link: "https://app.tnosworld.com/",
   },
@@ -218,43 +235,6 @@ export const skillsData: SkillsType = [
 ];
 
 const iconSize = 25;
-// : ,
-// : ,
-// : ,
-// "": ,
-// "": ,
-// : ,
-// : (
-//
-// ),
-// : ,
-// "": ,
-// : ,
-// : ,
-// : ,
-// "": ,
-// : ,
-// : ,
-// : ,
-// : ,
-// "": ,
-// "Nuxt.js": <SiNuxtdotjs size={iconSize} className="text-green-600" />,
-// "Vue.js": <SiVuedotjs size={iconSize} className="text-green-500" />,
-// : ,
-// "": ,
-// : ,
-// "": ,
-// : ,
-// : ,
-// : ,
-// "": ,
-// : ,
-// : ,
-// "": ,
-// "": (
-//
-// ),
-// "": ,
 
 export const STACKS: stacksProps[] = [
   {

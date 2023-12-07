@@ -2,6 +2,8 @@ import paymentXenditCustom from "../../../public/images/projects/payment-xendit-
 import tnosPwa from "../../../public/images/projects/tnos-pwa.png";
 import myBlog from "../../../public/images/projects/my-blog.png";
 import news from "../../../public/images/projects/news.png";
+import ppa1 from "../../../public/images/projects/ppa1.jpeg";
+import ppaweb from "../../../public/images/projects/ppaweb.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -76,6 +78,29 @@ const EN = {
       description: "My professional Project.",
       projectsData: [
         {
+          title: "Photo Proof App",
+          description:
+            "Application that functions to record the types of activities of plantation employees, so that we can control and view them easily.",
+          tags: ["Asp.net", "SQL SERVER", "API", "React Native", "Typescript"],
+          imageUrl: ppa1,
+          link: "",
+        },
+        {
+          title: "Photo Proof Web",
+          description:
+            "A website that functions to monitor and report data from Android to make it easier to read",
+          tags: [
+            "Asp.net",
+            "SQL SERVER",
+            "API",
+            "Tailwind CSS",
+            "Next JS",
+            "Typescript",
+          ],
+          imageUrl: ppaweb,
+          link: "",
+        },
+        {
           title: "Payment Costum Xendit",
           description:
             "Make payments easier with Xendit special payments such as Credit Cards, Bank Transfers, E-Wallets & QR Codes",
@@ -106,18 +131,18 @@ const EN = {
           tags: [
             "TypeScript",
             "Next.js",
-            "Tailwind",
-            "Directus js",
+            "Tailwind CSS",
             "Postgree",
+            "Express JS",
           ],
           imageUrl: myBlog,
-          link: "https://evairo-blog.vercel.app/",
+          link: "https://evairo-nice.vercel.app/en/blogs",
         },
         {
           title: "News",
           description:
             "A leading news portal offering the latest news and in-depth analysis across various fields, including politics, economics, entertainment, and technology.",
-          tags: ["Laravel"],
+          tags: ["Laravel", "Mysql", "Tailwind CSS", "Multi Language"],
           imageUrl: news,
           link: "#",
         },
