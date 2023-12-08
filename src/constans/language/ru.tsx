@@ -4,6 +4,7 @@ import myBlog from "../../../public/images/projects/my-blog.png";
 import news from "../../../public/images/projects/news.png";
 import ppa1 from "../../../public/images/projects/ppa1.jpeg";
 import ppaweb from "../../../public/images/projects/ppaweb.png";
+import jobseeker from "../../../public/images/projects/jobseeker.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -64,6 +65,14 @@ const RU = {
           date: "Окт 2022 - Июль 2023",
         },
         {
+          title: "Фрилансер Full-Stack Разработчик",
+          location: "Работа из дома",
+          description:
+            "Фриланс - это опыт работы, который позволил мне работать самостоятельно и гибко над конкретными проектами. В моей роли фрилансера я успешно управлял проектами с полной ответственностью, включая планирование, выполнение и своевременное завершение. Мои конкретные навыки включают в себя [упомяните навыки или отрасль], и я могу быстро адаптироваться к требованиям различных проектов. Мой опыт в сфере фриланса отражает мою способность решать сложности, эффективно общаться и предоставлять креативные решения для достижения целей проекта.",
+          icon: <MdWork className="w-5 h-5" />,
+          date: "Июль 2023 - настоящее время",
+        },
+        {
           title: "Full-Stack Разработчик",
           location: "KPN Plantation, Джакарта",
           description:
@@ -77,6 +86,21 @@ const RU = {
       title: "Мои проекты",
       description: "Мои профессиональные проекты.",
       projectsData: [
+        {
+          title: "Соискатель",
+          description:
+            "Веб-сайт поиска работы с функцией компании позволяет компаниям создавать и управлять вакансиями, а соискателям легко искать, подавать заявки и управлять своими заявками.",
+          tags: [
+            "Next JS",
+            "Postgree",
+            "Redux Toolkit",
+            "Framer Motion",
+            "Typescript",
+            "Tailwind CSS",
+          ],
+          imageUrl: jobseeker,
+          link: "",
+        },
         {
           title: "Приложение Photo Proof",
           description:

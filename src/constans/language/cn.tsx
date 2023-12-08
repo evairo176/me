@@ -4,6 +4,7 @@ import myBlog from "../../../public/images/projects/my-blog.png";
 import news from "../../../public/images/projects/news.png";
 import ppa1 from "../../../public/images/projects/ppa1.jpeg";
 import ppaweb from "../../../public/images/projects/ppaweb.png";
+import jobseeker from "../../../public/images/projects/jobseeker.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -62,6 +63,14 @@ const CN = {
           date: "2022年10月 - 2023年7月",
         },
         {
+          title: "自由職業 Full-Stack 開發人員",
+          location: "在家工作",
+          description:
+            "自由職業工作是一種經驗，使我能夠在具體項目上獨立靈活地工作。作為自由職業者，我成功地管理了全責任的項目，包括計劃、執行和及時完成。我的具體技能包括[提及技能或行業]，我能夠迅速適應不同項目的需求。我的自由職業經驗反映了我解決挑戰、有效溝通並提供創意解決方案以達到項目目標的能力。",
+          icon: <MdWork className="w-5 h-5" />,
+          date: "2023年7月 - 至今",
+        },
+        {
           title: "全栈开发人员",
           location: "印尼雅加达的KPN Plantation",
           description:
@@ -75,6 +84,21 @@ const CN = {
       title: "我的项目",
       description: "我的专业项目。",
       projectsData: [
+        {
+          title: "求職者",
+          description:
+            "拥有公司功能的求职网站使公司能够创建和管理职位，而求职者可以轻松搜索、申请和管理他们的申请.",
+          tags: [
+            "Next JS",
+            "Postgree",
+            "Redux Toolkit",
+            "Framer Motion",
+            "Typescript",
+            "Tailwind CSS",
+          ],
+          imageUrl: jobseeker,
+          link: "",
+        },
         {
           title: "照片证明应用",
           description:

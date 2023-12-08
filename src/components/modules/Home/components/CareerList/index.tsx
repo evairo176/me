@@ -71,7 +71,7 @@ const CareerList = ({ lang, dictionary }: CareerListInterface) => {
               >
                 <h3 className="font-semibold capitalize">{row?.title}</h3>
                 <p className="font-normal !mt-0">{row?.location}</p>
-                <p className="!mt-1 !font-normal text-gray-700 dark:text-white/80">
+                <p className="!mt-1 !font-normal text-gray-700 dark:text-white/80 text-justify">
                   {row?.description}
                 </p>
               </VerticalTimelineElement>

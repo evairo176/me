@@ -4,6 +4,7 @@ import myBlog from "../../../public/images/projects/my-blog.png";
 import news from "../../../public/images/projects/news.png";
 import ppa1 from "../../../public/images/projects/ppa1.jpeg";
 import ppaweb from "../../../public/images/projects/ppaweb.png";
+import jobseeker from "../../../public/images/projects/jobseeker.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -64,7 +65,15 @@ const ID = {
           date: "Okt 2022 - Jul 2023",
         },
         {
-          title: "Pengembang Full-Stack",
+          title: "Frelance Full-Stack Developer",
+          location: "Kerja Dari Rumah",
+          description:
+            "Pekerjaan freelance adalah pengalaman kerja yang memungkinkan saya bekerja secara mandiri dan fleksibel dalam proyek-proyek spesifik. Dalam kapasitas sebagai freelancer, saya telah berhasil mengelola proyek-proyek dengan tanggung jawab penuh, termasuk perencanaan, pelaksanaan, dan penyelesaian tepat waktu. Keahlian khusus saya meliputi [sebutkan keahlian atau industri], dan saya dapat dengan cepat beradaptasi dengan tuntutan proyek yang berbeda. Pengalaman freelance saya mencerminkan kemampuan saya dalam mengatasi tantangan, berkomunikasi secara efektif, dan memberikan solusi kreatif untuk mencapai tujuan proyek..",
+          icon: <MdWork className="w-5 h-5" />,
+          date: "Juli 2023 - sekarang",
+        },
+        {
+          title: "Full-Stack Developer",
           location: "KPN Plantation, Jakarta",
           description:
             "Sekarang saya bekerja sebagai pengembang full-stack secara penuh waktu. Teknologi yang saya gunakan meliputi React, Next.js, TypeScript, Tailwind, Prisma, dan MongoDB. Saya terbuka untuk peluang pekerjaan penuh waktu.",
@@ -77,6 +86,21 @@ const ID = {
       title: "Proyek Saya",
       description: "Proyek profesional saya.",
       projectsData: [
+        {
+          title: "Jobseeker",
+          description:
+            "Website pencarian kerja dengan fitur perusahaan memungkinkan perusahaan untuk membuat dan mengelola lowongan pekerjaan, sementara para pencari kerja dapat dengan mudah mencari, melamar, dan mengelola aplikasi mereka.",
+          tags: [
+            "Next JS",
+            "Postgree",
+            "Redux Toolkit",
+            "Framer Motion",
+            "Typescript",
+            "Tailwind CSS",
+          ],
+          imageUrl: jobseeker,
+          link: "",
+        },
         {
           title: "Aplikasi Photo Proof",
           description:

@@ -4,6 +4,7 @@ import myBlog from "../../../public/images/projects/my-blog.png";
 import news from "../../../public/images/projects/news.png";
 import ppa1 from "../../../public/images/projects/ppa1.jpeg";
 import ppaweb from "../../../public/images/projects/ppaweb.png";
+import jobseeker from "../../../public/images/projects/jobseeker.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -64,12 +65,20 @@ const EN = {
           date: "Oct 2022 - Jul 2023",
         },
         {
+          title: "Freelance Full-Stack Developer",
+          location: "Work From Home",
+          description:
+            "Freelance work is an experience that has allowed me to work independently and flexibly on specific projects. In my capacity as a freelancer, I have successfully managed projects with full responsibility, including planning, execution, and timely completion. My specific skills include [mention skills or industry], and I can quickly adapt to the demands of different projects. My freelance experience reflects my ability to tackle challenges, communicate effectively, and provide creative solutions to achieve project goals.",
+          icon: <MdWork className="w-5 h-5" />,
+          date: "Jul 2023 - Present",
+        },
+        {
           title: "Full-Stack Developer",
           location: "KPN Plantation, Jakarta",
           description:
             "I'm now a full-stack developer working full-time. My technology stack includes React, Next.js, TypeScript, Tailwind, Prisma, and MongoDB. I'm open to full-time opportunities.",
           icon: <MdWork className="w-5 h-5" />,
-          date: "Aug 2023 - present",
+          date: "Aug 2023 - Present",
         },
       ],
     },
@@ -77,6 +86,21 @@ const EN = {
       title: "My Projects",
       description: "My professional Project.",
       projectsData: [
+        {
+          title: "Jobseeker",
+          description:
+            "A job search website with company features allows companies to create and manage job postings, while job seekers can easily search, apply, and manage their applications.",
+          tags: [
+            "Next JS",
+            "Postgree",
+            "Redux Toolkit",
+            "Framer Motion",
+            "Typescript",
+            "Tailwind CSS",
+          ],
+          imageUrl: jobseeker,
+          link: "",
+        },
         {
           title: "Photo Proof App",
           description:
@@ -100,6 +124,7 @@ const EN = {
           imageUrl: ppaweb,
           link: "",
         },
+
         {
           title: "Payment Costum Xendit",
           description:
