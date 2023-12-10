@@ -37,11 +37,18 @@ const CareerList = ({ lang, dictionary }: CareerListInterface) => {
             variant={"secondary"}
             aria-label="download resume"
             className="flex gap-2 transition-all duration-300 items-center "
+            asChild
           >
-            <div className="border-b-2 overflow-hidden border-neutral-600 dark:border-neutral-500">
-              <IoIosDownload className="animate-rain-arrow" />
-            </div>
-            <span>{dictionary.home.career?.downloadResume}</span>
+            <a
+              href="dicki.prasetya.pdf"
+              target="_blank"
+              download="Dicki Prasetya CV"
+            >
+              <div className="border-b-2 overflow-hidden border-neutral-600 dark:border-neutral-500">
+                <IoIosDownload className="animate-rain-arrow" />
+              </div>
+              <span>{dictionary.home.career?.downloadResume}</span>
+            </a>
           </Button>
         </SectionSubHeading>
         <VerticalTimeline lineColor={"hsl(var(--muted))"}>
