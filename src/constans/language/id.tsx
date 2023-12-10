@@ -40,7 +40,7 @@ const ID = {
       say: "Hi, Saya Dicki",
       stack: "Developer Full-Stack",
       description:
-        "Pengembang dengan fokus kuat pada Full Stack Development. Mahir dalam TypeScript dan berpengalaman dalam semua aspek teknologi web. Pemain tim kolaboratif yang berdedikasi untuk menghadirkan aplikasi web yang efisien, terukur, dan menarik secara visual. Saya menikmati membangun situs & aplikasi.",
+        "Saya adalah seorang Fullstack Developer berusia 23 tahun dengan pengalaman lebih dari 1,5 tahun. Keahlian saya mencakup pengembangan aplikasi web dan mobile menggunakan React, TypeScript, dan Laravel. Saya memiliki fokus kuat terhadap pengembangan end-to-end, mulai dari desain antarmuka hingga pengembangan backend, sehingga memastikan pengalaman pengguna yang mulus dan efisien. Dengan keinginan untuk terus belajar dan berinovasi, saya siap untuk memberikan kontribusi positif dalam proyek pengembangan perangkat lunak.",
       place: "Lokasi di Indramayu, Jawa Barat",
     },
     career: {
@@ -68,7 +68,7 @@ const ID = {
           title: "Frelance Full-Stack Developer",
           location: "Kerja Dari Rumah",
           description:
-            "Pekerjaan freelance adalah pengalaman kerja yang memungkinkan saya bekerja secara mandiri dan fleksibel dalam proyek-proyek spesifik. Dalam kapasitas sebagai freelancer, saya telah berhasil mengelola proyek-proyek dengan tanggung jawab penuh, termasuk perencanaan, pelaksanaan, dan penyelesaian tepat waktu. Keahlian khusus saya meliputi [sebutkan keahlian atau industri], dan saya dapat dengan cepat beradaptasi dengan tuntutan proyek yang berbeda. Pengalaman freelance saya mencerminkan kemampuan saya dalam mengatasi tantangan, berkomunikasi secara efektif, dan memberikan solusi kreatif untuk mencapai tujuan proyek..",
+            "Pekerjaan freelance adalah pengalaman kerja yang memungkinkan saya bekerja secara mandiri dan fleksibel dalam proyek-proyek spesifik. Dalam kapasitas sebagai freelancer, saya telah berhasil mengelola proyek-proyek dengan tanggung jawab penuh, termasuk perencanaan, pelaksanaan, dan penyelesaian tepat waktu. Keahlian khusus saya meliputi [sebutkan keahlian atau industri], dan saya dapat dengan cepat beradaptasi dengan tuntutan proyek yang berbeda. Pengalaman freelance saya mencerminkan kemampuan saya dalam mengatasi tantangan, berkomunikasi secara efektif, dan memberikan solusi kreatif untuk mencapai tujuan proyek.",
           icon: <MdWork className="w-5 h-5" />,
           date: "Juli 2023 - sekarang",
         },

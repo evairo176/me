@@ -40,7 +40,7 @@ const EN = {
       say: "Hi, I'm Dicki",
       stack: "Full-Stack Developer",
       description:
-        "A developer with a strong focus on Full Stack Development. Proficient in TypeScript and experienced in all aspects of web technology. A collaborative team player dedicated to delivering efficient, measurable, and visually appealing web applications. I enjoy building websites & apps.",
+        "I am a 23-year-old Fullstack Developer with over 1.5 years of experience. My expertise includes web and mobile application development using React, TypeScript, and Laravel. I have a strong focus on end-to-end development, from interface design to backend development, ensuring a seamless and efficient user experience. With a passion for continuous learning and innovation, I am ready to make a positive contribution to software development projects.",
       place: "Based in Indramayu, West Java",
     },
     career: {

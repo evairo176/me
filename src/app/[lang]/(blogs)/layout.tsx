@@ -1,6 +1,5 @@
 import Master from "@/components/layouts/blogs/Master";
 import "./globals.css";
-
 import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import NextTopLoader from "nextjs-toploader";

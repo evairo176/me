@@ -30,10 +30,10 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
       </div>
 
       <div className="flex items-center mt-1">
-        <div className="text-xs text-gray-500">{blog?.Author?.name}</div>
+        <div className="text-xs ">{blog?.Author?.name}</div>
 
         <div className="w-1 h-1 bg-gray-400 rounded-full mr-1 ml-1"></div>
-        <div className="text-xs text-gray-500">
+        <div className="text-xs text-m">
           {dateToHumanDate(blog?.createdAt?.toString())}
         </div>
       </div>
@@ -45,7 +45,7 @@ const BlogContent = ({ blog, isBlogPage }: BlogContentProps) => {
           {blog?.title}
         </div>
         <div
-          className={`text-sm text-gray-500 leading-normal ${
+          className={`text-sm leading-normal ${
             !isBlogPage && "line-clamp-3"
           }  text-justify`}
         >

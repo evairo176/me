@@ -29,29 +29,37 @@ const BlogBody = ({ body = "" }: BlogBodyProps) => {
               {...props}
             />
           ),
-          p: (props) => <div {...props} />,
+          p: (props) => (
+            <div className="text-sm leading-normal text-justify" {...props} />
+          ),
           h2: (props) => (
             <h2
-              className="text-xl font-medium dark:text-neutral-300"
+              className="text-xl font-semibold leading-normal false text-justify"
               {...props}
             />
           ),
           h3: (props) => (
-            <h3
-              className="text-[18px] leading-snug pt-4 font-medium dark:text-neutral-300"
+            <h3 className="text-[18px] font-semibold leading-snug" {...props} />
+          ),
+          h4: (props) => (
+            <h4 className="text-md font-medium leading-snug" {...props} />
+          ),
+          ul: (props) => (
+            <ul
+              className="pl-10 list-disc pb-1 text-sm leading-normal text-justify"
               {...props}
             />
           ),
-          ul: (props) => (
-            <ul className="pl-10 space-y-3 list-disc pb-5" {...props} />
-          ),
           ol: (props) => (
-            <ol className="pl-10 space-y-3 list-decimal pb-5" {...props} />
+            <ol
+              className="pl-10 list-decimal pb-1 text-sm leading-normal text-justify"
+              {...props}
+            />
           ),
           code: (props) => <CodeBlock {...props} />,
           blockquote: (props) => (
             <blockquote
-              className="pl-6 py-3 text-md border-l-[5px] border-neutral-700 border-l-cyan-500 bg-neutral-100 dark:bg-neutral-800 rounded-lg text-cyan-800 dark:text-cyan-200"
+              className="pl-6 py-3 text-md border-l-[5px] mt-3 border-neutral-700 border-l-cyan-500 bg-neutral-100 dark:bg-neutral-800 rounded-lg text-cyan-800 dark:text-cyan-200"
               {...props}
             />
           ),
