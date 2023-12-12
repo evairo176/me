@@ -5,6 +5,7 @@ import news from "../../../public/images/projects/news.png";
 import ppa1 from "../../../public/images/projects/ppa1.jpeg";
 import ppaweb from "../../../public/images/projects/ppaweb.png";
 import jobseeker from "../../../public/images/projects/jobseeker.png";
+import discord from "../../../public/images/projects/discord.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -84,6 +85,23 @@ const CN = {
       title: "我的项目",
       description: "我的专业项目。",
       projectsData: [
+        {
+          title: "克隆不和諧",
+          description:
+            "透過我們的平台，感受到線上溝通的最佳體驗，這是一個受 Discord 啟發的平台，提供即時消息、語音和視頻通話、有組織的服務器和頻道、可自訂的用戶資料、直觀的通知、角色管理、豐富的表情符號、強大的搜尋功能，以及流暢的深色或淺色主題選擇。優先考慮安全和隱私，可從各種設備訪問平台，並輕鬆共享文件，營造出一個充滿活力且引人入勝的在線社區。",
+          tags: [
+            "Next JS",
+            "Postgree",
+            "Redux Toolkit",
+            "Framer Motion",
+            "Typescript",
+            "Tailwind CSS",
+            "Socket IO",
+            ,
+          ],
+          imageUrl: discord,
+          link: "",
+        },
         {
           title: "求職者",
           description:

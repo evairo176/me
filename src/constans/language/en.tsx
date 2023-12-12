@@ -5,6 +5,7 @@ import news from "../../../public/images/projects/news.png";
 import ppa1 from "../../../public/images/projects/ppa1.jpeg";
 import ppaweb from "../../../public/images/projects/ppaweb.png";
 import jobseeker from "../../../public/images/projects/jobseeker.png";
+import discord from "../../../public/images/projects/discord.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -86,6 +87,23 @@ const EN = {
       title: "My Projects",
       description: "My professional Project.",
       projectsData: [
+        {
+          title: "Discord Clone",
+          description:
+            "Experience the ultimate in online communication with our platform, a Discord-inspired clone offering real-time messaging, voice and video calls, organized servers and channels, customizable profiles, intuitive notifications, role management, expressive emojis, powerful search capabilities, and a seamless dark or light theme choice. Prioritize security and privacy, access the platform on any device, and effortlessly share files for a dynamic and engaging online community.",
+          tags: [
+            "Next JS",
+            "Postgree",
+            "Redux Toolkit",
+            "Framer Motion",
+            "Typescript",
+            "Tailwind CSS",
+            "Socket IO",
+            ,
+          ],
+          imageUrl: discord,
+          link: "",
+        },
         {
           title: "Jobseeker",
           description:

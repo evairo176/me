@@ -5,6 +5,7 @@ import news from "../../../public/images/projects/news.png";
 import ppa1 from "../../../public/images/projects/ppa1.jpeg";
 import ppaweb from "../../../public/images/projects/ppaweb.png";
 import jobseeker from "../../../public/images/projects/jobseeker.png";
+import discord from "../../../public/images/projects/discord.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -86,6 +87,23 @@ const RU = {
       title: "Мои проекты",
       description: "Мои профессиональные проекты.",
       projectsData: [
+        {
+          title: "Дискорд-клонDiscord Clone",
+          description:
+            "Почувствуйте ультимативный опыт онлайн-коммуникаций с нашей платформой, вдохновленной Discord, предлагающей мгновенные сообщения, голосовые и видеозвонки, организованные серверы и каналы, настраиваемые профили, интуитивные уведомления, управление ролями, выразительные эмодзи, мощные функции поиска и бесшовный выбор темы светлой или темной. Придайте приоритет безопасности и конфиденциальности, получайте доступ к платформе с любого устройства и легко обменивайтесь файлами для динамичного и увлекательного онлайн-сообщества.",
+          tags: [
+            "Next JS",
+            "Postgree",
+            "Redux Toolkit",
+            "Framer Motion",
+            "Typescript",
+            "Tailwind CSS",
+            "Socket IO",
+            ,
+          ],
+          imageUrl: discord,
+          link: "",
+        },
         {
           title: "Соискатель",
           description:

@@ -5,6 +5,7 @@ import news from "../../../public/images/projects/news.png";
 import ppa1 from "../../../public/images/projects/ppa1.jpeg";
 import ppaweb from "../../../public/images/projects/ppaweb.png";
 import jobseeker from "../../../public/images/projects/jobseeker.png";
+import discord from "../../../public/images/projects/discord.png";
 import { FaUniversity } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 
@@ -86,6 +87,23 @@ const ID = {
       title: "Proyek Saya",
       description: "Proyek profesional saya.",
       projectsData: [
+        {
+          title: "Clone Discord",
+          description:
+            "Rasakan pengalaman terbaik dalam komunikasi online dengan platform kami, yang terinspirasi oleh Discord, menyajikan pesan real-time, panggilan suara dan video, server dan saluran terorganisir, profil yang dapat disesuaikan, pemberitahuan intuitif, manajemen peran, emoji ekspresif, pencarian kuat, dan pilihan tema gelap atau terang yang mulus. Prioritaskan keamanan dan privasi, akses platform dari berbagai perangkat, dan berbagi file dengan mudah untuk komunitas online yang dinamis dan menarik.",
+          tags: [
+            "Next JS",
+            "Postgree",
+            "Redux Toolkit",
+            "Framer Motion",
+            "Typescript",
+            "Tailwind CSS",
+            "Socket IO",
+            ,
+          ],
+          imageUrl: discord,
+          link: "",
+        },
         {
           title: "Jobseeker",
           description:
