@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { useCopyToClipboard } from "usehooks-ts";
-import { a11yDark as themeColor } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 type Props = {};
 
@@ -52,7 +51,7 @@ export const Code = ({ className = "", children, ...props }: any) => {
 
       <SyntaxHighlighter
         language={className?.replace(/(?:lang(?:uage)?-)/, "")}
-        style={themeColor}
+        style={materialOceanic}
         wrapLines={true}
         className="not-prose rounded-md"
       >
