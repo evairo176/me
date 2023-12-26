@@ -3,6 +3,8 @@ import Footer from "../Footer";
 import Header from "../Header";
 import { AllLanguage } from "../../landing-page/Master";
 import Sidebar from "../Sidebar";
+import CtaCard from "@/components/elements/CtaCard";
+import { Separator } from "@/components/ui/separator";
 
 type Props = {
   children: React.ReactNode;
@@ -19,6 +21,8 @@ const Master = async ({ children }: Props) => {
           {children}
         </div>
       </div>
+      <CtaCard />
+      <Separator />
       <Footer />
     </>
   );

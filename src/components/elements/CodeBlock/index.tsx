@@ -84,9 +84,9 @@ const CodeBlock = ({ className = "", children, ...props }: any) => {
               borderRadius: "8px",
               paddingRight: "50px",
             }}
-            PreTag="div"
             language={match ? match[1] : "javascript"}
             wrapLongLines={true}
+            className="not-prose rounded-md"
           >
             {String(children).replace(/\n$/, "")}
           </SyntaxHighlighter>

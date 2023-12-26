@@ -117,7 +117,6 @@ const CreateBlogPage = (props: Props) => {
                 <Header
                   currentIndex={currentIndex}
                   history={history}
-                  his
                   handleUndo={handleUndo}
                   handleRedo={handleRedo}
                   feedElement={feedElement}
