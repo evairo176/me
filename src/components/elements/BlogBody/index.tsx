@@ -1,5 +1,3 @@
-import ReactMarkdown from "react-markdown";
-import CodeBlock from "@/components/elements/CodeBlock";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSanitize from "rehype-sanitize";
@@ -13,7 +11,7 @@ type BlogBodyProps = {
 const BlogBody = ({ body = "" }: BlogBodyProps) => {
   const options = { code: Code, pre: Pre };
   return (
-    <article className="prose prose-pre:p-0 max-w-none dark:prose-invert prose-sm">
+    <article className="prose prose-sm prose-pre:p-0 max-w-none dark:prose-invert ">
       <Markdown
         components={options}
         remarkPlugins={[remarkGfm]}

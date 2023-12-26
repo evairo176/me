@@ -141,7 +141,7 @@ const CreateBlogPage = (props: Props) => {
                 </Tab.Panel>
                 <Tab.Panel className="-m-0.5 rounded-lg p-0.5">
                   <div className="border-b">
-                    <div className="mx-px mt-px px-3 pb-12 pt-2 text-sm leading-5 text-gray-800">
+                    <div className="mx-px mt-px px-3 pb-12 pt-2 text-sm leading-5">
                       <article className="prose prose-pre:p-0 max-w-none dark:prose-invert">
                         <Markdown
                           components={options}
