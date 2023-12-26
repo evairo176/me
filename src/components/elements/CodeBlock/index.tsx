@@ -93,7 +93,7 @@ const CodeBlock = ({ className = "", children, ...props }: any) => {
         </div>
       )}
       {inline && (
-        <code className="font-light bg-muted text-muted-foreground py-1 px-1 rounded-md mx-1">
+        <code className="font-light text-muted-foreground rounded-md mx-1">
           {children}
         </code>
       )}
