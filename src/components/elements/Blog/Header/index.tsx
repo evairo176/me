@@ -72,7 +72,7 @@ const Header = ({
           {btns.map((btn, key) => {
             if (btn.type === "undo") {
               return (
-                <div className="flex items-center">
+                <div key={key} className="flex items-center">
                   <Button
                     disabled={isHaveUndo}
                     key={btn.syntax}
@@ -92,7 +92,7 @@ const Header = ({
 
             if (btn.type === "redo") {
               return (
-                <div className="flex items-center">
+                <div key={key} className="flex items-center">
                   <Button
                     disabled={isHaveRedo}
                     key={btn.syntax}
