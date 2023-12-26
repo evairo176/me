@@ -69,7 +69,7 @@ const Header = ({
     <div className="">
       {selectedIndex === 0 ? (
         <div className="ml-auto flex items-center flex-wrap space-x-5">
-          {btns.map((btn) => {
+          {btns.map((btn, key) => {
             if (btn.type === "undo") {
               return (
                 <div className="flex items-center">
@@ -110,7 +110,7 @@ const Header = ({
               );
             }
             return (
-              <div className="flex items-center">
+              <div key={key} className="flex items-center">
                 <Button
                   key={btn.syntax}
                   onClick={() => feedElement(btn.syntax)}
