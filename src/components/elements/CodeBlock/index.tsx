@@ -31,7 +31,7 @@ SyntaxHighlighter.registerLanguage(languages.diff, diff);
 SyntaxHighlighter.registerLanguage(languages.tsx, tsx);
 SyntaxHighlighter.registerLanguage(languages.css, css);
 
-const CodeBlock = ({ className = "", children, inline, ...props }: any) => {
+const CodeBlock = ({ className = "", children, ...props }: any) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [value, copy] = useCopyToClipboard();
 
@@ -52,9 +52,14 @@ const CodeBlock = ({ className = "", children, inline, ...props }: any) => {
     }
   }, [isCopied]);
 
+  const inline =
+    props.node.position.start.line === props.node.position.end.line;
+
+  console.log(inline);
+
   return (
     <>
-      {!inline ? (
+      {!inline && (
         <div className="relative ">
           <button
             className="absolute top-3 right-3 p-2 border border-neutral-700 rounded-lg hover:bg-neutral-800"
@@ -86,8 +91,9 @@ const CodeBlock = ({ className = "", children, inline, ...props }: any) => {
             {String(children).replace(/\n$/, "")}
           </SyntaxHighlighter>
         </div>
-      ) : (
-        <code className="font-light bg-neutral-200 text-sky-600 dark:text-sky-300 dark:bg-neutral-700 py-1 px-2 rounded-md text-[14px]">
+      )}
+      {inline && (
+        <code className="font-light bg-muted text-muted-foreground py-1 px-1 rounded-md mx-1">
           {children}
         </code>
       )}
