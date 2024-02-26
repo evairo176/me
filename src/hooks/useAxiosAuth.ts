@@ -8,6 +8,7 @@ const useAxiosAuth = () => {
   const { data: session } = useSession();
   const refreshToken = useRefreshToken();
 
+  // get refresh token
   useEffect(() => {
     const requestIntercept = axiosAuth.interceptors.request.use(
       (config) => {

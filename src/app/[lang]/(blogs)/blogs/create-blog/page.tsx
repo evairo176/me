@@ -17,11 +17,119 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 
 type Props = {};
+const DATA_COR = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      geometry: { type: "Point", coordinates: [102.0, 0.5] },
+      properties: { prop0: "value0" },
+    },
+    {
+      type: "Feature",
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [102.0, 0.0],
+          [103.0, 1.0],
+          [104.0, 0.0],
+          [105.0, 1.0],
+        ],
+      },
+      properties: { prop0: "value0", prop1: 0.0 },
+    },
+    {
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [100.0, 0.0],
+            [101.0, 0.0],
+            [101.0, 1.0],
+            [100.0, 1.0],
+            [100.0, 0.0],
+          ],
+        ],
+      },
+      properties: { prop0: "value0", prop1: { this: "that" } },
+    },
+  ],
+};
 
 const CreateBlogPage = (props: Props) => {
   const [source, setSource] = useState<string>("");
   const [history, setHistory] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
+
+  const FILTER_DATA_COR = DATA_COR.features.filter(
+    (row) => row.geometry.type === "Polygon"
+  );
+
+  const FILTER_DATA_COR2 = FILTER_DATA_COR.map(
+    (row: any) => row.geometry.coordinates[0]
+  );
+  const arrayResult: any = {
+    point1: {
+      x: FILTER_DATA_COR2[0][0][0],
+      y: FILTER_DATA_COR2[0][0][1],
+    },
+    point2: {
+      x: FILTER_DATA_COR2[0][1][0],
+      y: FILTER_DATA_COR2[0][1][1],
+    },
+    point3: {
+      x: FILTER_DATA_COR2[0][2][0],
+      y: FILTER_DATA_COR2[0][2][1],
+    },
+    point4: {
+      x: FILTER_DATA_COR2[0][3][0],
+      y: FILTER_DATA_COR2[0][3][1],
+    },
+    point5: {
+      x: FILTER_DATA_COR2[0][4][0],
+      y: FILTER_DATA_COR2[0][4][1],
+    },
+  };
+
+  function isPalindrome(input: string): boolean {
+    // Palindrome
+    const reversedString = input.split("").reverse().join("");
+    const palindrome = input === reversedString;
+
+    if (palindrome) {
+      return palindrome;
+    }
+
+    const cleanedInput = input.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+    const firstChar = cleanedInput.charAt(0);
+    const lastChar = cleanedInput.charAt(cleanedInput.length - 1);
+
+    const polindrom2 = firstChar === lastChar;
+    return polindrom2;
+  }
+
+  // Example usage:
+  const word1 = "sakas";
+  const isPalindromeResult1 = isPalindrome(word1);
+
+  console.log(
+    `Does "${word1}" have the same first and last characters? ${isPalindromeResult1}`
+  );
+
+  const word2 = "katakrusaktek";
+  const isPalindromeResult2 = isPalindrome(word2);
+
+  console.log(
+    `Does "${word2}" have the same first and last characters? ${isPalindromeResult2}`
+  );
+  // const RESULT = FILTER_DATA_COR2.map((row, key) => {
+  //   const show  = {
+  //     point1
+  //   }
+  //   return row;
+  // });
+  console.log({ FILTER_DATA_COR, FILTER_DATA_COR2, arrayResult });
 
   const handleChange = (event: any) => {
     const newText = event.target.value;
@@ -76,6 +184,7 @@ const CreateBlogPage = (props: Props) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleUndo, handleRedo]);
+
   return (
     <div className="px-5 mx-auto">
       <form action="#">

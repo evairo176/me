@@ -63,7 +63,6 @@ const Header = ({
 
   const isHaveUndo = currentIndex === 0 || currentIndex === -1;
   const isHaveRedo = currentIndex === history.length - 1;
-  console.log({ isHaveUndo, isHaveRedo, history, currentIndex });
 
   return (
     <div className="">
